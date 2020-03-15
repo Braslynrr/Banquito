@@ -6,6 +6,7 @@
 package Logic;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,11 +14,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,28 +38,29 @@ public class User implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "id")
-    private Integer id;
-    @Size(max = 45)
+    private String id;
+    @Size(max = 20)
     @Column(name = "password")
     private String password;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Cashier cashier;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Client client;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private List<Cashier> cashierList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private List<Client> clientList;
 
     public User() {
     }
 
-    public User(Integer id) {
+    public User(String id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,20 +72,22 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Cashier getCashier() {
-        return cashier;
+    @XmlTransient
+    public List<Cashier> getCashierList() {
+        return cashierList;
     }
 
-    public void setCashier(Cashier cashier) {
-        this.cashier = cashier;
+    public void setCashierList(List<Cashier> cashierList) {
+        this.cashierList = cashierList;
     }
 
-    public Client getClient() {
-        return client;
+    @XmlTransient
+    public List<Client> getClientList() {
+        return clientList;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
     }
 
     @Override

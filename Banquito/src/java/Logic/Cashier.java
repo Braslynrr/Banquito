@@ -11,9 +11,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,43 +28,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cashier.findAll", query = "SELECT c FROM Cashier c")
-    , @NamedQuery(name = "Cashier.findByCashierId", query = "SELECT c FROM Cashier c WHERE c.cashierId = :cashierId")
-    , @NamedQuery(name = "Cashier.findByName", query = "SELECT c FROM Cashier c WHERE c.name = :name")})
+    , @NamedQuery(name = "Cashier.findByName", query = "SELECT c FROM Cashier c WHERE c.name = :name")
+    , @NamedQuery(name = "Cashier.findById", query = "SELECT c FROM Cashier c WHERE c.id = :id")})
 public class Cashier implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "name")
+    private String name;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "cashier_id")
-    private Integer cashierId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "name")
-    private String name;
-    @JoinColumn(name = "cashier_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private User user;
+    @Size(min = 1, max = 20)
+    @Column(name = "id")
+    private String id;
+    @JoinColumn(name = "User_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User userid;
 
     public Cashier() {
     }
 
-    public Cashier(Integer cashierId) {
-        this.cashierId = cashierId;
+    public Cashier(String id) {
+        this.id = id;
     }
 
-    public Cashier(Integer cashierId, String name) {
-        this.cashierId = cashierId;
+    public Cashier(String id, String name) {
+        this.id = id;
         this.name = name;
-    }
-
-    public Integer getCashierId() {
-        return cashierId;
-    }
-
-    public void setCashierId(Integer cashierId) {
-        this.cashierId = cashierId;
     }
 
     public String getName() {
@@ -75,18 +68,26 @@ public class Cashier implements Serializable {
         this.name = name;
     }
 
-    public User getUser() {
-        return user;
+    public String getId() {
+        return id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public User getUserid() {
+        return userid;
+    }
+
+    public void setUserid(User userid) {
+        this.userid = userid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (cashierId != null ? cashierId.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +98,7 @@ public class Cashier implements Serializable {
             return false;
         }
         Cashier other = (Cashier) object;
-        if ((this.cashierId == null && other.cashierId != null) || (this.cashierId != null && !this.cashierId.equals(other.cashierId))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -105,7 +106,7 @@ public class Cashier implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Cashier[ cashierId=" + cashierId + " ]";
+        return "Logic.Cashier[ id=" + id + " ]";
     }
     
 }

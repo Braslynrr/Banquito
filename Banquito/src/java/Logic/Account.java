@@ -39,12 +39,12 @@ public class Account implements Serializable {
     protected AccountPK accountPK;
     @Column(name = "balance")
     private Integer balance;
-    @JoinColumn(name = "Client_client_id", referencedColumnName = "client_id")
+    @JoinColumn(name = "Client_client_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Client clientclientid;
-    @JoinColumn(name = "Currency_currencyCode", referencedColumnName = "currencyCode", insertable = false, updatable = false)
+    @JoinColumn(name = "Currency_currencyCode1", referencedColumnName = "currencyCode")
     @ManyToOne(optional = false)
-    private Currency currency;
+    private Currency currencycurrencyCode1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private List<Transaction> transactionList;
 
@@ -83,12 +83,12 @@ public class Account implements Serializable {
         this.clientclientid = clientclientid;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public Currency getCurrencycurrencyCode1() {
+        return currencycurrencyCode1;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setCurrencycurrencyCode1(Currency currencycurrencyCode1) {
+        this.currencycurrencyCode1 = currencycurrencyCode1;
     }
 
     @XmlTransient

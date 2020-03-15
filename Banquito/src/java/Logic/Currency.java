@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Currency.findAll", query = "SELECT c FROM Currency c")
     , @NamedQuery(name = "Currency.findByCurrencyCode", query = "SELECT c FROM Currency c WHERE c.currencyCode = :currencyCode")
-    , @NamedQuery(name = "Currency.findByExchangeRate", query = "SELECT c FROM Currency c WHERE c.exchangeRate = :exchangeRate")})
+    , @NamedQuery(name = "Currency.findByExchangeRate", query = "SELECT c FROM Currency c WHERE c.exchangeRate = :exchangeRate")
+    , @NamedQuery(name = "Currency.findByDescription", query = "SELECT c FROM Currency c WHERE c.description = :description")})
 public class Currency implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,7 +45,10 @@ public class Currency implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "exchange_rate")
     private Float exchangeRate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "currency")
+    @Size(max = 20)
+    @Column(name = "description")
+    private String description;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "currencycurrencyCode1")
     private List<Account> accountList;
 
     public Currency() {
@@ -68,6 +72,14 @@ public class Currency implements Serializable {
 
     public void setExchangeRate(Float exchangeRate) {
         this.exchangeRate = exchangeRate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @XmlTransient

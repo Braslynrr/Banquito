@@ -46,7 +46,7 @@ public class Transaction implements Serializable {
     private Integer number;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 20)
     @Column(name = "type")
     private String type;
     @Basic(optional = false)

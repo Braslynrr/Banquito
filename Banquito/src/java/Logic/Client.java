@@ -13,10 +13,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
-    , @NamedQuery(name = "Client.findByClientId", query = "SELECT c FROM Client c WHERE c.clientId = :clientId")
+    , @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id")
     , @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name")
     , @NamedQuery(name = "Client.findByTelNumber", query = "SELECT c FROM Client c WHERE c.telNumber = :telNumber")})
 public class Client implements Serializable {
@@ -41,43 +41,44 @@ public class Client implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "client_id")
-    private Integer clientId;
+    @Size(min = 1, max = 20)
+    @Column(name = "id")
+    private String id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 20)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 20)
     @Column(name = "tel_number")
     private String telNumber;
-    @JoinColumn(name = "client_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private User user;
+    @JoinColumn(name = "User_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User userid;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
     private List<Account> accountList;
 
     public Client() {
     }
 
-    public Client(Integer clientId) {
-        this.clientId = clientId;
+    public Client(String id) {
+        this.id = id;
     }
 
-    public Client(Integer clientId, String name, String telNumber) {
-        this.clientId = clientId;
+    public Client(String id, String name, String telNumber) {
+        this.id = id;
         this.name = name;
         this.telNumber = telNumber;
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public String getId() {
+        return id;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -96,12 +97,12 @@ public class Client implements Serializable {
         this.telNumber = telNumber;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserid() {
+        return userid;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserid(User userid) {
+        this.userid = userid;
     }
 
     @XmlTransient
@@ -116,7 +117,7 @@ public class Client implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (clientId != null ? clientId.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -127,7 +128,7 @@ public class Client implements Serializable {
             return false;
         }
         Client other = (Client) object;
-        if ((this.clientId == null && other.clientId != null) || (this.clientId != null && !this.clientId.equals(other.clientId))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -135,7 +136,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Client[ clientId=" + clientId + " ]";
+        return "Logic.Client[ id=" + id + " ]";
     }
     
 }
