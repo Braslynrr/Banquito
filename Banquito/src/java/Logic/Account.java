@@ -7,64 +7,73 @@ package Logic;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Brazza
+ * @author gaira
  */
 @Entity
 @Table(name = "account")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
-    , @NamedQuery(name = "Account.findByNumber", query = "SELECT a FROM Account a WHERE a.accountPK.number = :number")
-    , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")
-    , @NamedQuery(name = "Account.findByCurrencycurrencyCode", query = "SELECT a FROM Account a WHERE a.accountPK.currencycurrencyCode = :currencycurrencyCode")})
+    , @NamedQuery(name = "Account.findByNumber", query = "SELECT a FROM Account a WHERE a.number = :number")
+    , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
 public class Account implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AccountPK accountPK;
-    @Column(name = "balance")
-    private Integer balance;
-    @JoinColumn(name = "Client_client_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Client clientclientid;
-    @JoinColumn(name = "Currency_currencyCode1", referencedColumnName = "currencyCode")
-    @ManyToOne(optional = false)
-    private Currency currencycurrencyCode1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private List<Transaction> transactionList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "number")
+    private Integer number;
+    @Column(name = "balance")
+    private Integer balance;
+    @JoinColumns({
+        @JoinColumn(name = "Client_client_id", referencedColumnName = "id")
+        , @JoinColumn(name = "Client_client_id", referencedColumnName = "id")})
+    @ManyToOne(optional = false)
+    private Client client;
+    @JoinColumns({
+        @JoinColumn(name = "Currency_currencyCode", referencedColumnName = "currencyCode")
+        , @JoinColumn(name = "Currency_currencyCode", referencedColumnName = "currencyCode")})
+    @ManyToOne(optional = false)
+    private Currency currency;
 
     public Account() {
     }
 
-    public Account(AccountPK accountPK) {
-        this.accountPK = accountPK;
+    public Account(Integer number) {
+        this.number = number;
     }
 
-    public Account(int number, String currencycurrencyCode) {
-        this.accountPK = new AccountPK(number, currencycurrencyCode);
+    public Integer getNumber() {
+        return number;
     }
 
-    public AccountPK getAccountPK() {
-        return accountPK;
-    }
-
-    public void setAccountPK(AccountPK accountPK) {
-        this.accountPK = accountPK;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public Integer getBalance() {
@@ -75,35 +84,26 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
-    public Client getClientclientid() {
-        return clientclientid;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientclientid(Client clientclientid) {
-        this.clientclientid = clientclientid;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public Currency getCurrencycurrencyCode1() {
-        return currencycurrencyCode1;
+    public Currency getCurrency() {
+        return currency;
     }
 
-    public void setCurrencycurrencyCode1(Currency currencycurrencyCode1) {
-        this.currencycurrencyCode1 = currencycurrencyCode1;
-    }
-
-    @XmlTransient
-    public List<Transaction> getTransactionList() {
-        return transactionList;
-    }
-
-    public void setTransactionList(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (accountPK != null ? accountPK.hashCode() : 0);
+        hash += (number != null ? number.hashCode() : 0);
         return hash;
     }
 
@@ -114,7 +114,7 @@ public class Account implements Serializable {
             return false;
         }
         Account other = (Account) object;
-        if ((this.accountPK == null && other.accountPK != null) || (this.accountPK != null && !this.accountPK.equals(other.accountPK))) {
+        if ((this.number == null && other.number != null) || (this.number != null && !this.number.equals(other.number))) {
             return false;
         }
         return true;
@@ -122,7 +122,24 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Account[ accountPK=" + accountPK + " ]";
+        return "Logic.Account[ number=" + number + " ]";
+    }
+
+    public AccountPK getAccountPK() {
+        return accountPK;
+    }
+
+    public void setAccountPK(AccountPK accountPK) {
+        this.accountPK = accountPK;
+    }
+
+    @XmlTransient
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
     }
     
 }

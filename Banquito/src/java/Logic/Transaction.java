@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Brazza
+ * @author gaira
  */
 @Entity
 @Table(name = "transaction")
@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Transaction.findByNumber", query = "SELECT t FROM Transaction t WHERE t.number = :number")
     , @NamedQuery(name = "Transaction.findByType", query = "SELECT t FROM Transaction t WHERE t.type = :type")
     , @NamedQuery(name = "Transaction.findByAmount", query = "SELECT t FROM Transaction t WHERE t.amount = :amount")
-    , @NamedQuery(name = "Transaction.findByDate", query = "SELECT t FROM Transaction t WHERE t.date = :date")})
+    , @NamedQuery(name = "Transaction.findByDate", query = "SELECT t FROM Transaction t WHERE t.date = :date")
+    , @NamedQuery(name = "Transaction.findByCurrencyCode", query = "SELECT t FROM Transaction t WHERE t.currencyCode = :currencyCode")})
 public class Transaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,9 +57,14 @@ public class Transaction implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.DATE)
     private Date date;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "currencyCode")
+    private String currencyCode;
     @JoinColumns({
         @JoinColumn(name = "Account_number", referencedColumnName = "number")
-        , @JoinColumn(name = "Account_Currency_currencyCode", referencedColumnName = "Currency_currencyCode")})
+        , @JoinColumn(name = "Account_number", referencedColumnName = "number")})
     @ManyToOne(optional = false)
     private Account account;
 
@@ -69,10 +75,11 @@ public class Transaction implements Serializable {
         this.number = number;
     }
 
-    public Transaction(Integer number, String type, float amount) {
+    public Transaction(Integer number, String type, float amount, String currencyCode) {
         this.number = number;
         this.type = type;
         this.amount = amount;
+        this.currencyCode = currencyCode;
     }
 
     public Integer getNumber() {
@@ -105,6 +112,14 @@ public class Transaction implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public Account getAccount() {

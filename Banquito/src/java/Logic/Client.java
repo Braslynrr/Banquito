@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,6 +37,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name")
     , @NamedQuery(name = "Client.findByTelNumber", query = "SELECT c FROM Client c WHERE c.telNumber = :telNumber")})
 public class Client implements Serializable {
+
+    @JoinColumns({
+        @JoinColumn(name = "User_id", referencedColumnName = "id")
+        , @JoinColumn(name = "User_id", referencedColumnName = "id")})
+    @ManyToOne(optional = false)
+    private User user;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -137,6 +144,14 @@ public class Client implements Serializable {
     @Override
     public String toString() {
         return "Logic.Client[ id=" + id + " ]";
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
 }
