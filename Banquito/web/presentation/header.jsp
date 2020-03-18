@@ -1,17 +1,33 @@
-<%-- 
-    Document   : head
-    Created on : Mar 18, 2020, 1:32:35 AM
-    Author     : gaira
---%>
+<%@page import="Banco.Logic.User"%>
+<% User usuario= null; %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<header>
+    <div class="logo">
+        <img src="\Banquito\web\Imagenes\Logo2.png">
+        <span>Banco Banquito</span>
+    </div> 
+    <div class="menu">
+        <ul> 
+              <li>
+                <a href="/Guia/presentation/Index.jsp">Inicio</a>
+              </li>
+                        <% if (usuario!=null){ %>
+                <li>
+                  <a href="/Guia/presentation/cliente/cuentas/show">Cuentas</a>
+                  <ul>  <!--submenu --> </ul>
+                </li>                        
+                <li >
+                  <a  href="/Guia/presentation/login/logout">Logout</a>
+                  <ul>  <!--submenu --> </ul>
+                </li>                
+                        <% } %>
+                        <% if (usuario==null){%>
+                <li>
+                  <a href="/Guia/presentation/login/show">Login</a>
+                </li>
+                
+                        <% }%>             
+            </ul>
+    </div>
+  </header>          
+
