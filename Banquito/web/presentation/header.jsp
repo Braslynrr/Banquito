@@ -3,7 +3,7 @@
 
 <header>
     <div class="logo">
-        <img src="/Banquito/imagenes/Logo.png">
+        <img src="/Banquito/imagenes/Logo.png" width="100" height="98">
         <span>Banco Banquito</span>
     </div> 
     <div class="menu">
