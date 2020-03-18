@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Index
-    Created on : Mar 17, 2020, 10:46:49 PM
+    Document   : head
+    Created on : Mar 18, 2020, 1:32:35 AM
     Author     : gaira
 --%>
 
@@ -14,5 +14,4 @@
     <body>
         <h1>Hello World!</h1>
     </body>
-    <%@ include file="/presentation/footer.jsp" %>
 </html>
