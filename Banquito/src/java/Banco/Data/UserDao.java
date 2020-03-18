@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Data;
-import Logic.User;
+package Banco.Data;
+import Banco.Logic.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

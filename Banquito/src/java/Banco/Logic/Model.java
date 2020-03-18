@@ -5,12 +5,12 @@
  */
 package Banco.Logic;
 
-import Data.AccountDao;
-import Data.CashierDao;
-import Data.ClientDao;
-import Data.CurrencyDao;
-import Data.TransactionDao;
-import Data.UserDao;
+import Banco.Data.AccountDao;
+import Banco.Data.CashierDao;
+import Banco.Data.ClientDao;
+import Banco.Data.CurrencyDao;
+import Banco.Data.TransactionDao;
+import Banco.Data.UserDao;
 
 /**
  *

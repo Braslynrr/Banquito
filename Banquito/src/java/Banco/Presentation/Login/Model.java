@@ -5,7 +5,7 @@
  */
 package Banco.Presentation.Login;
 
-import Logic.User;
+import Banco.Logic.User;
 
 /**
  *

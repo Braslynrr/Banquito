@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Data;
+package Banco.Data;
 
-import static Data.ClientDao.toClient;
-import static Data.CurrencyDao.toCurrency;
-import Logic.Client;
-import Logic.Currency;
-import Logic.Account;
+import static Banco.Data.ClientDao.toClient;
+import static Banco.Data.CurrencyDao.toCurrency;
+import Banco.Logic.Client;
+import Banco.Logic.Currency;
+import Banco.Logic.Account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
