@@ -1,35 +1,30 @@
-
-.logo{
-  width: 110%;
-  background-color: rgb(255, 255, 255);
-  position: fixed;
-  top: 0;
-  left:0;
-}
-
-.logo>span{
-    font-family: Open Sans, sans-serif;
-    font-size: 4em;
-    color: brown;
-}
-
-body{
-    background: url(../imagenes/madera.jpg);
-    background-position: center;
-    background-size: inherit;
-}
 .menu{
-  width: 100%;
-  left:0;
-  background-color: rgb(226, 151, 62);
+    padding: 115px;
+    background: rgb(255,243,161);
+    position: inherit;
+    height: 0;
+    text-align: center;
 }
 
-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(255, 255, 255);
-  color: rgb(139,96,32);
-  text-align: center;
+.menu>ul {
+    padding:2px 2px 2px 10px;
+    list-style: none;
+}
+.menu>ul>li{ 
+    font-size: 13px;
+    display: inline-block;
+    vertical-align:top;      
+}
+
+.menu>ul>li>a{
+    width: 100%;
+    color: brown;
+    font-family: Open Sans, sans-serif;	
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;            
+}
+
+.menu>ul>li>a:hover{
+    color:white;
 }

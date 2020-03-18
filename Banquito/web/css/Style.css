@@ -1,0 +1,30 @@
+.logo{
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  top: 0;
+  left:0;
+}
+
+.logo>span{
+    font-family: Open Sans, sans-serif;
+    font-size: 4em;
+    color: brown;
+}
+
+body{
+    background: url(../imagenes/madera.jpg);
+    background-position: center;
+    background-size: inherit;
+}
+
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  color: rgb(139,96,32);
+  text-align: center;
+}
