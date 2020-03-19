@@ -1,5 +1,5 @@
 .menu{
-    padding: 115px;
+    padding: 75px;
     background: rgb(255,243,161);
     position: inherit;
     height: 0;
@@ -7,18 +7,18 @@
 }
 
 .menu>ul {
-    padding:2px 2px 2px 10px;
+    padding:40px 40px 50px 20px;
     list-style: none;
 }
-.menu>ul>li{ 
-    font-size: 13px;
+.menu>ul>li{
+    font-size: 15px;
     display: inline-block;
-    vertical-align:top;      
+    vertical-align:top;
 }
 
 .menu>ul>li>a{
     width: 100%;
-    color: brown;
+    color: blue;
     font-family: Open Sans, sans-serif;	
     text-transform: uppercase;
     text-decoration: none;
@@ -26,5 +26,5 @@
 }
 
 .menu>ul>li>a:hover{
-    color:white;
+    color:brown;
 }
