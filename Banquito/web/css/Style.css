@@ -3,6 +3,7 @@
   background-color: rgb(255, 255, 255);
   position: fixed;
   top: 0;
+  font-size: 1em;
   left:0;
 }
 
@@ -31,4 +32,19 @@ footer{
 
 logo.imgs{
    
+}
+
+button{
+    border: none;
+    color: white;
+    background-color: brown;
+    cursor: pointer;
+    width: 100%;
+    font-size: 15px;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+button:hover{
+    opacity: 0.8;
 }

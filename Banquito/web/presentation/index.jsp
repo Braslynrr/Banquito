@@ -8,6 +8,7 @@
     </head>
     <body>
         <%@ include file="/presentation/header.jsp" %>
+        <img src="/Banquito/imagenes/wilaT.png" align="right" align="buttom">
     </body>
     <%@ include file="/presentation/footer.jsp" %>
 </html>

@@ -22,9 +22,10 @@
     font-family: Open Sans, sans-serif;	
     text-transform: uppercase;
     text-decoration: none;
-    display: block;            
+    display: block;      
 }
 
 .menu>ul>li>a:hover{
     color:brown;
 }
+

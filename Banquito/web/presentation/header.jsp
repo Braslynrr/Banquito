@@ -4,7 +4,7 @@
 <header>
     <div class="logo">
         <a href="/Banquito/presentation/index.jsp"><img src="/Banquito/imagenes/Logo.png" width="100" height="98"></a>
-        <span>Banco Banquito</span><img src="/Banquito/imagenes/Targeta.png" align="right" width="140" height="80" >
+        <span>Banco Banquito</span><img src="/Banquito/imagenes/Targeta.png" align="right" width="170" height="110" >
         <center>Sientese seguro!</center>
     </div> 
     <div class="menu">
@@ -24,10 +24,16 @@
             <li>
                 <a href="/Banquito/presentation/index.jsp">About</a>
             </li>
+            <% if(usuario==null){ %>
             <li>
-                <a href="/Banquito/presentation/Login.jsp">Login</a>
+                <button onclick="document.getElementById('Login-emergente').style.display='block'">Log in</button> 
             </li>
+            <% } %>
         </ul>
     </div>
+        <div id="Login-emergente" class="modal"> 
+            
+        
+        </div>
   </header>          
 
