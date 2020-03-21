@@ -26,14 +26,10 @@
             </li>
             <% if(usuario==null){ %>
             <li>
-                <button onclick="document.getElementById('Login-emergente').style.display='block'">Log in</button> 
+                <a href="/Banquito/presentation/login/Login.jsp"> Log in</a>
             </li>
             <% } %>
         </ul>
     </div>
-        <div id="Login-emergente" class="modal"> 
-            
-        
-        </div>
   </header>          
 
