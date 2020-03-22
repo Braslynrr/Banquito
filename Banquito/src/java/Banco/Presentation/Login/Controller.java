@@ -54,11 +54,13 @@ public class Controller extends HttpServlet {
     }
 
     void updateModel(HttpServletRequest request){
-       Model model= (Model) request.getAttribute("model");       
-       //model.getCurrent().setCedula(request.getParameter("cedulaFld"));
-       //model.getCurrent().setClave(request.getParameter("claveFld"));
+       Model model= (Model) request.getAttribute("model");   
+       //Se supone que aqui se obtienen los datos 
+       model.getCurrent().setId(request.getParameter("cedulaFld"));
+       model.getCurrent().setPassword(request.getParameter("claveFld"));
    }
     
+    //Verfica si los campos completos
     
      Map<String,String> validar(HttpServletRequest request){
         Map<String,String> errores = new HashMap<>();
@@ -71,12 +73,13 @@ public class Controller extends HttpServlet {
         }
         return errores;
     }
-     
-        public String loginAction(HttpServletRequest request) {
+    public String loginAction(HttpServletRequest request) {
         Model model= (Model) request.getAttribute("model");
+        Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
         HttpSession session = request.getSession(true);
         try {
-            User real =(User) new UserDao().getUser("11");
+            //User real =(User) new UserDao().getUser("11");
+            User real = domainModel.consultUser(model.getCurrent().getId());
             session.setAttribute("usuario", real);
             String viewUrl="";
             return viewUrl;

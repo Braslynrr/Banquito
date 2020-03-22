@@ -17,8 +17,17 @@ import Banco.Data.UserDao;
  * @author gaira
  */
 public class Model {
+   private static Model uniqueInstance;
     
-        
+   
+     public static Model instance(){
+        if (uniqueInstance == null){
+            uniqueInstance = new Model();
+        }
+        return uniqueInstance; 
+    }
+   
+   
    AccountDao account;
    CashierDao cashier;
    ClientDao client;
