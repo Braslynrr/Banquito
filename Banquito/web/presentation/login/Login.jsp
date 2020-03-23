@@ -10,9 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Banquito</title>
         <%@ include file="/presentation/Head.jsp" %>
-         <% Model model= (Model) request.getAttribute("model"); %>
-        <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
-        <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
+        
         <link href="/Banquito/css/logincss.css" rel="stylesheet" type="text/css" />
        
     </head>
@@ -21,7 +19,9 @@
         
         
         <%@ include file="/presentation/header.jsp" %>
-       
+        <% Model model= (Model) request.getAttribute("model"); %>
+        <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
+        <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
         
         <<form class="box" method="post">
             <h1>Log in</h1>

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author gaira
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/login"})
+@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -29,6 +29,10 @@ public class Controller extends HttpServlet {
         request.setAttribute("model", new Model());
         String viewUrl="";
          switch(request.getServletPath()){  
+             
+            case "/presentation/login/show":
+                viewUrl=this.show(request);
+                break;
             case "/presentation/login/login":
                 viewUrl=this.login(request);
                 break;            
@@ -45,34 +49,34 @@ public class Controller extends HttpServlet {
             }
             else{
                 request.setAttribute("errores", errores);
-                return "/presentation/login/View.jsp"; 
+                return "/presentation/login/Login.jsp"; 
             }            
         }
         catch(Exception e){
             return "/presentation/Error.jsp";             
         }         
     }
-
-    void updateModel(HttpServletRequest request){
-       Model model= (Model) request.getAttribute("model");   
-       //Se supone que aqui se obtienen los datos 
-       model.getCurrent().setId(request.getParameter("cedulaFld"));
-       model.getCurrent().setPassword(request.getParameter("claveFld"));
-   }
-    
-    //Verfica si los campos completos
-    
-     Map<String,String> validar(HttpServletRequest request){
+     
+    Map<String,String> validar(HttpServletRequest request){
         Map<String,String> errores = new HashMap<>();
-        if (request.getParameter("cedulaFld").isEmpty()){
-            errores.put("cedulaFld","Cedula requerida");
+        if (request.getParameter("id").isEmpty()){
+            errores.put("id","Cedula requerida");
         }
 
-        if (request.getParameter("claveFld").isEmpty()){
-            errores.put("claveFld","Clave requerida");
+        if (request.getParameter("password").isEmpty()){
+            errores.put("password","Clave requerida");
         }
         return errores;
     }
+    void updateModel(HttpServletRequest request){
+       Model model= (Model) request.getAttribute("model");   
+       //Se supone que aqui se obtienen los datos 
+       model.getCurrent().setId(request.getParameter("id"));
+       model.getCurrent().setPassword(request.getParameter("password"));
+   }
+    
+    
+
     public String loginAction(HttpServletRequest request) {
         Model model= (Model) request.getAttribute("model");
         Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
@@ -90,7 +94,30 @@ public class Controller extends HttpServlet {
             errores.put("claveFld","Usuario o clave incorrectos");
             return "/presentation/login/View.jsp"; 
         }        
-    }   
+    } 
+    
+     public String logout(HttpServletRequest request){
+        return this.logoutAction(request);
+    }
+    
+    public String logoutAction(HttpServletRequest request){
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("usuario");
+        session.invalidate();
+        return "/presentation/index.jsp";   
+    }
+
+    public String show(HttpServletRequest request){
+        return this.showAction(request);
+    }
+        
+    public String showAction(HttpServletRequest request){
+        Model model= (Model) request.getAttribute("model");
+        model.getCurrent().setId("");
+        model.getCurrent().setPassword("");
+        return "/presentation/login/Login.jsp"; 
+    }    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

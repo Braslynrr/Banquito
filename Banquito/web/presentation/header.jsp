@@ -1,5 +1,5 @@
 <%@page import="Banco.Logic.User"%>
-<% User usuario= null; %>
+<% User usuario= (User) session.getAttribute("usuario");; %>
 
 <header>
     <div class="logo">
@@ -24,9 +24,10 @@
             <li>
                 <a href="/Banquito/presentation/index.jsp">About</a>
             </li>
-            <% if(usuario==null){ %>
+            
+                <% if(usuario==null){ %>
             <li>
-                <a href="/Banquito/presentation/login/Login.jsp"> Log in</a>
+                <a href="/Banquito/presentation/login/show"> Log in</a>
             </li>
             <% } %>
         </ul>
