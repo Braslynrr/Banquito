@@ -82,6 +82,22 @@ public class AccountDao {
             return null;
         }
     }
+
+    public ArrayList<Account> getList(String id) {
+         String sql = "select *" +
+                 "from Account a inner join Client c on a.Client_client_id = c.id"
+                + "inner join Currency d on a.Currency_currencyCode = d.currencyCode"
+                + "where a.number = '%s'";
+        sql = String.format(sql,id);
+        ResultSet rs = db.executeQuery(sql);
+         //if (rs.next()) {
+           // return toAccount(rs);
+       // }
+       // else{
+         //   throw new Exception ("La cuenta no existe");
+      //  }
+        return null;
+    }
     
     
 }

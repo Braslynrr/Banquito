@@ -5,6 +5,7 @@
  */
 package Banco.Presentation.Menu;
 
+import Banco.Logic.Client;
 import Banco.Logic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,7 +61,13 @@ public class Controller extends HttpServlet {
         HttpSession session = request.getSession(true);
         User usuario = (User) session.getAttribute("usuario");
         model.setUsuario(usuario);
-        
+        try{
+            model.setCliente(Banco.Logic.Model.instance().ConsutClient(usuario.getId()));
+            model.setCash(Banco.Logic.Model.instance().consultcash(usuario.getId()));
+        }catch(Exception ex){
+            
+        }
+       
         return "/presentation/Menu/Menu.jsp"; 
     }   
     @Override

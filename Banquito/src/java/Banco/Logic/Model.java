@@ -11,6 +11,7 @@ import Banco.Data.ClientDao;
 import Banco.Data.CurrencyDao;
 import Banco.Data.TransactionDao;
 import Banco.Data.UserDao;
+import java.util.ArrayList;
 
 /**
  *
@@ -47,7 +48,7 @@ public class Model {
    }
    
    public User consultUser(String id,String pass) throws Exception{
-   
+       
        User result = user.Login(id,pass);
        if (result == null){
            throw new Exception ("Usuario no existe");
@@ -56,8 +57,20 @@ public class Model {
    
    }
     
+   
+   public ArrayList<Account> ConsultarCuentas(String id)throws Exception{
+       ArrayList<Account> lista= account.getList(id);
+       
+       return null;
+   }
     
-    
-    
-    
+   public Client ConsutClient(String id)throws Exception{
+       Client cliente = client.getClient(id);
+       return cliente;
+   }
+   
+   public Cashier consultcash(String id)throws Exception{
+     Cashier cash=cashier.getCashier(id);
+     return cash;
+    }
 }

@@ -38,6 +38,18 @@ public class ClientDao {
         
     }
     
+    public Client ConsultClient(String id)throws Exception{
+         String sql = "select * from cliente where User_id='%s'";
+         sql = String.format(sql,id);
+         ResultSet rs = db.executeQuery(sql);
+         if(rs.next()){
+            return this.toClient(rs);
+        }
+         else{
+            throw new Exception ("El cliente no existe");
+        }
+    }
+    
     public Client getClient(String id)throws Exception{
         
         String sql = "select * from cliente c inner join user u on c.User=u id where c.id like '%%%s%%'";

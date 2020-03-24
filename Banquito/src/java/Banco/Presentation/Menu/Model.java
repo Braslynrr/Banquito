@@ -5,8 +5,8 @@
  */
 package Banco.Presentation.Menu;
 
-import Banco.Logic.Account;
 import Banco.Logic.Cashier;
+import Banco.Logic.Client;
 import Banco.Logic.User;
 
 /**
@@ -16,7 +16,7 @@ import Banco.Logic.User;
 public class Model {
     User usuario;
     Cashier cash;
-    Account cuenta;
+    Client cliente;
 
     public Model() {
     }
@@ -37,15 +37,13 @@ public class Model {
         this.cash = cash;
     }
 
-    public Account getCuenta() {
-        return cuenta;
+    public Client getCliente() {
+        return cliente;
     }
 
-    public void setCuenta(Account cuenta) {
-        this.cuenta = cuenta;
+    public void setCliente(Client cliente) {
+        this.cliente = cliente;
     }
-    
-    
     
     
 }

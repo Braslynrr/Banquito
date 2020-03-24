@@ -7,10 +7,6 @@ package Banco.Presentation.Login;
 
 import Banco.Logic.User;
 
-/**
- *
- * @author gaira
- */
 public class Model {
     
     User current;
