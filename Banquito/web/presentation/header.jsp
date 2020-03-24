@@ -32,12 +32,12 @@
             <% } %>
                 <% if(usuario!=null){ %>
             <li>
-                <a href="/Banquito/presentation/login/show"><% usuario.toString();%></a>
+                <%= usuario.toString()%>
             </li>
             <% } %>
                 <% if(usuario!=null){ %>
             <li>
-                <a href="/Banquito/presentation/login/show"> Log out</a>
+                <a href="/Banquito/presentation/login/logout"> Log out</a>
             </li>
             <% } %>
         </ul>

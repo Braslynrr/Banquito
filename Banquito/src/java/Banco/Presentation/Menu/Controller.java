@@ -5,6 +5,7 @@
  */
 package Banco.Presentation.Menu;
 
+import Banco.Logic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -53,10 +55,13 @@ public class Controller extends HttpServlet {
         return this.showAction(request);
     }
     
-        public String showAction(HttpServletRequest request){
+    public String showAction(HttpServletRequest request){
         Model model= (Model) request.getAttribute("model");
-
-        return "/presentation/login/Login.jsp"; 
+        HttpSession session = request.getSession(true);
+        User usuario = (User) session.getAttribute("usuario");
+        model.setUsuario(usuario);
+        
+        return "/presentation/Menu/Menu.jsp"; 
     }   
     @Override
     public String getServletInfo() {

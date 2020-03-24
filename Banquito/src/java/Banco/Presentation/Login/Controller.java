@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author gaira
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show","/presentation/login/login"})
+@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show","/presentation/login/logout","/presentation/login/login"})
 public class Controller extends HttpServlet {
 
     /*
@@ -40,7 +40,10 @@ public class Controller extends HttpServlet {
                 break;
             case "/presentation/login/login":
                 viewUrl=this.login(request);
-                break;            
+                break;
+            case "/presentation/login/logout":
+                viewUrl=this.logout(request);
+                break;
         }
         request.getRequestDispatcher(viewUrl).forward( request, response); 
     }
@@ -89,7 +92,7 @@ public class Controller extends HttpServlet {
             User real = domainModel.consultUser(model.getCurrent().getId(),model.getCurrent().getPassword());
             session.setAttribute("usuario", real);
             String viewUrl="";
-            viewUrl="/presentacion/Menu/show";
+            viewUrl="/presentation/Menu/show";
             return viewUrl;
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();
