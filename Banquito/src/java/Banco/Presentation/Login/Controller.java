@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author gaira
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show"})
+@WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show","/presentation/login/login"})
 public class Controller extends HttpServlet {
 
     /*
@@ -91,6 +91,7 @@ public class Controller extends HttpServlet {
             User real = domainModel.consultUser(model.getCurrent().getId());
             session.setAttribute("usuario", real);
             String viewUrl="";
+            viewUrl="Presentacion/index.jsp";
             return viewUrl;
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();

@@ -30,10 +30,5 @@ public class Model {
     public void setCurrent(User current) {
         this.current = current;
     }
-   
-    
-    
-    
-    
     
 }
