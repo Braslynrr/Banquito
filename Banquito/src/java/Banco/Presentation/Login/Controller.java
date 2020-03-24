@@ -89,7 +89,7 @@ public class Controller extends HttpServlet {
             User real = domainModel.consultUser(model.getCurrent().getId(),model.getCurrent().getPassword());
             session.setAttribute("usuario", real);
             String viewUrl="";
-            viewUrl="/presentacion/index.jsp";
+            viewUrl="/presentacion/Menu/show";
             return viewUrl;
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();

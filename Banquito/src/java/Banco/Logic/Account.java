@@ -37,8 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
 public class Account implements Serializable {
 
-    @EmbeddedId
-    protected AccountPK accountPK;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     private List<Transaction> transactionList;
 
@@ -123,14 +121,6 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "Logic.Account[ number=" + number + " ]";
-    }
-
-    public AccountPK getAccountPK() {
-        return accountPK;
-    }
-
-    public void setAccountPK(AccountPK accountPK) {
-        this.accountPK = accountPK;
     }
 
     @XmlTransient
