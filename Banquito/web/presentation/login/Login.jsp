@@ -1,4 +1,4 @@
-<%@page import="java.util.HashMap"%>
+                <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="Banco.Presentation.Login.Model"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,10 +23,10 @@
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
         <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
         
-        <<form class="box" method="post">
+         <<form class="box" name="form" action="/Banquito/presentation/login/login" method="post">
             <h1>Log in</h1>
-            <div id="usuario" class="campo"><input type="text" placeholder="usuario"> </div>
-            <div id="pass" class="campo"><input type="password" placeholder="contraseña"></div>
+            <div id="usuario" class="campo"><input class="<%=erroneo("userid",errores)%>" placeholder="usuario" type="text" name="userid" value="<%=form.get("userid")[0]%>" title="<%=title("userid",errores)%>"></div>
+            <div id="pass" class="campo"><input class="<%=erroneo("userpass",errores)%>" placeholder="clave" type="password" name="userpass" value="<%=form.get("userpass")[0]%>" title="<%=title("userpass",errores)%>"></div>
             <input type="submit">
         </form>
     </body>
@@ -49,8 +49,8 @@
 
     private Map<String,String[]> getForm(Model model){
        Map<String,String[]> values = new HashMap<>();
-       values.put("cedulaFld", new String[]{model.getCurrent().getId()});
-       values.put("claveFld", new String[]{model.getCurrent().getPassword()});
+       values.put("userid", new String[]{model.getCurrent().getId()});
+       values.put("userpass", new String[]{model.getCurrent().getPassword()});
        return values;
     }
     

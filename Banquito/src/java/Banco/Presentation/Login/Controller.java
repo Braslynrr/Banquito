@@ -24,6 +24,11 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginController", urlPatterns = {"/presentation/login/show"})
 public class Controller extends HttpServlet {
 
+    /*
+        
+        Procesa el request, depende del url recibido
+    
+    */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("model", new Model());
@@ -59,12 +64,12 @@ public class Controller extends HttpServlet {
      
     Map<String,String> validar(HttpServletRequest request){
         Map<String,String> errores = new HashMap<>();
-        if (request.getParameter("id").isEmpty()){
-            errores.put("id","Cedula requerida");
+        if (request.getParameter("userid").isEmpty()){
+            errores.put("userid","Cedula requerida");
         }
 
-        if (request.getParameter("password").isEmpty()){
-            errores.put("password","Clave requerida");
+        if (request.getParameter("userpass").isEmpty()){
+            errores.put("userpass","Clave requerida");
         }
         return errores;
     }
@@ -90,9 +95,9 @@ public class Controller extends HttpServlet {
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();
             request.setAttribute("errores", errores);
-            errores.put("cedulaFld","Usuario o clave incorrectos");
-            errores.put("claveFld","Usuario o clave incorrectos");
-            return "/presentation/login/View.jsp"; 
+            errores.put("userid","Usuario o clave incorrectos");
+            errores.put("userpass","Usuario o clave incorrectos");
+            return "/presentation/login/Login.jsp"; 
         }        
     } 
     
@@ -110,7 +115,8 @@ public class Controller extends HttpServlet {
     public String show(HttpServletRequest request){
         return this.showAction(request);
     }
-        
+    
+    //Muestra el view del mvc del login
     public String showAction(HttpServletRequest request){
         Model model= (Model) request.getAttribute("model");
         model.getCurrent().setId("");
