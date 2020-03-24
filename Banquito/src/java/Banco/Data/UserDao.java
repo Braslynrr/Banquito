@@ -58,6 +58,22 @@ public class UserDao {
     }
     
     
+    public User Login(String id ,String pass)throws Exception{
+        String sql = "select * from user where id = '%s'";
+        String sql2 =" and password = '%s'" ;
+        sql = String.format(sql, id);
+        sql2 = String.format(sql2, pass);
+        ResultSet rs = db.executeQuery(sql+sql2);
+         if(rs.next()){
+            return this.toUser(rs);
+        }
+        else{
+            throw new Exception ("El usuario no existe");
+        }
+        
+        
+    }
+    
     public static User toUser(ResultSet rs) throws SQLException{
     
         try{

@@ -75,9 +75,8 @@ public class Controller extends HttpServlet {
     }
     void updateModel(HttpServletRequest request){
        Model model= (Model) request.getAttribute("model");   
-       //Se supone que aqui se obtienen los datos 
-       model.getCurrent().setId(request.getParameter("id"));
-       model.getCurrent().setPassword(request.getParameter("password"));
+       model.getCurrent().setId(request.getParameter("userid"));
+       model.getCurrent().setPassword(request.getParameter("userpass"));
    }
     
     
@@ -87,11 +86,10 @@ public class Controller extends HttpServlet {
         Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
         HttpSession session = request.getSession(true);
         try {
-            //User real =(User) new UserDao().getUser("11");
-            User real = domainModel.consultUser(model.getCurrent().getId());
+            User real = domainModel.consultUser(model.getCurrent().getId(),model.getCurrent().getPassword());
             session.setAttribute("usuario", real);
             String viewUrl="";
-            viewUrl="Presentacion/index.jsp";
+            viewUrl="/presentacion/index.jsp";
             return viewUrl;
         } catch (Exception ex) {
             Map<String,String> errores = new HashMap<>();

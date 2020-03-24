@@ -46,9 +46,9 @@ public class Model {
    
    }
    
-   public User consultUser(String id) throws Exception{
+   public User consultUser(String id,String pass) throws Exception{
    
-       User result = user.getUser(id);
+       User result = user.Login(id,pass);
        if (result == null){
            throw new Exception ("Usuario no existe");
        }
