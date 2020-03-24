@@ -52,7 +52,7 @@ public class ClientDao {
     
     public Client getClient(String id)throws Exception{
         
-        String sql = "select * from cliente c inner join user u on c.User=u id where c.id like '%%%s%%'";
+        String sql = "select * from cliente c inner join user u on c.User=u id where c.user_id like '%s'";
         sql = String.format(sql,id);
         ResultSet rs = db.executeQuery(sql);
         

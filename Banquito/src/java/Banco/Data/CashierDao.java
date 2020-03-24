@@ -71,6 +71,18 @@ public class CashierDao {
             return null;
         }
     }
+
+    public Cashier ConsultCashier(String id)throws Exception{
+         String sql = "select * from cashier where User_id='%s'";
+         sql = String.format(sql,id);
+         ResultSet rs = db.executeQuery(sql);
+         if(rs.next()){
+            return this.toCashier(rs);
+        }
+         else{
+            throw new Exception ("El cliente no existe");
+        }
+    }
     
     
     

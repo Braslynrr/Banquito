@@ -64,6 +64,13 @@ public class Controller extends HttpServlet {
         try{
             model.setCliente(Banco.Logic.Model.instance().ConsutClient(usuario.getId()));
             model.setCash(Banco.Logic.Model.instance().consultcash(usuario.getId()));
+           if(model.getCliente()!=null && model.getCash()!=null){
+                return "/presentation/Menu/Menu.jsp";
+           }else if(model.getCliente()!=null){
+               
+           }else{
+               
+           }
         }catch(Exception ex){
             
         }

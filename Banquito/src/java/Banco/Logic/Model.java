@@ -70,7 +70,7 @@ public class Model {
    }
    
    public Cashier consultcash(String id)throws Exception{
-     Cashier cash=cashier.getCashier(id);
+     Cashier cash=cashier.ConsultCashier(id);
      return cash;
     }
 }
