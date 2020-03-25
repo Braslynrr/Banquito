@@ -16,10 +16,10 @@
         <ul>
             <li>
                 <% if(usuario==null){ %>
-                <a href="/Banquito/presentation/index.jsp">Inicio</a>
+                <a href="/Banquito/presentation/index.jsp">Inicio </a>
                 <%}%>
                 <% if(usuario!=null){ %>
-                 <a href="/Banquito/presentation/Menu/show">Inicio</a>
+                 <a href="/Banquito/presentation/Menu/show">Inicio </a>
                <% } %>
             </li>
             <li>
