@@ -48,3 +48,20 @@ button{
 button:hover{
     opacity: 0.8;
 }
+
+.box{
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 1;
+  text-align: center;
+}
+
+.box img{
+    position: absolute;
+    top: 120%;
+    left: -30%;
+}
