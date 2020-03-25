@@ -44,6 +44,12 @@
   transition: 0.25s;
   cursor: pointer;
 }
+
+input[type=text].is-invalid,input[type=password].is-invalid{
+    border-color: #dc3545;
+    padding-right: 20px;
+   
+}
 .box input[type = "submit"]:hover{
   background: #2ecc71;
 }
