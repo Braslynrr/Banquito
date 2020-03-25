@@ -42,7 +42,7 @@ public class CashierDao {
     
     public Cashier getCashier(String id)throws Exception{
         
-        String sql = "select * from cliente c inner join user u on c.User=u id where c.id like '%%%s%%'";
+        String sql = "select * from cashier c inner join user u on u.id like '%s'";
         sql = String.format(sql,id);
         ResultSet rs = db.executeQuery(sql);
         
@@ -57,34 +57,17 @@ public class CashierDao {
     
     public static Cashier toCashier(ResultSet rs) throws SQLException{
     
-        try{
-            
+        try{      
             Cashier c = new Cashier();
             c.setId(rs.getString("id"));
             c.setName(rs.getString("name"));
             c.setUserid(toUser(rs));
             return c;
-            
-        
         }
         catch(SQLException ex){
             return null;
         }
     }
-
-    public Cashier ConsultCashier(String id)throws Exception{
-         String sql = "select * from cashier where User_id='%s'";
-         sql = String.format(sql,id);
-         ResultSet rs = db.executeQuery(sql);
-         if(rs.next()){
-            return this.toCashier(rs);
-        }
-         else{
-            throw new Exception ("El cliente no existe");
-        }
-    }
-    
-    
     
     
     

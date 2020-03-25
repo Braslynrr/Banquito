@@ -143,7 +143,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Client[ id=" + id + " ]";
+        return "Cliente ID=" + id;
     }
 
     public User getUser() {

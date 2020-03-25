@@ -65,11 +65,15 @@ public class Controller extends HttpServlet {
             model.setCliente(Banco.Logic.Model.instance().ConsutClient(usuario.getId()));
             model.setCash(Banco.Logic.Model.instance().consultcash(usuario.getId()));
            if(model.getCliente()!=null && model.getCash()!=null){
-                return "/presentation/Menu/Menu.jsp";
+               session.setAttribute("client", model.getCliente());
+               session.setAttribute("cashier", model.getCash());
+               return "/presentation/Menu/Menu.jsp";
            }else if(model.getCliente()!=null){
-               
+               session.setAttribute("cashier", model.getCash());
+               return "/presentation/Menu/Cajero/show";
            }else{
-               
+               session.setAttribute("client", model.getCliente());
+               return "/presentation/Menu/Cuenta/show";
            }
         }catch(Exception ex){
             
