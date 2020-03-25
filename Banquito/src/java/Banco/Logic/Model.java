@@ -60,8 +60,7 @@ public class Model {
    
    public ArrayList<Account> ConsultarCuentas(String id)throws Exception{
        ArrayList<Account> lista= account.getList(id);
-       
-       return null;
+       return lista;
    }
     
    public Client ConsutClient(String id)throws Exception{

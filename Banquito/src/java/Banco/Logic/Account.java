@@ -120,7 +120,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Account[ number=" + number + " ]";
+        return "Numero de cuenta: " + number;
     }
 
     @XmlTransient

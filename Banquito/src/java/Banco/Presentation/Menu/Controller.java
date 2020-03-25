@@ -31,10 +31,7 @@ public class Controller extends HttpServlet {
              
         case "/presentation/Menu/show":
                viewUrl=this.show(request);
-            break;
-       //     case "/presentation/login/login":
-        //        viewUrl=this.login(request);
-         //       break;            
+            break;            
         }
         request.getRequestDispatcher(viewUrl).forward( request, response); 
     }
