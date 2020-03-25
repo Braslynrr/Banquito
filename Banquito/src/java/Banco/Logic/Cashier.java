@@ -42,7 +42,7 @@ public class Cashier implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "id")
+    @Column(name = "cod")
     private String id;
     @JoinColumn(name = "User_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

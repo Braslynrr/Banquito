@@ -49,7 +49,7 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "id")
+    @Column(name = "cod")
     private String id;
     @Basic(optional = false)
     @NotNull

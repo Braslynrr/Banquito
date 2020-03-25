@@ -59,7 +59,7 @@ public class ClientDao {
         try{
             
             Client c = new Client();
-            c.setId(rs.getString("id"));
+            c.setId(rs.getString("cod"));
             c.setName(rs.getString("name"));
             c.setTelNumber(rs.getString("tel_number"));
             c.setUserid(toUser(rs));

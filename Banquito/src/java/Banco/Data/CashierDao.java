@@ -50,7 +50,7 @@ public class CashierDao {
             return this.toCashier(rs);
         }
          else{
-            throw new Exception ("El cliente no existe");
+            return null;
         }
         
     }
@@ -59,7 +59,7 @@ public class CashierDao {
     
         try{      
             Cashier c = new Cashier();
-            c.setId(rs.getString("id"));
+            c.setId(rs.getString("cod"));
             c.setName(rs.getString("name"));
             c.setUserid(toUser(rs));
             return c;
