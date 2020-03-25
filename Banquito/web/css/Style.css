@@ -3,6 +3,7 @@
   background-color: rgb(255, 255, 255);
   position: fixed;
   top: 0;
+  background: #E0E0E0;
   font-size: 1em;
   left:0;
 }
@@ -25,7 +26,7 @@ footer{
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  background-color: #E0E0E0;
   color: rgb(139,96,32);
   text-align: center;
 }
