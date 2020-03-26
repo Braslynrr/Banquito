@@ -16,7 +16,7 @@
         <div class="box">
             <h1>Cliente:<%=cliente.getId()%></h1>
             <div id="cuen">
-                <input type="submit" value="ir a Cuenta" onclick="href='/Banquito'"><a href="/Banquito/presentation/Menu/Cuenta/show"> a
+                <input type="submit" value="ir a Cuenta" onclick="Redirect1();">
             </div>
         </div>
         <div class="box3">
@@ -25,9 +25,19 @@
         <div class="box2">
             <h1>Cajero:<%=cashier.getId()%> </h1>
             <div id="caj">   
-            <input type="submit" value="Ir al Cajero" >
+            <input type="submit" value="Ir al Cajero" onclick="Redirect2();" >
             </div>
         </div>
+         <script type = "text/javascript">
+         <!--
+            function Redirect1() {
+               window.location = "/Banquito/presentation/Menu/Cuenta/show";
+            }
+            
+            function Redirect2() {
+               window.location = "/Banquito/presentacion/Menu/Cajero/show";
+            }
+      </script>
     </body>
     <%@ include file="/presentation/footer.jsp" %>
 </html>
