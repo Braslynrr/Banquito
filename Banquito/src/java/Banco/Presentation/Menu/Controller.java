@@ -65,7 +65,7 @@ public class Controller extends HttpServlet {
                session.setAttribute("client", model.getCliente());
                session.setAttribute("cashier", model.getCash());
                return "/presentation/Menu/Menu.jsp";
-           }else if(model.getCliente()!=null){
+           }else if(model.getCash()!=null){
                session.setAttribute("cashier", model.getCash());
                return "/presentation/Menu/Cajero/show";
            }else{

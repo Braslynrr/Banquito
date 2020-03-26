@@ -16,7 +16,7 @@
         <div class="box">
             <h1>Cliente:<%=cliente.getId()%></h1>
             <div id="cuen">
-                <input type="submit" value="ir a Cuenta"><a href="/Banquito/presentation/Menu/Cuenta/show"> a
+                <input type="submit" value="ir a Cuenta" onclick="href='/Banquito'"><a href="/Banquito/presentation/Menu/Cuenta/show"> a
             </div>
         </div>
         <div class="box3">

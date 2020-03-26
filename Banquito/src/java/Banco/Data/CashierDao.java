@@ -42,7 +42,7 @@ public class CashierDao {
     
     public Cashier getCashier(String id)throws Exception{
         
-        String sql = "select * from cashier c inner join user u on u.id like '%s'";
+        String sql = "select * from cashier c inner join user u on c.User_id = u.id where c.User_id = '%s'";
         sql = String.format(sql,id);
         ResultSet rs = db.executeQuery(sql);
         
