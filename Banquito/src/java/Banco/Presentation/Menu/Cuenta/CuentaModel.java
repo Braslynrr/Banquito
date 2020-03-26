@@ -8,9 +8,10 @@ package Banco.Presentation.Menu.Cuenta;
 import Banco.Logic.Account;
 import Banco.Logic.Client;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CuentaModel {
-ArrayList<Account> cuentas;
+List<Account> cuentas;
 Client cliente;
     public CuentaModel() {
         cuentas=null;
@@ -25,11 +26,11 @@ Client cliente;
         this.cliente = cliente;
     }
 
-    public ArrayList<Account> getCuentas() {
+    public List<Account> getCuentas() {
         return cuentas;
     }
 
-    public void setCuentas(ArrayList<Account> cuentas) {
+    public void setCuentas(List<Account> cuentas) {
         this.cuentas = cuentas;
     }
 }

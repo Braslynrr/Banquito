@@ -12,6 +12,7 @@ import Banco.Data.CurrencyDao;
 import Banco.Data.TransactionDao;
 import Banco.Data.UserDao;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -58,8 +59,8 @@ public class Model {
    }
     
    
-   public ArrayList<Account> ConsultarCuentas(String id)throws Exception{
-       ArrayList<Account> lista= account.getList(id);
+   public List<Account> ConsultarCuentas(String cod,String id)throws Exception{
+       List<Account> lista= account.getList(cod,id);
        return lista;
    }
     

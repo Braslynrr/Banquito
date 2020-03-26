@@ -29,7 +29,7 @@
           
             <div id="usuario" class="campo"><input class="<%=erroneo("userid",errores)%>" placeholder="usuario" type="text" name="userid" value="<%=form.get("userid")[0]%>" title="<%=title("userid",errores)%>"></div>
             <div id="pass" class="campo"><input class="<%=erroneo("userpass",errores)%>" placeholder="clave" type="password" name="userpass" value="<%=form.get("userpass")[0]%>" title="<%=title("userpass",errores)%>"></div>
-            <input type="submit">
+            <input type="submit" value="Entrar">
         </form>
     </body>
     <%@ include file="/presentation/footer.jsp" %>

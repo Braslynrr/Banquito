@@ -79,11 +79,13 @@ public class AccountDao {
         }
     }
 
-    public ArrayList<Account> getList(String id)throws Exception {
-        ArrayList<Account> lista= new ArrayList<Account>();
-         String sql = "select * from account a inner join client c inner join user on a.Client_client_cod = '%s'";
-        sql = String.format(sql,id);
-        ResultSet rs = db.executeQuery(sql);
+    public List<Account> getList(String cod,String id)throws Exception {
+        List<Account> lista= new ArrayList<Account>();
+        String sql = "select * from account a inner join client c inner join user u inner join currency on a.Client_client_cod = c.cod and  c.User_id=u.id where c.cod='%s'";
+        String sql2=" and c.User_id='%s'";
+        sql = String.format(sql,cod);
+        sql2 = String.format(sql2,id);
+        ResultSet rs = db.executeQuery(sql+sql2);
         while(rs.next()){
             lista.add(toAccount(rs));
         }    

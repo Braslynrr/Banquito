@@ -41,7 +41,7 @@ public class ClientDao {
     
     public Client getClient(String id)throws Exception{
         
-        String sql = "select * from client c inner join user u on c.user_id like '%s'";
+        String sql = "select * from client c inner join user u on c.User_id = u.id where c.User_id = '%s'";
         sql = String.format(sql,id);
         ResultSet rs = db.executeQuery(sql);
         
@@ -63,6 +63,7 @@ public class ClientDao {
             c.setName(rs.getString("name"));
             c.setTelNumber(rs.getString("tel_number"));
             c.setUserid(toUser(rs));
+            c.setUser(c.getUserid());
             return c;
             
         

@@ -48,7 +48,7 @@ public class CuentaController extends HttpServlet {
         Client cliente = (Client) session.getAttribute("client");
         model.setCliente(cliente);
         try{
-           model.setCuentas(Banco.Logic.Model.instance().ConsultarCuentas(cliente.getId()));
+           model.setCuentas(Banco.Logic.Model.instance().ConsultarCuentas(cliente.getId(),cliente.getUser().getId()));
            session.setAttribute("cuentas", model.getCuentas());
            return "/presentation/Menu/Cuenta/Cuenta.jsp";
         }catch(Exception ex){

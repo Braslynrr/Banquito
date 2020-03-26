@@ -54,7 +54,7 @@ public class CurrencyDao {
             
             Currency c = new Currency();
             c.setCurrencyCode(rs.getString("currencyCode"));
-            c.setExchangeRate(Float.parseFloat(rs.getString("exdchange_rate")));
+            c.setExchangeRate(Float.parseFloat(rs.getString("exchange_rate")));
             c.setDescription(rs.getString("description"));
             
             return c;
