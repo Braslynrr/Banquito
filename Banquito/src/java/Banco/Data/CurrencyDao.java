@@ -48,17 +48,28 @@ public class CurrencyDao {
         
     }    
     
+    public List<Currency> Listacurrency()throws Exception{
+        String sql="Select * from Currency";
+        List<Currency> lista= new ArrayList<Currency>();
+        ResultSet rs = db.executeQuery(sql);
+        while(rs.next()){
+            Currency curren= this.toCurrency(rs);
+            if(curren.getDescription()!="colones"){
+                lista.add(curren);
+            }
+        }
+        return lista;
+    }
+    
     public static Currency toCurrency(ResultSet rs)throws SQLException{
     
         try{
-            
             Currency c = new Currency();
             c.setCurrencyCode(rs.getString("currencyCode"));
             c.setExchangeRate(Float.parseFloat(rs.getString("exchange_rate")));
             c.setDescription(rs.getString("description"));
             
             return c;
-        
         }
           catch(SQLException ex){
         return null;

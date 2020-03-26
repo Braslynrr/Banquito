@@ -73,4 +73,10 @@ public class Model {
      Cashier cash=cashier.getCashier(id);
      return cash;
     }
+   
+   public List<Currency> Consultarcurrency()throws Exception{
+     List<Currency> lista=currency.Listacurrency();
+     return lista;
+   }
+   
 }
