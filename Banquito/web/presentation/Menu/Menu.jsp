@@ -16,7 +16,7 @@
         <div class="box">
             <h1>Cliente:<%=cliente.getId()%></h1>
             <div id="cuen">
-                <input type="submit" value="ir a Cuenta">
+                <input type="submit" value="ir a Cuenta"><a href="/Banquito/presentation/Menu/Cuenta/show"> a
             </div>
         </div>
         <div class="box3">
@@ -25,7 +25,7 @@
         <div class="box2">
             <h1>Cajero:<%=cashier.getId()%> </h1>
             <div id="caj">   
-            <input type="submit" value="Ir al Cajero">
+            <input type="submit" value="Ir al Cajero" >
             </div>
         </div>
     </body>

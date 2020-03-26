@@ -30,7 +30,7 @@ public class CuentaController extends HttpServlet {
         String viewUrl="";
          switch(request.getServletPath()){  
              
-        case "/presentation/Menu/show":
+        case "/presentation/Menu/Cuenta/show":
                viewUrl=this.show(request);
             break;            
         }
@@ -49,21 +49,16 @@ public class CuentaController extends HttpServlet {
         model.setCliente(cliente);
         try{
            model.setCuentas(Banco.Logic.Model.instance().ConsultarCuentas(cliente.getId()));
+           session.setAttribute("cuentas", model.getCuentas());
+           return "/presentation/Menu/Cuenta/Cuenta.jsp";
         }catch(Exception ex){
             
         }
        
-        return "/presentation/Menu/Menu.jsp"; 
+        return "/presentation/Menu/Cuenta/Cuenta.jsp"; 
     } 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
+        
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

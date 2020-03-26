@@ -4,7 +4,6 @@
     position: inherit;
     height: 0;
     text-align: left;
-    
 }
 
 .menu>ul {
@@ -35,3 +34,7 @@
     color:brown;
 }
 
+.slogan{
+    font-family: Open Sans, sans-serif;	
+    padding-left: 5.6%;
+}

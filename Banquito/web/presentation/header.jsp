@@ -10,7 +10,9 @@
              <a href="/Banquito/presentation/Menu/show"><img src="/Banquito/imagenes/Logo.png" width="100" height="98"></a>
         <%}%>
         <span>Banco Banquito</span><img src="/Banquito/imagenes/Targeta.png" align="right" width="170" height="110" >
-        <center>Sientese seguro!</center>
+        <div class="slogan">
+            Sientese seguro!
+        </div>
     </div> 
     <div class="menu">
         <ul>

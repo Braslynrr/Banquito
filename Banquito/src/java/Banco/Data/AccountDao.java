@@ -70,33 +70,27 @@ public class AccountDao {
             Account a = new Account();
             a.setNumber(Integer.parseInt(rs.getString("number")));
             a.setBalance(Integer.parseInt(rs.getString("balance")));
-            a.getClient().setId(rs.getString("c.id"));
             a.setClient(toClient(rs));
-            a.getCurrency().setCurrencyCode(rs.getString("d.currencyCode"));
             a.setCurrency(toCurrency(rs));
-            
-            return a;
-                 
+            return a;    
         }
          catch (SQLException ex) {
             return null;
         }
     }
 
-    public ArrayList<Account> getList(String id) {
-         String sql = "select *" +
-                 "from Account a inner join Client c on a.Client_client_id = c.id"
-                + "inner join Currency d on a.Currency_currencyCode = d.currencyCode"
-                + "where a.number = '%s'";
+    public ArrayList<Account> getList(String id)throws Exception {
+        ArrayList<Account> lista= new ArrayList<Account>();
+         String sql = "select * from account a inner join client c inner join user on a.Client_client_cod = '%s'";
         sql = String.format(sql,id);
         ResultSet rs = db.executeQuery(sql);
-         //if (rs.next()) {
-           // return toAccount(rs);
-       // }
-       // else{
-         //   throw new Exception ("La cuenta no existe");
-      //  }
-        return null;
+        while(rs.next()){
+            lista.add(toAccount(rs));
+        }    
+        if(lista.isEmpty()){
+            throw new Exception ("Usuario no tiene cuentas");
+        }
+        return lista;
     }
     
     
