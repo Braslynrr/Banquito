@@ -35,7 +35,7 @@
             }
             
             function Redirect2() {
-               window.location = "/Banquito/presentacion/Menu/Cajero/show";
+               window.location = "/Banquito/presentation/Menu/Cajero/show";
             }
       </script>
     </body>
