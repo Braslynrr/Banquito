@@ -13,18 +13,28 @@
     </head>
     <body>
         <%@ include file="/presentation/header.jsp" %>
-
+        <%@page import="Banco.Logic.Client"%>
+        <%@page import="Banco.Logic.Cashier"%>
+       
+         <% Cashier cashier=(Cashier) session.getAttribute("cashier"); %>
         <div class="box">
             <h1>Menu cajeros</hl>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">HTML</a></li>
-                    <li><a href="#">CSS</a></li>
-                    <li><a href="#">JavaScript</a></li>
-                    <li><a href="#">About</a></li>
-                </ul>
+            <div id="menu">   
+                <input type="submit" value="Registrar un cliente" onclick="Redirect1();" >
+            </div>
+             <h2>Codigo de cajero: <%=cashier.getId()%></h2>
         </div>
-
+    
+      <script type = "text/javascript">
+         <!--
+            function Redirect1() {
+               window.location = "/Banquito/presentation/Menu/Cajero/Registro/show";
+            }
+            
+        
+      </script>   
+        
     </body>
      <%@ include file="/presentation/footer.jsp" %>
 </html>
+
