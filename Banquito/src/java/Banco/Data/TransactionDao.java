@@ -71,10 +71,9 @@ public class TransactionDao {
             t.setType(rs.getString("type"));
             t.setAmount(Float.parseFloat(rs.getString("amount")));
             t.setDate(date);
-            t.getAccount().setNumber(Integer.parseInt(rs.getString("number")));
             t.setAccount(toAccount(rs));
+            t.getAccount().setNumber(Integer.parseInt(rs.getString("number")));
             t.setCurrencyCode(t.getAccount().getCurrency().getCurrencyCode());
-            
             return t;
            
         
@@ -85,9 +84,19 @@ public class TransactionDao {
     
     
     
-    
-    
-    
+    }
+
+    public List<Transaction> getlista(Integer num,String cod)throws Exception{
+        List<Transaction> lista = new ArrayList<Transaction>();
+        String sql="select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where t.Account_number= '%s'";
+        String sql2="and a.Client_client_cod= '%s'";
+        sql = String.format(sql,num);
+        sql2 = String.format(sql2,cod);
+        ResultSet rs = db.executeQuery(sql+sql2);
+        while(rs.next()){
+            lista.add(toTransaction(rs));
+        }
+        return lista;
     }
     
     

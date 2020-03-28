@@ -7,7 +7,7 @@
 </head>
 <body>
   
-    <%@ include file="/presentation/Header.jsp" %>
+    <%@ include file="/presentation/header.jsp" %>
     <div id="body" style="margin: 0 auto; width:85%; ">   
         <h1>Ha ocurrido un error</h1>
     </div>  

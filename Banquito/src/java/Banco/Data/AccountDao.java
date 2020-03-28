@@ -47,10 +47,9 @@ public class AccountDao {
     }
     public Account getAccount(String num) throws Exception {
     
-        String sql = "select *" +
-                 "from Account a inner join Client c on a.Client_client_id = c.id"
-                + "inner join Currency d on a.Currency_currencyCode = d.currencyCode"
-                + "where a.number = '%s'";
+        String sql = "select * from account a inner join client c inner join user u on "
+                + "u.id=c.User_id on a.Client_client_cod = c.cod inner join Currency d "
+                + "on a.Currency_currencyCode = d.currencyCode where a.number = %s";
         sql = String.format(sql,num);
         ResultSet rs = db.executeQuery(sql);
          if (rs.next()) {

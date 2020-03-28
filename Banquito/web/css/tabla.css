@@ -1,8 +1,29 @@
 .tabla{
     font-size: 2em;
     color: white;
+    border-collapse: collapse;
+}
+.tabla h1{
+    position: absolute;
+    left: 20%
 }
 
-table>h1{
-    
+.tabla table{
+    width: 40%;
+    top: 40%;
+    color: white;
+    left: 20%;
+    position: absolute;
+}
+
+.tabla th, td {
+   border-bottom: 1px solid white;
+}
+
+.tabla a{
+    color: #9f6934;
+}
+
+.tabla a:hover{
+    color:brown;
 }

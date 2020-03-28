@@ -23,7 +23,7 @@
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
         <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
         
-         <<form class="box" name="form" action="/Banquito/presentation/login/login" method="post">
+         <form class="box" name="form" action="/Banquito/presentation/login/login" method="post">
             <h1>Log in</h1>
           
           

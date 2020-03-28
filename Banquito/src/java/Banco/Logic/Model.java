@@ -63,6 +63,11 @@ public class Model {
        List<Account> lista= account.getList(cod,id);
        return lista;
    }
+   
+   public Account getCuenta(String cod)throws Exception{
+       Account cuenta=account.getAccount(cod);
+       return cuenta;
+   }
     
    public Client ConsutClient(String id)throws Exception{
        Client cliente = client.getClient(id);
@@ -79,4 +84,8 @@ public class Model {
      return lista;
    }
    
+   public List<Transaction> consultarTransaciones(Integer num,String cod)throws Exception{
+       List<Transaction> lista = transaction.getlista(num,cod);
+       return lista;
+   }
 }
