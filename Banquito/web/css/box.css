@@ -16,6 +16,7 @@ h1{
 
 
 .box{
+  background-attachment: fixed;
   background-color: none;
   font-size: 2em;
   width: 100%;
