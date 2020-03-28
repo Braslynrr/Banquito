@@ -52,10 +52,9 @@ public class CuentaController extends HttpServlet {
            session.setAttribute("cuentas", model.getCuentas());
            return "/presentation/Menu/Cuenta/Cuenta.jsp";
         }catch(Exception ex){
-            
+            session.setAttribute("msg", ex.toString());
+             return "/presentation/Error.jsp"; 
         }
-       
-        return "/presentation/Menu/Cuenta/Cuenta.jsp"; 
     } 
 
         

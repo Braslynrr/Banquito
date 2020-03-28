@@ -54,6 +54,7 @@ public class TransaccionController extends HttpServlet {
            session.setAttribute("account", model.getAccount());
            return "/presentation/Menu/Cuenta/Transacciones/View.jsp";
         }catch(Exception ex){
+            session.setAttribute("msg", ex.toString());
              return "/presentation/Error.jsp";
         }
     } 

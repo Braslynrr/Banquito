@@ -1,15 +1,30 @@
+<%@page import="Banco.Logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
  <%@ include file="/presentation/Head.jsp" %>
+ <link href="/Banquito/css/Error.css" rel="stylesheet" type="text/css" />
  <title>Error</title> 
+ <% String msg= (String) session.getAttribute("error");%>
 </head>
 <body>
-  
     <%@ include file="/presentation/header.jsp" %>
-    <div id="body" style="margin: 0 auto; width:85%; ">   
-        <h1>Ha ocurrido un error</h1>
+    <div class="derror">
+        <h1>Ha ocurrido un error <br>
+        <%= msg %></h1>
+        <input type="submit" value="Volver al inicio" onclick="Inicio(usuario)">
     </div>  
 </body>
 </html>
+
+<script>    
+    
+    function Inicio(usuario){
+       
+     if(usuario!==null){
+        window.location = "/Banquito/presentation/Menu/show";  
+     }   
+        window.location = "/Banquito/presentation/Menu/index.jsp";  
+    }
+</script>
