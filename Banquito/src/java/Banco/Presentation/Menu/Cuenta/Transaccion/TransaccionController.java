@@ -7,7 +7,7 @@ package Banco.Presentation.Menu.Cuenta.Transaccion;
 
 import Banco.Logic.Client;
 import Banco.Presentation.Menu.Cuenta.CuentaModel;
-import Logic.Transaction;
+//import Logic.Transaction;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
