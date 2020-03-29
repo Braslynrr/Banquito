@@ -23,11 +23,13 @@
         <div class="box">
         <form  name="form" action = "/Banquito/presentation/Menu/Cajero/Registro/registrar" method="post">
             
-         <h1>Ingrese los datos del nuevo cliente</hl>    
+         <h1>Ingrese los datos del nuevo cliente</hl>
+            <input type = "text" name = "username" placeholder="Nombre" class = "<%=erroneo("username",errores)%>" />
+            <input type = "text" name = "tnumber" placeholder="Numero de telefono" class = "<%=erroneo("tnumber",errores)%>" />
             <input type = "text" name = "userid" placeholder="id" class = "<%=erroneo("userid",errores)%>" />
             <input type = "text" name = "userpass" placeholder="contrasena" class = "<%=erroneo("userpass",errores)%>" />
             
-            <input type = "submit" values = "Registrar">
+            <input type = "submit" value = "Registrar">
         
         </form>
         </div>

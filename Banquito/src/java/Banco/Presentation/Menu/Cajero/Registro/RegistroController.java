@@ -68,6 +68,8 @@ public class RegistroController extends HttpServlet {
     
      public  String registrarAction (HttpServletRequest request) {
          
+         
+         //Crear un objeto cliente 
          Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
          User real = new User();
          
@@ -167,6 +169,13 @@ public class RegistroController extends HttpServlet {
 
         if (request.getParameter("userpass").isEmpty()){
             errores.put("userpass","Clave requerida");
+        }
+        if (request.getParameter("username").isEmpty()){
+            errores.put("username","Cedula requerida");
+        }
+
+        if (request.getParameter("tnumber").isEmpty()){
+            errores.put("tnumber","Clave requerida");
         }
         return errores;
     }
