@@ -125,7 +125,7 @@ public class RegistroController extends HttpServlet {
         model.getUsuario().setPassword(request.getParameter("userpass"));
    }
    
-    public String createUser(HttpServletRequest request){
+    /*public String createUser(HttpServletRequest request){
                
             //Obtiene el atributo model de la sesion
             RegistroModel model = (RegistroModel) request.getAttribute("model");
@@ -152,19 +152,26 @@ public class RegistroController extends HttpServlet {
             errores.put("userid", "Usuario o clave incorrectos");
             errores.put("userpass", "Usuario o clave incorrectos");
            
-            */
+            
              return "/presentation/login/Login.jsp";
         }
     
     
 
     
-    }
+    }*/
     
    Map<String,String> validar(HttpServletRequest request){
         Map<String,String> errores = new HashMap<>();
+        String test = "1122";
+        
+         if (request.getParameter("userid").equals(test)){
+            errores.put("userid","Cedula requerida");
+            
+        }
         if (request.getParameter("userid").isEmpty()){
             errores.put("userid","Cedula requerida");
+            
         }
 
         if (request.getParameter("userpass").isEmpty()){
