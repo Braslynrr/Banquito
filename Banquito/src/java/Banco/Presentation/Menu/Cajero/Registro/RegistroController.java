@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -124,50 +126,18 @@ public class RegistroController extends HttpServlet {
         model.getUsuario().setId(request.getParameter("userid"));
         model.getUsuario().setPassword(request.getParameter("userpass"));
    }
-   
-    /*public String createUser(HttpServletRequest request){
-               
-            //Obtiene el atributo model de la sesion
-            RegistroModel model = (RegistroModel) request.getAttribute("model");
-            Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
-            HttpSession session = request.getSession(true);
-            
-        try {
-          
-            User real = new User();
-            real.setId(request.getParameter("userid"));
-            real.setPassword(request.getParameter("userpass"));
-            //este metodo inserta el usuario en la base de datos
-            //descomentar cuando brazzlyn haga el ultimo push
-            //domainModel.addUser(real);
-            String viewUrl = "";
-            viewUrl = "/presentation/Menu/show";
-            return viewUrl;
-        } catch (Exception ex) {
-            
-            //En caso de de que existan errores a la hora de registrar al usuario 
-            /*
-            Map<String, String> errores = new HashMap<>();
-            request.setAttribute("errores", errores);
-            errores.put("userid", "Usuario o clave incorrectos");
-            errores.put("userpass", "Usuario o clave incorrectos");
-           
-            
-             return "/presentation/login/Login.jsp";
-        }
-    
-    
 
     
-    }*/
-    
-   Map<String,String> validar(HttpServletRequest request){
+   Map<String,String> validar(HttpServletRequest request) {
         Map<String,String> errores = new HashMap<>();
-        String test = "1122";
+        Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
         
-         if (request.getParameter("userid").equals(test)){
-            errores.put("userid","Cedula requerida");
-            
+        try {
+            if (domainModel.clientExist(request.getParameter("userid"))){
+                errores.put("userid","El cliente ya se encuentra registrado"); 
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(RegistroController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (request.getParameter("userid").isEmpty()){
             errores.put("userid","Cedula requerida");
@@ -178,11 +148,11 @@ public class RegistroController extends HttpServlet {
             errores.put("userpass","Clave requerida");
         }
         if (request.getParameter("username").isEmpty()){
-            errores.put("username","Cedula requerida");
+            errores.put("username","Espacio requerido");
         }
 
         if (request.getParameter("tnumber").isEmpty()){
-            errores.put("tnumber","Clave requerida");
+            errores.put("tnumber","Espacio requerido");
         }
         return errores;
     }

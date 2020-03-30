@@ -32,7 +32,7 @@
             <input type = "text" name = "userid" placeholder="id" class = "<%=erroneo("userid",errores)%>" title="<%=title("userid",errores)%>"/>
             <input type = "text" name = "userpass" placeholder="contrasena" class = "<%=erroneo("userpass",errores)%>" title="<%=title("userpass",errores)%>"/>
             
-            <input type = "submit" value = "Registrar">
+            <input type = "submit" value = "Siguiente">
        
         
         </form>

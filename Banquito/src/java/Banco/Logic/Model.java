@@ -48,6 +48,8 @@ public class Model {
    
    }
    
+   
+   
    public User consultUser(String id,String pass) throws Exception{
        
        User result = user.Login(id,pass);
@@ -69,6 +71,12 @@ public class Model {
        return cuenta;
    }
    
+   public boolean clientExist (String id) throws Exception {
+    
+          
+      return client.getClient(id).getUserid().getId().equals(id);
+       
+   }
    
    public void addUser(User obj) throws Exception{
        

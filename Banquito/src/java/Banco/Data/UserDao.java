@@ -58,6 +58,7 @@ public class UserDao {
     }
     
     
+    
     public User Login(String id ,String pass)throws Exception{
         String sql = "select * from user where id = '%s'";
         String sql2 =" and password = '%s'" ;
