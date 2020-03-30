@@ -16,8 +16,8 @@
     <body>
         <%@ include file="/presentation/header.jsp" %>
         <div class="busqueda">
-            <h1>Busqueda de transacciones</h1>
-            Numero de Cuenta<input type="text"> Fecha:<input type="date"> Dinero Minimo: <input type="text"> <input type="button" value="Buscar">
+            <h1>Busqueda de transacciones</h1><a href="/Banquito/presentation/Menu/Cuenta/Transacciones/show"></a>
+            Numero de Cuenta<input type="text"> Fecha:<input type="date"> Dinero Minimo: <input type="text"> <input type="submit" value="Buscar">
         </div>
         <div class="tabla">
             

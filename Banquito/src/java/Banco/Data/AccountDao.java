@@ -62,6 +62,16 @@ public class AccountDao {
     
     }
     
+    public Integer GeneratorNAccount()throws Exception{
+        String sql="select count(number) from account";
+        ResultSet rs = db.executeQuery(sql);
+         if (rs.next()) {
+            return Integer.parseInt(rs.getString("count(number)"))+1;
+         }else{
+            return 1;
+         }
+    } 
+    
     public static Account toAccount(ResultSet rs) throws SQLException{
         
         try{

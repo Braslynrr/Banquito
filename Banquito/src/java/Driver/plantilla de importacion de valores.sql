@@ -21,6 +21,8 @@ select * from account a inner join client c inner join user u on u.id=c.User_id 
 
 select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where t.number= 1 and a.Client_client_cod= 'CL001';
 
-select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where t.Account_number= '1';
+select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where t.Account_number= '1' and a.Client_client_cod= 'CL100' ;
 
 select * from transaction where Account_number=1;
+
+select count(cod) from client;

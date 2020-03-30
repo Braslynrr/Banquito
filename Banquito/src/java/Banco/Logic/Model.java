@@ -73,6 +73,7 @@ public class Model {
    public void addUser(User obj) throws Exception{
        
        user.AddUser(obj);
+       
    }
    
     

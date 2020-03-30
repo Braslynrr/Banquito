@@ -54,6 +54,18 @@ public class ClientDao {
         
     }
     
+    
+    public Integer GeneratorNclient()throws Exception{
+        String sql="select count(cod) from client";
+        ResultSet rs = db.executeQuery(sql);
+         if (rs.next()) {
+            return Integer.parseInt(rs.getString("count(cod)"))+1;
+         }else{
+            return 1;
+         }
+    } 
+    
+    
     public static Client toClient(ResultSet rs) throws SQLException{
     
         try{

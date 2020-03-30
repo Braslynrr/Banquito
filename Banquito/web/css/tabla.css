@@ -43,6 +43,19 @@
 .busqueda h1{
     font-size: 2em;
 }
-.busqueda [type="button"]{
-    background-color: None;
+.busqueda [type="submit"]{
+  border:0;
+  background: none;
+  padding: 7px 30px;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.busqueda [type="button"]:hover{
+    background-color: #2ecc71; 
 }

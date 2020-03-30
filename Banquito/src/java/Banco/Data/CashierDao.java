@@ -55,6 +55,17 @@ public class CashierDao {
         
     }
     
+    
+    public Integer GeneratorNCashier()throws Exception{
+        String sql="select count(cod) from cashier";
+        ResultSet rs = db.executeQuery(sql);
+         if (rs.next()) {
+            return Integer.parseInt(rs.getString("count(cod)"))+1;
+         }else{
+            return 1;
+         }
+    } 
+    
     public static Cashier toCashier(ResultSet rs) throws SQLException{
     
         try{      
