@@ -55,7 +55,7 @@ public class TransaccionController extends HttpServlet {
            return "/presentation/Menu/Cuenta/Transacciones/View.jsp";
         }catch(Exception ex){
             session.setAttribute("msg", ex.toString());
-             return "/presentation/Error.jsp";
+            return "/presentation/Error.jsp";
         }
     } 
      

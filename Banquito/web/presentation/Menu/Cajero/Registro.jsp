@@ -24,8 +24,7 @@
         
          <<form class="box">
             <h1>Ingrese los datos del nuevo usuario </h1>
-          
-          
+            
             <div id="usuario" class="campo"><input class="<%=erroneo("userid",errores)%>" placeholder="usuario" type="text" name="userid" value="<%=form.get("userid")[0]%>" title="<%=title("userid",errores)%>"></div>
             <div id="pass" class="campo"><input class="<%=erroneo("userpass",errores)%>" placeholder="clave" type="password" name="userpass" value="<%=form.get("userpass")[0]%>" title="<%=title("userpass",errores)%>"></div>
     
