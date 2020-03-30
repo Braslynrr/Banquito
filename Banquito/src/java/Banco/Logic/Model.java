@@ -68,6 +68,13 @@ public class Model {
        Account cuenta=account.getAccount(cod);
        return cuenta;
    }
+   
+   
+   public void addUser(User obj) throws Exception{
+       
+       user.AddUser(obj);
+   }
+   
     
    public Client ConsutClient(String id)throws Exception{
        Client cliente = client.getClient(id);

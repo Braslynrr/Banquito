@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author gaira
  */
-@WebServlet(name = "RegistroController", urlPatterns = {"/presentation/Menu/Cajero/Registro/show"})
+@WebServlet(name = "RegistroController", urlPatterns = {"/presentation/Menu/Cajero/Registro/show","/presentation/Menu/Cajero/Registro/registrar"})
 public class RegistroController extends HttpServlet {
 
     
@@ -34,7 +34,10 @@ public class RegistroController extends HttpServlet {
              
         case "/presentation/Menu/Cajero/Registro/show":
                viewUrl=this.show(request);
-            break;            
+            break;     
+        case "/presentation/Menu/Cajero/Registro/registrar":
+               viewUrl=this.registrar(request);
+            break;    
         }
         request.getRequestDispatcher(viewUrl).forward( request, response);
         
@@ -44,12 +47,62 @@ public class RegistroController extends HttpServlet {
     public String show(HttpServletRequest request){
         return this.showAction(request);
     }
+     public String registrar(HttpServletRequest request){
+         
+        try{ 
+            Map<String,String> errores =  this.validar(request);
+            if(errores.isEmpty()){
+                //this.updateModel(request);          
+                return this.registrarAction(request);
+            }
+            else{
+                request.setAttribute("errores", errores);
+                return "/presentation/Menu/Cajero/Registro.jsp"; 
+            }      
+            
+        }
+           catch(Exception e){
+            return "/presentation/Error.jsp";             
+        }   
+    }
     
-    
+     public  String registrarAction (HttpServletRequest request) {
+         
+         
+         //Crear un objeto cliente 
+         Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
+         User real = new User();
+         
+         try{
+             
+         real.setId(request.getParameter("userid"));
+         real.setPassword(request.getParameter("userpass"));
+         domainModel.addUser(real);
+         return "/presentation/Menu/Cajero/Registro.jsp";
+         }
+         catch (Exception ex) {
+            
+            //En caso de de que existan errores a la hora de registrar al usuario 
+            /*
+            Map<String, String> errores = new HashMap<>();
+            request.setAttribute("errores", errores);
+            errores.put("userid", "Usuario o clave incorrectos");
+            errores.put("userpass", "Usuario o clave incorrectos");
+           
+            */
+             return "/presentation/Menu/Cajero/Registro.jsp";
+        }
+         
+         
+         
+         
+         
+          
+     }
     
     public String showAction(HttpServletRequest request){
         RegistroModel model= (RegistroModel) request.getAttribute("model");
-        HttpSession session = request.getSession(true);
+        /*HttpSession session = request.getSession(true);
         model.getUsuario().setId("");
         model.getUsuario().setPassword("");
         /*Client cliente = (Client) session.getAttribute("client");
@@ -80,6 +133,7 @@ public class RegistroController extends HttpServlet {
             HttpSession session = request.getSession(true);
             
         try {
+          
             User real = new User();
             real.setId(request.getParameter("userid"));
             real.setPassword(request.getParameter("userpass"));
@@ -105,6 +159,25 @@ public class RegistroController extends HttpServlet {
     
 
     
+    }
+    
+   Map<String,String> validar(HttpServletRequest request){
+        Map<String,String> errores = new HashMap<>();
+        if (request.getParameter("userid").isEmpty()){
+            errores.put("userid","Cedula requerida");
+        }
+
+        if (request.getParameter("userpass").isEmpty()){
+            errores.put("userpass","Clave requerida");
+        }
+        if (request.getParameter("username").isEmpty()){
+            errores.put("username","Cedula requerida");
+        }
+
+        if (request.getParameter("tnumber").isEmpty()){
+            errores.put("tnumber","Clave requerida");
+        }
+        return errores;
     }
     
 
