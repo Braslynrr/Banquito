@@ -104,27 +104,25 @@ public class RegistroController extends HttpServlet {
     
     public String showAction(HttpServletRequest request){
         RegistroModel model= (RegistroModel) request.getAttribute("model");
-        /*HttpSession session = request.getSession(true);
-        model.getUsuario().setId("");
-        model.getUsuario().setPassword("");
-        /*Client cliente = (Client) session.getAttribute("client");
-        model.setCliente(cliente);
+        HttpSession session = request.getSession(true);
+    
         try{
-           model.setCuentas(Banco.Logic.Model.instance().ConsultarCuentas(cliente.getId(),cliente.getUser().getId()));
-           session.setAttribute("cuentas", model.getCuentas());
-           return "/presentation/Menu/Cuenta/Cuenta.jsp";
+           this.updateModel(request);
+           model.setMonedas(Banco.Logic.Model.instance().Consultarcurrency());
+           session.setAttribute("currencies", model.getMonedas());
+           return "/presentation/Menu/Cajero/Registro.jsp";
         }catch(Exception ex){
-            
-        }*/
+            return "/presentation/Menu/Cajero/Registro.jsp"; 
+        }
+        
        
-        return "/presentation/Menu/Cajero/Registro.jsp"; 
+      
     
     }
     void updateModel(HttpServletRequest request){
-       RegistroModel model= (RegistroModel) request.getAttribute("model");   
-       //model.getCurrent().setId(request.getParameter("userid"));
-        model.getUsuario().setId(request.getParameter("userid"));
-        model.getUsuario().setPassword(request.getParameter("userpass"));
+       RegistroModel model= (RegistroModel) request.getAttribute("model");
+       HttpSession session = request.getSession(true);
+     
    }
 
     

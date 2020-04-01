@@ -1,4 +1,5 @@
 
+<%@page import="Banco.Logic.Currency"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
@@ -20,27 +21,36 @@
        
         <% RegistroModel model= (RegistroModel) request.getAttribute("model"); %>
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
-      
+        <% List<Currency> lista=(List<Currency>) session.getAttribute("currencies");%>
         
       <div class="box">
-        <form  name="form" action = "/Banquito/presentation/Menu/Cajero/Registro/registrar" method="post">
-            
-            <h1>Ingrese los datos del nuevo cliente</hl>    
-  
-            <input type = "text" name = "username" placeholder="Nombre" class = "<%=erroneo("username",errores)%>" title="<%=title("username",errores)%>" />
-            <input type = "text" name = "tnumber" placeholder="Numero de telefono" class = "<%=erroneo("tnumber",errores)%>" title="<%=title("tnumber",errores)%>" />
-            <input type = "text" name = "userid" placeholder="id" class = "<%=erroneo("userid",errores)%>" title="<%=title("userid",errores)%>"/>
-            <input type = "text" name = "userpass" placeholder="contrasena" class = "<%=erroneo("userpass",errores)%>" title="<%=title("userpass",errores)%>"/>
-            
-            <input type = "submit" value = "Siguiente">
-       
-        
-        </form>
-        </div>
-        
-      </script>   
-        
-    </body>
+          <form  name="form" action = "/Banquito/presentation/Menu/Cajero/Registro/registrar" method="post">
+
+              <h1>Ingrese los datos del nuevo cliente</hl>    
+
+                  <input type = "text" name = "username" placeholder="Nombre" class = "<%=erroneo("username", errores)%>" title="<%=title("username", errores)%>" />
+                  <input type = "text" name = "tnumber" placeholder="Numero de telefono" class = "<%=erroneo("tnumber", errores)%>" title="<%=title("tnumber", errores)%>" />
+                  <input type = "text" name = "userid" placeholder="id" class = "<%=erroneo("userid", errores)%>" title="<%=title("userid", errores)%>"/>
+                  <input type = "text" name = "userpass" placeholder="contrasena" class = "<%=erroneo("userpass", errores)%>" title="<%=title("userpass", errores)%>"/>
+                  <select id = "currencyType">
+
+                      <% for (Currency m : lista) {%>
+                      <option>  <%= m.getDescription()%> </option>
+                     
+                      <% } %>
+                      <% if (lista.isEmpty()) { %>
+                      <option value = "No se han registrado tipos de cambio" </option>
+                      <% }%>
+                  </select>
+                  <input type = "submit" value = "Siguiente">
+
+
+                  </form>
+                  </div>
+
+                  </script>   
+
+                  </body>
      <%@ include file="/presentation/footer.jsp" %>
 </html>
 
