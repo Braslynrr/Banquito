@@ -109,6 +109,8 @@ public class RegistroController extends HttpServlet {
         try{
            this.updateModel(request);
            model.setMonedas(Banco.Logic.Model.instance().Consultarcurrency());
+           
+           
            session.setAttribute("currencies", model.getMonedas());
            return "/presentation/Menu/Cajero/Registro.jsp";
         }catch(Exception ex){
