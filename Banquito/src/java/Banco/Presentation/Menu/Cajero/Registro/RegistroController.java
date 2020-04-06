@@ -5,6 +5,8 @@
  */
 package Banco.Presentation.Menu.Cajero.Registro;
 
+import Banco.Logic.Account;
+import Banco.Logic.Client;
 import Banco.Logic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,8 +55,7 @@ public class RegistroController extends HttpServlet {
          
         try{ 
             Map<String,String> errores =  this.validar(request);
-            if(errores.isEmpty()){
-                //this.updateModel(request);          
+            if(errores.isEmpty()){         
                 return this.registrarAction(request);
             }
             else{
@@ -70,36 +71,29 @@ public class RegistroController extends HttpServlet {
     
      public  String registrarAction (HttpServletRequest request) {
          
-         
-         //Crear un objeto cliente 
          Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
          User real = new User();
+         Client cliente = new Client();
+         Account cuenta = new Account();
          
          try{
              
          real.setId(request.getParameter("userid"));
          real.setPassword(request.getParameter("userpass"));
+         cliente.setId(domainModel.clientCode());
+         cliente.setName(request.getParameter("username"));
+         cliente.setTelNumber(request.getParameter("tnumber"));
+         cliente.setUserid(real);
+         
          domainModel.addUser(real);
+         domainModel.addClient(cliente);
          return "/presentation/Menu/Cajero/Registro.jsp";
          }
          catch (Exception ex) {
             
-            //En caso de de que existan errores a la hora de registrar al usuario 
-            /*
-            Map<String, String> errores = new HashMap<>();
-            request.setAttribute("errores", errores);
-            errores.put("userid", "Usuario o clave incorrectos");
-            errores.put("userpass", "Usuario o clave incorrectos");
-           
-            */
+ 
              return "/presentation/Menu/Cajero/Registro.jsp";
-        }
-         
-         
-         
-         
-         
-          
+        }    
      }
     
     public String showAction(HttpServletRequest request){
