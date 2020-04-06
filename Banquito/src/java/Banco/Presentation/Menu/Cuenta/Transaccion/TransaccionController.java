@@ -10,6 +10,7 @@ import Banco.Presentation.Menu.Cuenta.CuentaModel;
 //import Logic.Transaction;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,19 +49,47 @@ public class TransaccionController extends HttpServlet {
         TransaccionModel model = ( TransaccionModel) request.getAttribute("model");
         HttpSession session = request.getSession(true);
         try{
-           this.updateModel(request);
-           model.setTrans(Banco.Logic.Model.instance().consultarTransaciones(model.getAccount().getNumber(),model.getAccount().getClient().getId()));
-           session.setAttribute("transactions", model.getTrans());
-           session.setAttribute("account", model.getAccount());
+           if(request.getParameter("numeroFld")!=null){
+                this.AccountAction(request);
+                model.setTrans(Banco.Logic.Model.instance().consultarTransaciones(model.getAccount().getNumber(),model.getAccount().getClient().getId()));
+                session.setAttribute("transactions", model.getTrans());
+                session.setAttribute("account", model.getAccount());
+           }else{
+               this.Search(request);
+               Client cliente = (Client) session.getAttribute("client"); 
+               model.setTrans(Banco.Logic.Model.instance().consultarTransacionesRange(cliente.getId(),model.getF1(),model.getF2(),""+model.getMin()));
+               session.setAttribute("transactions", model.getTrans());
+               session.setAttribute("account", null);
+           }
            return "/presentation/Menu/Cuenta/Transacciones/View.jsp";
         }catch(Exception ex){
-            session.setAttribute("msg", ex.toString());
+            session.setAttribute("msg", ex.getMessage());
             return "/presentation/Error.jsp";
         }
     } 
      
-    
-    void updateModel(HttpServletRequest request)throws Exception{
+
+    void Search(HttpServletRequest request)throws Exception{
+        TransaccionModel model= ( TransaccionModel) request.getAttribute("model");
+        HttpSession session = request.getSession(true);
+        model.setF1((String) request.getParameter("FechaI"));
+        model.setF2((String) request.getParameter("FechaF"));
+        String min=(String) request.getParameter("dmin");
+        try{
+            Integer.parseInt(min);
+        }catch(Exception e){
+            throw new Exception("Caracter incorrecto");
+        }
+        if(Integer.parseInt(min)>=0){
+            model.setMin(Integer.parseInt(min));
+        }else{
+            throw new Exception("Numero invalido");
+        }
+        
+   }
+     
+     
+    void AccountAction(HttpServletRequest request)throws Exception{
         TransaccionModel model= ( TransaccionModel) request.getAttribute("model");
         HttpSession session = request.getSession(true);
         model.setAccount(Banco.Logic.Model.instance().getCuenta(request.getParameter("numeroFld")));

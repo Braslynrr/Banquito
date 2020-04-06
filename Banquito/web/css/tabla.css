@@ -56,6 +56,6 @@
   cursor: pointer;
 }
 
-.busqueda [type="button"]:hover{
-    background-color: #2ecc71; 
+.busqueda [type="submit"]:hover{
+    background: #2ecc71; 
 }

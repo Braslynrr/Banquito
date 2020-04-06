@@ -6,7 +6,7 @@
  <%@ include file="/presentation/Head.jsp" %>
  <link href="/Banquito/css/Error.css" rel="stylesheet" type="text/css" />
  <title>Error</title> 
- <% String msg= (String) session.getAttribute("error");%>
+ <% String msg= (String) session.getAttribute("msg");%>
 </head>
 <body>
     <%@ include file="/presentation/header.jsp" %>
@@ -24,7 +24,8 @@
        
      if(usuario!==null){
         window.location = "/Banquito/presentation/Menu/show";  
-     }   
+     }else{
         window.location = "/Banquito/presentation/Menu/index.jsp";  
+     }
     }
 </script>

@@ -26,3 +26,6 @@ select * from transaction t inner join account a inner join currency inner join 
 select * from transaction where Account_number=1;
 
 select count(cod) from client;
+
+select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where a.Client_client_cod= 'CL001' and  t.date>=2020-02-01 and t.amount>0;
+

@@ -85,6 +85,30 @@ public class TransactionDao {
     
     
     }
+    
+    public List<Transaction> getlistaRang(String cod,String FechaI,String FechaF, String dmin)throws Exception{
+     List<Transaction> lista = new ArrayList<Transaction>();
+        String sql="select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where a.Client_client_cod='%s' ";
+        sql = String.format(sql,cod);
+        if(!FechaI.isEmpty()){
+            sql=sql+"and  t.date>='%s' ";
+            sql = String.format(sql,FechaI);
+        }
+        if(!FechaF.isEmpty()){
+            sql=sql+"and t.date<='%s'" ;
+            sql = String.format(sql,FechaF);
+        }
+        if(!dmin.isEmpty()){
+             sql=sql+"and t.amount>'%s'";
+             sql = String.format(sql,dmin);
+        }
+        ResultSet rs = db.executeQuery(sql);
+        while(rs.next()){
+            lista.add(toTransaction(rs));
+        }
+        return lista;
+    }
+    
 
     public List<Transaction> getlista(Integer num,String cod)throws Exception{
         List<Transaction> lista = new ArrayList<Transaction>();

@@ -84,6 +84,11 @@ public class Model {
        
    }
    
+   public List<Transaction> consultarTransacionesRange(String Cod, String FechaI,String FechaF,String dmin)throws Exception{
+        List<Transaction> lista = transaction.getlistaRang(Cod, FechaI, FechaF, dmin);
+        return lista;
+   }
+   
     
    public Client ConsutClient(String id)throws Exception{
        Client cliente = client.getClient(id);

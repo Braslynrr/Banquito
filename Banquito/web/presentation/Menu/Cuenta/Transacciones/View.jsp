@@ -13,10 +13,15 @@
     </head>
     <body>
         <%@ include file="/presentation/header.jsp" %>
-        <center><h1>Transaciones de Cuenta #<%= account.getNumber() %>  Cliente: <%= account.getClient().getName()%> Saldo: <%= account.getBalance() %></h1></center>
+        <% if(account!=null){ %>
+            <center><h1>Transaciones de Cuenta #<%= account.getNumber() %>  Cliente: <%= account.getClient().getName()%> Saldo: <%= account.getBalance() %></h1></center>
+        <% } %>
+        <% if(account==null){ %>
+            <center><h1>Busqueda personalizada de Transaciones</h1></center>
+        <% } %>
         <form class="box">
             <% for(Transaction t:lista){ %>
-            <div class="tbox"> Numero de transaccion: <%= t.getNumber()%> <br> tipo:<%= t.getType() %> <br> cantidad: <%= t.getAmount() %> <%= account.getCurrency().getDescription()%><br> Fecha: <%= t.getDate().toString()%> <br> Propietario:<%=t.getAccount().getClient().getName() %> </div>
+            <div class="tbox"> Numero de transaccion: <%= t.getNumber()%> <br> tipo:<%= t.getType() %> <br> cantidad: <%= t.getAmount() %> <%= t.getAccount().getCurrency().getDescription() %><br> Fecha: <%= t.getDate().toString()%> <br> Propietario:<%=t.getAccount().getClient().getName() %> </div>
             <% } %>
             <% if(lista.isEmpty()){ %>
             <h1> No se han registrado transacciones en su cuenta!</h1>
