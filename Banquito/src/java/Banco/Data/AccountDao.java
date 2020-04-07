@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -104,5 +105,13 @@ public class AccountDao {
         return lista;
     }
     
-    
+        public String GenertadorKey(){
+        String key="";
+        char generator;
+        for(int i=0;i<8;i=i+1){
+            generator=(char) (Math.random()*127+33);
+            key=key+generator;
+        }
+        return key;
+    }
 }
