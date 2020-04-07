@@ -12,6 +12,7 @@ import Banco.Logic.Client;
 import Banco.Logic.Account;
 import Banco.Logic.User;
 import Banco.Logic.Currency;
+import java.util.List;
 
 /**
  *
@@ -24,7 +25,9 @@ public class RegistroModel {
     Client cliente;
     Account cuenta;
     Cashier cajero;
-    Currency moneda;
+
+
+    List<Currency> monedas;
     User usuario;
 
     public void setUsuario(User usuario) {
@@ -41,7 +44,6 @@ public class RegistroModel {
         cliente = null;
         cuenta = null;
         cajero = null;
-        moneda = null;
         usuario = null;
     }
     
@@ -57,9 +59,7 @@ public class RegistroModel {
         this.cajero = cajero;
     }
 
-    public void setMoneda(Currency moneda) {
-        this.moneda = moneda;
-    }
+  
 
     public Client getCliente() {
         return cliente;
@@ -72,11 +72,15 @@ public class RegistroModel {
     public Cashier getCajero() {
         return cajero;
     }
-
-    public Currency getMoneda() {
-        return moneda;
-    }
     
+    public List<Currency> getMonedas() {
+        return monedas;
+    }
+
+    public void setMonedas(List<Currency> monedas) {
+        this.monedas = monedas;
+    }
+
 
     
     

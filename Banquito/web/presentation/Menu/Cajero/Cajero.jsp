@@ -21,6 +21,7 @@
             <h1>Menu cajeros</hl>
             <div id="menu">   
                 <input type="submit" value="Registrar un cliente" onclick="Redirect1();" >
+                <input type="submit" value="Abrir una cuenta" onclick="Redirect1();" >
             </div>
              <h2>Codigo de cajero: <%=cashier.getId()%></h2>
         </div>

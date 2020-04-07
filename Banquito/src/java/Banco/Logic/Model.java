@@ -49,6 +49,14 @@ public class Model {
    }
    
    
+   public String clientCode () throws Exception{
+   
+       
+       String code = "CL"+Integer.toString(client.GeneratorNclient());
+       
+   
+       return code;
+   }
    
    public User consultUser(String id,String pass) throws Exception{
        
@@ -89,7 +97,11 @@ public class Model {
         return lista;
    }
    
-    
+    public void addClient(Client obj) throws Exception{
+       
+       client.AddClient(obj);
+       
+   }
    public Client ConsutClient(String id)throws Exception{
        Client cliente = client.getClient(id);
        return cliente;
