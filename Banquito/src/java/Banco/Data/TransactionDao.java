@@ -99,7 +99,7 @@ public class TransactionDao {
             sql = String.format(sql,FechaF);
         }
         if(!dmin.isEmpty()){
-             sql=sql+"and t.amount>'%s'";
+             sql=sql+"and t.amount>='%s'";
              sql = String.format(sql,dmin);
         }
         ResultSet rs = db.executeQuery(sql);
