@@ -109,8 +109,8 @@ public class AccountDao {
         String key="";
         char generator;
         for(int i=0;i<8;i=i+1){
-            int x = (int) (Math.random()*74 + 48);
-            if(x>97 & x>90){
+            int x = (int) (Math.random()*74 + 47);
+            if(x<96 && x>90){
                x=x+8;
             }
             generator=(char) x;
