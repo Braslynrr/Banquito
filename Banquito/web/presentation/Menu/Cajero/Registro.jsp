@@ -22,6 +22,7 @@
         <% RegistroModel model= (RegistroModel) request.getAttribute("model"); %>
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
         <% List<Currency> lista=(List<Currency>) session.getAttribute("currencies");%>
+        <% String password = (String) session.getAttribute("password"); %>
         
       <div class="box">
           <form  name="form" action = "/Banquito/presentation/Menu/Cajero/Registro/registrar" method="post">
@@ -31,7 +32,7 @@
                   <input type = "text" name = "username" placeholder="Nombre" class = "<%=erroneo("username", errores)%>" title="<%=title("username", errores)%>" />
                   <input type = "text" name = "tnumber" placeholder="Numero de telefono" class = "<%=erroneo("tnumber", errores)%>" title="<%=title("tnumber", errores)%>" />
                   <input type = "text" name = "userid" placeholder="id" class = "<%=erroneo("userid", errores)%>" title="<%=title("userid", errores)%>"/>
-                  <input type = "text" name = "userpass" placeholder="contrasena" class = "<%=erroneo("userpass", errores)%>" title="<%=title("userpass", errores)%>"/>
+                  <input type = "text" name = "userpass" placeholder="contrasena" value=<%= password %> class = "<%=erroneo("userpass", errores)%>" title="<%=title("userpass", errores)%>"/>
                   <select id = "currencyType">
 
                       <% for (Currency m : lista) {%>

@@ -121,4 +121,8 @@ public class Model {
        List<Transaction> lista = transaction.getlista(num,cod);
        return lista;
    }
+   
+   public String getpassword(){
+       return account.GenertadorKey();
+   }
 }

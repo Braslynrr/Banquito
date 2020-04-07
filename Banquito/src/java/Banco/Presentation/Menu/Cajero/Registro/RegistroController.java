@@ -11,6 +11,7 @@ import Banco.Logic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,7 +105,7 @@ public class RegistroController extends HttpServlet {
            this.updateModel(request);
            model.setMonedas(Banco.Logic.Model.instance().Consultarcurrency());
            
-           
+           session.setAttribute("password", Banco.Logic.Model.instance().getpassword());
            session.setAttribute("currencies", model.getMonedas());
            return "/presentation/Menu/Cajero/Registro.jsp";
         }catch(Exception ex){

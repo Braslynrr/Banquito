@@ -105,11 +105,15 @@ public class AccountDao {
         return lista;
     }
     
-        public String GenertadorKey(){
+    public String GenertadorKey(){
         String key="";
         char generator;
         for(int i=0;i<8;i=i+1){
-            generator=(char) (Math.random()*127+33);
+            int x = (int) (Math.random()*74 + 48);
+            if(x>97 & x>90){
+               x=x+8;
+            }
+            generator=(char) x;
             key=key+generator;
         }
         return key;
