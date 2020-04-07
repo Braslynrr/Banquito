@@ -9,13 +9,13 @@ h1{
   margin:10px;
   height:250px;
   width:420px;
- 
   opacity: 1;
   border-radius: 10px 10px 10px 10px;
 }
 
 
 .box{
+  padding-left: 7%;
   background-attachment: fixed;
   background-color: none;
   font-size: 2em;
@@ -27,4 +27,5 @@ h1{
   opacity: 1;
   text-align: center;
   border-radius: 10px 10px 10px 10px;
+  overflow: auto;
 }

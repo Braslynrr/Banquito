@@ -21,7 +21,7 @@
         <% } %>
         <form class="box">
             <% for(Transaction t:lista){ %>
-            <div class="tbox"> Numero de transaccion: <%= t.getNumber()%> <br> tipo:<%= t.getType() %> <br> cantidad: <%= t.getAmount() %> <%= t.getAccount().getCurrency().getDescription() %><br> Fecha: <%= t.getDate().toString()%> <br> Propietario:<%=t.getAccount().getClient().getName() %> </div>
+            <div class="tbox"> Numero de transaccion: <%= t.getNumber()%> <br> tipo:<%= t.getType() %> <br> cantidad: <%= t.getAmount() %> <%= t.getAccount().getCurrency().getDescription() %><br> Fecha: <%= t.toString() %> <br> Propietario:<%=t.getAccount().getClient().getName() %> </div>
             <% } %>
             <% if(lista.isEmpty()){ %>
             <h1> No se han registrado transacciones en su cuenta!</h1>

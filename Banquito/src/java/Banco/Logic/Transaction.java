@@ -152,7 +152,7 @@ public class Transaction implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Transaction[ number=" + number + " ]";
+        return date.toLocaleString();
     }
     
 }
