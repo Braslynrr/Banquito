@@ -33,7 +33,7 @@
                   <input type = "text" name = "tnumber" placeholder="Numero de telefono" class = "<%=erroneo("tnumber", errores)%>" title="<%=title("tnumber", errores)%>" />
                   <input type = "text" name = "userid" placeholder="id" class = "<%=erroneo("userid", errores)%>" title="<%=title("userid", errores)%>"/>
                   <input type = "text" name = "userpass" placeholder="contrasena" value=<%= password %> class = "<%=erroneo("userpass", errores)%>" title="<%=title("userpass", errores)%>"/>
-                  <select id = "currencyType">
+                  <select id = "currencyType" name = "currency">
 
                       <% for (Currency m : lista) {%>
                       <option>  <%= m.getDescription()%> </option>

@@ -36,7 +36,7 @@ public class CurrencyDao {
     
     public Currency getCurrency(String code)  throws Exception{
     
-        String sql  = "select * from Currency where currencyCode = '%s'";
+        String sql  = "select * from Currency where description = '%s'";
         sql = String.format(sql, code);
            ResultSet rs = db.executeQuery(sql);
         if(rs.next()){

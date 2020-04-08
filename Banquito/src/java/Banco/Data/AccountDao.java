@@ -35,7 +35,7 @@ public class AccountDao {
     
         String sql = "insert into Account (number,balance,Client_client_id,Currency_currencyCode)"
                 + "values('%s','%s','%s','%s')";
-        sql = String.format(sql,a.getNumber(),a.getBalance(),a.getClient(),a.getCurrency());
+        sql = String.format(sql,a.getNumber(),a.getBalance(),a.getClient().getId(),a.getCurrency().getCurrencyCode());
          int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("La cuenta ya existe");

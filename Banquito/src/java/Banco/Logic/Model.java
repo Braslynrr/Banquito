@@ -58,6 +58,14 @@ public class Model {
        return code;
    }
    
+     public Integer accountNumber () throws Exception{
+   
+       
+       Integer code = account.GeneratorNAccount();
+       
+   
+       return code;
+   }
    public User consultUser(String id,String pass) throws Exception{
        
        User result = user.Login(id,pass);
@@ -78,6 +86,13 @@ public class Model {
        Account cuenta=account.getAccount(cod);
        return cuenta;
    }
+   
+    
+   public Currency getCurrency(String cod)throws Exception{
+       Currency moneda = currency.getCurrency(cod);
+       return moneda;
+   }
+   
    
    public boolean clientExist (String id) throws Exception {
     
@@ -102,6 +117,12 @@ public class Model {
        client.AddClient(obj);
        
    }
+    
+   public void addAccount(Account obj) throws Exception{
+       
+       account.addAccount(obj);
+       
+   } 
    public Client ConsutClient(String id)throws Exception{
        Client cliente = client.getClient(id);
        return cliente;
