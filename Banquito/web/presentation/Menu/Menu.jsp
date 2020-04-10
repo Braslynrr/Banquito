@@ -14,7 +14,7 @@
         <% Client cliente=(Client) session.getAttribute("client"); %>
          <% Cashier cashier=(Cashier) session.getAttribute("cashier"); %>
         <div class="box">
-            <h1>Cliente:<%=cliente.getId()%></h1>
+            <h1>Cliente:<%=cliente.getCod()%></h1>
             <div id="cuen">
                 <input type="submit" value="ir a Cuenta" onclick="Redirect1();">
             </div>
@@ -23,7 +23,7 @@
             <img src="/Banquito/imagenes/wilaT.png">
         </div>
         <div class="box2">
-            <h1>Cajero:<%=cashier.getId()%> </h1>
+            <h1>Cajero:<%=cashier.getCod()%> </h1>
             <div id="caj">   
             <input type="submit" value="Ir al Cajero" onclick="Redirect2();" >
             </div>

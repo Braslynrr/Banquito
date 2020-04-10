@@ -23,7 +23,7 @@
                 <input type="submit" value="Registrar un cliente" onclick="Redirect1();" >
                 <input type="submit" value="Abrir una cuenta" onclick="Redirect1();" >
             </div>
-             <h2>Codigo de cajero: <%=cashier.getId()%></h2>
+             <h2>Codigo de cajero: <%=cashier.getCod()%></h2>
         </div>
     
       <script type = "text/javascript">

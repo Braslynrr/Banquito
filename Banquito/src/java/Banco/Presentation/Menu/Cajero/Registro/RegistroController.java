@@ -81,10 +81,10 @@ public class RegistroController extends HttpServlet {
              
          real.setId(request.getParameter("userid"));
          real.setPassword(request.getParameter("userpass"));
-         cliente.setId(domainModel.clientCode());
+         cliente.setCod(domainModel.clientCode());
          cliente.setName(request.getParameter("username"));
          cliente.setTelNumber(request.getParameter("tnumber"));
-         cliente.setUserid(real);
+         cliente.setUser(real);
          cuenta.setBalance(0);
          cuenta.setClient(cliente);
          cuenta.setNumber(domainModel.accountNumber());
@@ -98,7 +98,7 @@ public class RegistroController extends HttpServlet {
          catch (Exception ex) {
             
  
-             return "/presentation/Menu/Cajero/Registro.jsp";
+             return "/presentation/Error.jsp"; 
         }    
      }
     

@@ -6,7 +6,7 @@
 package Banco.Logic;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Brazza
+ * @author gaira
  */
 @Entity
 @Table(name = "currency")
@@ -48,8 +48,8 @@ public class Currency implements Serializable {
     @Size(max = 20)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "currencycurrencyCode1")
-    private List<Account> accountList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "currency")
+    private Collection<Account> accountCollection;
 
     public Currency() {
     }
@@ -83,12 +83,12 @@ public class Currency implements Serializable {
     }
 
     @XmlTransient
-    public List<Account> getAccountList() {
-        return accountList;
+    public Collection<Account> getAccountCollection() {
+        return accountCollection;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setAccountCollection(Collection<Account> accountCollection) {
+        this.accountCollection = accountCollection;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Currency implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Currency[ currencyCode=" + currencyCode + " ]";
+        return "Banco.Logic.Currency[ currencyCode=" + currencyCode + " ]";
     }
     
 }

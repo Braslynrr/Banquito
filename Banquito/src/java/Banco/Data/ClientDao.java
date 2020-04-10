@@ -29,7 +29,7 @@ public class ClientDao {
         String sql = "insert into client (cod,name,tel_number,User_id)"
                 + "values ('%s','%s','%s','%s')";
         
-        sql = String.format(sql, c.getId(),c.getName(),c.getTelNumber(),c.getUserid().getId());
+        sql = String.format(sql, c.getCod(),c.getName(),c.getTelNumber(),c.getUser().getId());
         int count = db.executeUpdate(sql);
         if(count == 0){
             throw new Exception("El usuario ya existe");
@@ -71,11 +71,11 @@ public class ClientDao {
         try{
             
             Client c = new Client();
-            c.setId(rs.getString("cod"));
+            c.setCod(rs.getString("cod"));
             c.setName(rs.getString("name"));
             c.setTelNumber(rs.getString("tel_number"));
-            c.setUserid(toUser(rs));
-            c.setUser(c.getUserid());
+            c.setUser(toUser(rs));
+            //c.setUser(c.getUserid());
             return c;
             
         

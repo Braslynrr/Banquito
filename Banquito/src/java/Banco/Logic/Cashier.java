@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Brazza
+ * @author gaira
  */
 @Entity
 @Table(name = "cashier")
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Cashier.findAll", query = "SELECT c FROM Cashier c")
     , @NamedQuery(name = "Cashier.findByName", query = "SELECT c FROM Cashier c WHERE c.name = :name")
-    , @NamedQuery(name = "Cashier.findById", query = "SELECT c FROM Cashier c WHERE c.id = :id")})
+    , @NamedQuery(name = "Cashier.findByCod", query = "SELECT c FROM Cashier c WHERE c.cod = :cod")})
 public class Cashier implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,20 +44,22 @@ public class Cashier implements Serializable {
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "cod")
-    private String id;
-    @JoinColumn(name = "User_id", referencedColumnName = "id")
+    private String cod;
+    @JoinColumns({
+        @JoinColumn(name = "User_id", referencedColumnName = "id")
+        , @JoinColumn(name = "User_id", referencedColumnName = "id")})
     @ManyToOne(optional = false)
-    private User userid;
+    private User user;
 
     public Cashier() {
     }
 
-    public Cashier(String id) {
-        this.id = id;
+    public Cashier(String cod) {
+        this.cod = cod;
     }
 
-    public Cashier(String id, String name) {
-        this.id = id;
+    public Cashier(String cod, String name) {
+        this.cod = cod;
         this.name = name;
     }
 
@@ -68,26 +71,26 @@ public class Cashier implements Serializable {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public String getCod() {
+        return cod;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
-    public User getUserid() {
-        return userid;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (cod != null ? cod.hashCode() : 0);
         return hash;
     }
 
@@ -98,7 +101,7 @@ public class Cashier implements Serializable {
             return false;
         }
         Cashier other = (Cashier) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.cod == null && other.cod != null) || (this.cod != null && !this.cod.equals(other.cod))) {
             return false;
         }
         return true;
@@ -106,7 +109,7 @@ public class Cashier implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Cashier[ id=" + id + " ]";
+        return "Banco.Logic.Cashier[ cod=" + cod + " ]";
     }
     
 }

@@ -97,7 +97,7 @@ public class Model {
    public boolean clientExist (String id) throws Exception {
     
           
-      return client.getClient(id).getUserid().getId().equals(id);
+      return client.getClient(id).getUser().getId().equals(id);
        
    }
    

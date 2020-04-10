@@ -6,11 +6,10 @@
 package Banco.Logic;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,9 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
 public class Account implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
-    private List<Transaction> transactionList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -48,9 +45,13 @@ public class Account implements Serializable {
     private Integer number;
     @Column(name = "balance")
     private Integer balance;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
+    private Favorites favorites;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "favoriteAccount")
+    private Collection<Favorites> favoritesCollection;
     @JoinColumns({
-        @JoinColumn(name = "Client_client_id", referencedColumnName = "id")
-        , @JoinColumn(name = "Client_client_id", referencedColumnName = "id")})
+        @JoinColumn(name = "Client_client_id", referencedColumnName = "cod")
+        , @JoinColumn(name = "Client_client_id", referencedColumnName = "cod")})
     @ManyToOne(optional = false)
     private Client client;
     @JoinColumns({
@@ -58,6 +59,8 @@ public class Account implements Serializable {
         , @JoinColumn(name = "Currency_currencyCode", referencedColumnName = "currencyCode")})
     @ManyToOne(optional = false)
     private Currency currency;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
+    private Collection<Transaction> transactionCollection;
 
     public Account() {
     }
@@ -82,6 +85,23 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
+    public Favorites getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Favorites favorites) {
+        this.favorites = favorites;
+    }
+
+    @XmlTransient
+    public Collection<Favorites> getFavoritesCollection() {
+        return favoritesCollection;
+    }
+
+    public void setFavoritesCollection(Collection<Favorites> favoritesCollection) {
+        this.favoritesCollection = favoritesCollection;
+    }
+
     public Client getClient() {
         return client;
     }
@@ -96,6 +116,15 @@ public class Account implements Serializable {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    @XmlTransient
+    public Collection<Transaction> getTransactionCollection() {
+        return transactionCollection;
+    }
+
+    public void setTransactionCollection(Collection<Transaction> transactionCollection) {
+        this.transactionCollection = transactionCollection;
     }
 
     @Override
@@ -120,20 +149,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Numero de cuenta: " + number;
+        return "Banco.Logic.Account[ number=" + number + " ]";
     }
-
-    @XmlTransient
-    public List<Transaction> getTransactionList() {
-        return transactionList;
-    }
-
-    public void setTransactionList(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
-    }
-    
-    
-    
-    
     
 }

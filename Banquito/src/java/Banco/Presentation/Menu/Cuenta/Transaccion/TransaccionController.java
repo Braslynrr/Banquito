@@ -51,13 +51,13 @@ public class TransaccionController extends HttpServlet {
         try{
            if(request.getParameter("numeroFld")!=null){
                 this.AccountAction(request);
-                model.setTrans(Banco.Logic.Model.instance().consultarTransaciones(model.getAccount().getNumber(),model.getAccount().getClient().getId()));
+                model.setTrans(Banco.Logic.Model.instance().consultarTransaciones(model.getAccount().getNumber(),model.getAccount().getClient().getCod()));
                 session.setAttribute("transactions", model.getTrans());
                 session.setAttribute("account", model.getAccount());
            }else{
                this.Search(request);
                Client cliente = (Client) session.getAttribute("client"); 
-               model.setTrans(Banco.Logic.Model.instance().consultarTransacionesRange(cliente.getId(),model.getF1(),model.getF2(),""+model.getMin()));
+               model.setTrans(Banco.Logic.Model.instance().consultarTransacionesRange(cliente.getCod(),model.getF1(),model.getF2(),""+model.getMin()));
                session.setAttribute("transactions", model.getTrans());
                session.setAttribute("account", null);
            }
@@ -94,7 +94,7 @@ public class TransaccionController extends HttpServlet {
         HttpSession session = request.getSession(true);
         model.setAccount(Banco.Logic.Model.instance().getCuenta(request.getParameter("numeroFld")));
         Client c= (Client) session.getAttribute("client");
-        if(!c.getId().equals(model.getAccount().getClient().getId())){
+        if(!c.getCod().equals(model.getAccount().getClient().getUser().getId())){
             throw new Exception("Acceso Ilegal");
         }
    } 

@@ -31,7 +31,7 @@ public class CashierDao {
         String sql = "insert into client (id,name,User_id)"
                 + "values ('%s','%s','%s','%s')";
         
-        sql = String.format(sql, c.getId(),c.getName(),c.getUserid());
+        sql = String.format(sql, c.getCod(),c.getName(),c.getUser().getId());
         int count = db.executeUpdate(sql);
         if(count == 0){
             throw new Exception("El cajero ya existe");
@@ -70,9 +70,9 @@ public class CashierDao {
     
         try{      
             Cashier c = new Cashier();
-            c.setId(rs.getString("cod"));
+            c.setCod(rs.getString("cod"));
             c.setName(rs.getString("name"));
-            c.setUserid(toUser(rs));
+            c.setUser(toUser(rs));
             return c;
         }
         catch(SQLException ex){

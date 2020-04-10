@@ -42,6 +42,7 @@
                       <% if (lista.isEmpty()) { %>
                       <option value = "No se han registrado tipos de cambio" </option>
                       <% }%>
+                      
                   </select>
                   <input type = "submit" value = "Siguiente">
 
