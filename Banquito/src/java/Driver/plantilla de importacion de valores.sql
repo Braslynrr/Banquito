@@ -12,13 +12,13 @@ insert into account values(4,15000,"CL001","003");
 insert into account values(5,1500,"CL001","002");
 insert into account values(6,150,"CL001","003");
 insert into cashier values("Braslyn","CS001","402420750");
-insert into favorites values(0,"CL001",2);
-insert into favorites values(0,"CL100",3);
-insert into favorites values(0,"CL100",4);
-insert into favorites values(0,"CL100",5);
-insert into favorites values(0,"CL100",6);
+insert into favorites values(0,2,"CL001");
+insert into favorites values(0,3,"CL100");
+insert into favorites values(0,4,"CL100");
+insert into favorites values(0,5,"CL100");
+insert into favorites values(0,6,"CL100");
 
-
+select count(number) from transaction;
 
 select * from account inner join client inner join user inner join currency on user.id="402420750" ;
 select * from client c inner join user u on c.User_id = u.id where c.User_id="402420750";
@@ -40,6 +40,8 @@ select * from transaction where Account_number=1;
 
 select count(cod) from client;
 
+delete from transaction where number=1;
+
 select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where a.Client_client_cod= 'CL001' and  t.date>=2020-02-01 and t.amount>0;
 
 select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where a.Client_client_cod='CL001' and t.amount>'0';
@@ -51,3 +53,10 @@ select * from account a inner join client c inner join user u inner join currenc
 delete  from account where account.number=6;
 
 select *  from favorites f inner join account a inner join currency c inner join client cl inner join user u on a.Client_client_cod= cl.cod and u.id = cl.User_id and f.favorite_account=a.number and a.Currency_currencyCode= c.currencyCode where f.Client_cod ='CL001';
+
+insert into Transaction values(1,'Transferencia-Envio',12.0,date('11/04/2020 03:58:12 PM'),2,'001');
+
+Update account set balance= 1500 , Client_client_cod= 'CL001', Currency_currencyCode= '001' where number= 1;
+
+
+select * from transaction t inner join account a inner join currency cu inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and t.currencyCode= cu.currencyCode and c.User_id=u.id where t.Account_number= 4 and a.Client_client_cod= "CL001";

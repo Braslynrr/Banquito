@@ -94,7 +94,7 @@ public class TransaccionController extends HttpServlet {
         HttpSession session = request.getSession(true);
         model.setAccount(Banco.Logic.Model.instance().getCuenta(request.getParameter("numeroFld")));
         Client c= (Client) session.getAttribute("client");
-        if(!c.getCod().equals(model.getAccount().getClient().getUser().getId())){
+        if(!c.getCod().equals(model.getAccount().getClient().getCod())){
             throw new Exception("Acceso Ilegal");
         }
    } 

@@ -6,6 +6,7 @@
 package Banco.Logic;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -75,10 +76,12 @@ public class Transaction implements Serializable {
         this.number = number;
     }
 
-    public Transaction(Integer number, String type, float amount, String currencyCode) {
+    public Transaction(Integer number, String type, float amount,Account account,Date date ,String currencyCode) {
         this.number = number;
         this.type = type;
         this.amount = amount;
+        this.account=account;
+        this.date=date;
         this.currencyCode = currencyCode;
     }
 
@@ -152,7 +155,8 @@ public class Transaction implements Serializable {
 
     @Override
     public String toString() {
-        return "Banco.Logic.Transaction[ number=" + number + " ]";
+        SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd");
+        return form.format(date);
     }
     
 }

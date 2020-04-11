@@ -56,7 +56,7 @@ public class RelDatabase {
             Statement stm = cnx.createStatement();
             stm.executeUpdate(statement);
             return stm.getUpdateCount();
-        } catch (SQLException ex) {
+        } catch (SQLException ex){
             return 0;
         }
     }

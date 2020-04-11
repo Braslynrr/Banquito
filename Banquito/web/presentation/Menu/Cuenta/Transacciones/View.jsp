@@ -14,7 +14,7 @@
     <body>
         <%@ include file="/presentation/header.jsp" %>
         <% if(account!=null){ %>
-            <center><h1>Transaciones de Cuenta #<%= account.getNumber() %>  Cliente: <%= account.getClient().getName()%> Saldo: <%= account.getBalance() %></h1></center>
+    <center><h1>Transaciones de Cuenta #<%= account.getNumber() %>  Cliente: <%= account.getClient().getName()%> Saldo: <%= account.getBalance() %> <%= account.getCurrency().getDescription() %></h1></center>
         <% } %>
         <% if(account==null){ %>
             <center><h1>Busqueda personalizada de Transaciones</h1></center>

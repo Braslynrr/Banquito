@@ -85,7 +85,7 @@ public class RegistroController extends HttpServlet {
          cliente.setName(request.getParameter("username"));
          cliente.setTelNumber(request.getParameter("tnumber"));
          cliente.setUser(real);
-         cuenta.setBalance(0);
+         cuenta.setBalance(new Float(0));
          cuenta.setClient(cliente);
          cuenta.setNumber(domainModel.accountNumber());
          cuenta.setCurrency(domainModel.getCurrency(request.getParameter("currency")));
