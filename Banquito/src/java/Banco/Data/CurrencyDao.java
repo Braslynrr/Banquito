@@ -68,7 +68,7 @@ public class CurrencyDao {
             c.setCurrencyCode(rs.getString("currencyCode"));
             c.setExchangeRate(Float.parseFloat(rs.getString("exchange_rate")));
             c.setDescription(rs.getString("description"));
-            
+            c.setTax(Float.parseFloat(rs.getString("tax")));
             return c;
         }
           catch(SQLException ex){

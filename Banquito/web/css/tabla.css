@@ -1,38 +1,56 @@
-.tabla{
-    font-size: 2em;
+.panel{
+  padding-left: 99%;
+  background-color: None;
+  font-size: 1em;
+  width: 100%;
+  height: 60%;
+  top: 60%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  opacity: 1;
+  text-align: center;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.panel .tabla{
+    width: 100%;
+    height: 45%;
+    margin-top: 10px;
     color: white;
     border-collapse: collapse;
-}
-.tabla h1{
-    position: absolute;
-    left: 20%
+    overflow: auto;
 }
 
-.tabla table{
-    width: 40%;
-    top: 40%;
+.panel .tabla h1{
+    padding-left: 15%; 
+    position: fixed;
+}
+
+.panel .tabla table{
+    font-size: 2em;
+    margin-top: 70px;
+    width: 30%;
+    height: 30%;
     color: white;
-    left: 30%;
-    position: absolute;
+    left: 62%;
+    position: fixed;
+    display:  block;
+    overflow: auto;
 }
 
-.tabla th, td {
+.panel .tabla th, td {
+    width: 5%;
    border-bottom: 1px solid white;
 }
 
-.tabla a{
+.panel .tabla a{
     color: #9f6934;
 }
 
-.tabla a:hover{
+.panel .tabla a:hover{
     color:brown;
 }
 
-.tabla .busqueda{
-    left: 20%;
-    position: absolute;
-    top: 60%
-}
 
 .busqueda{
     font-size: 1em;
@@ -43,6 +61,7 @@
 .busqueda h1{
     font-size: 2em;
 }
+
 .busqueda [type="submit"]{
   border:0;
   background: none;
@@ -57,5 +76,24 @@
 }
 
 .busqueda [type="submit"]:hover{
+    background: #2ecc71; 
+}
+
+.añade [type="submit"]{
+  margin-left: 45%;
+  margin-top: 32%;
+  border:0;
+  background: none;
+  padding: 7px 30px;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.añade [type="submit"]:hover{
     background: #2ecc71; 
 }

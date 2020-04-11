@@ -42,14 +42,15 @@ public class CuentaController extends HttpServlet {
     }
     
     
-        public String showAction(HttpServletRequest request){
+    public String showAction(HttpServletRequest request){
         CuentaModel model= (CuentaModel) request.getAttribute("model");
         HttpSession session = request.getSession(true);
         Client cliente = (Client) session.getAttribute("client");
         model.setCliente(cliente);
         try{
-           model.setCuentas(Banco.Logic.Model.instance().ConsultarCuentas(cliente.getCod(),cliente.getUser().getId()));
+           model.setCuentas(Banco.Logic.Model.instance().ConsultarCuentas(cliente.getCod()));
            session.setAttribute("cuentas", model.getCuentas());
+           session.setAttribute("favorites", Banco.Logic.Model.instance().getfavoritos(model.getCliente().getCod()));
            return "/presentation/Menu/Cuenta/Cuenta.jsp";
         }catch(Exception ex){
             session.setAttribute("msg", ex.toString());

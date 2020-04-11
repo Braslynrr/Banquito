@@ -35,8 +35,8 @@ public class Favorites implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "Own")
-    private Integer own;
+    @Column(name = "Client_Cod")
+    private String own;
     @JoinColumn(name = "Own", referencedColumnName = "number", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Account account;
@@ -47,15 +47,15 @@ public class Favorites implements Serializable {
     public Favorites() {
     }
 
-    public Favorites(Integer own) {
+    public Favorites(String own) {
         this.own = own;
     }
 
-    public Integer getOwn() {
+    public String getOwn() {
         return own;
     }
 
-    public void setOwn(Integer own) {
+    public void setOwn(String own) {
         this.own = own;
     }
 

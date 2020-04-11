@@ -48,6 +48,8 @@ public class Currency implements Serializable {
     @Size(max = 20)
     @Column(name = "description")
     private String description;
+    @Column(name = "tax")
+    private Float tax;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "currency")
     private Collection<Account> accountCollection;
 
@@ -82,6 +84,15 @@ public class Currency implements Serializable {
         this.description = description;
     }
 
+    public Float getTax() {
+        return tax;
+    }
+
+    public void setTax(Float tax) {
+        this.tax = tax;
+    }
+
+    
     @XmlTransient
     public Collection<Account> getAccountCollection() {
         return accountCollection;
@@ -90,7 +101,7 @@ public class Currency implements Serializable {
     public void setAccountCollection(Collection<Account> accountCollection) {
         this.accountCollection = accountCollection;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -9,6 +9,7 @@ import Banco.Data.AccountDao;
 import Banco.Data.CashierDao;
 import Banco.Data.ClientDao;
 import Banco.Data.CurrencyDao;
+import Banco.Data.FavoritesDao;
 import Banco.Data.TransactionDao;
 import Banco.Data.UserDao;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class Model {
    CurrencyDao currency;
    TransactionDao transaction;
    UserDao user;
+   FavoritesDao favorites;
    
    public Model () {
        
@@ -45,7 +47,7 @@ public class Model {
        currency = new CurrencyDao();
        transaction = new TransactionDao();
        user = new UserDao();
-   
+       favorites=new FavoritesDao();
    }
    
    
@@ -77,8 +79,8 @@ public class Model {
    }
     
    
-   public List<Account> ConsultarCuentas(String cod,String id)throws Exception{
-       List<Account> lista= account.getList(cod,id);
+   public List<Account> ConsultarCuentas(String cod)throws Exception{
+       List<Account> lista= account.getList(cod);
        return lista;
    }
    
@@ -93,6 +95,10 @@ public class Model {
        return moneda;
    }
    
+   public List<Account> getfavoritos(String cod)throws Exception{
+       List<Account> lista = favorites.ListaFavoritos(cod);
+       return lista;
+   }
    
    public boolean clientExist (String id) throws Exception {
     

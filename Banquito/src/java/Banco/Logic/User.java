@@ -112,7 +112,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "Banco.Logic.User[ id=" + id + " ]";
+        return id;
     }
     
 }
