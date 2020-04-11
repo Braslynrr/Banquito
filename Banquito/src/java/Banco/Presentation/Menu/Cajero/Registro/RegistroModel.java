@@ -22,32 +22,32 @@ public class RegistroModel {
     
     
     //Tengo que cambiar el atributo cliente por una lista de clientes
-    Client cliente;
-    Account cuenta;
-    Cashier cajero;
+    //Client cliente;
+    //Account cuenta;
+   // Cashier cajero;
 
 
     List<Currency> monedas;
-    User usuario;
+    //User usuario;
 
-    public void setUsuario(User usuario) {
+   /* public void setUsuario(User usuario) {
         this.usuario = usuario;
     }
 
     public User getUsuario() {
         return usuario;
-    }
+    }*/
     
     
     public RegistroModel(){
     
-        cliente = null;
+        /*cliente = null;
         cuenta = null;
         cajero = null;
-        usuario = null;
+        usuario = null;*/
     }
     
-    public void setCliente(Client cliente) {
+   /* public void setCliente(Client cliente) {
         this.cliente = cliente;
     }
 
@@ -57,11 +57,11 @@ public class RegistroModel {
 
     public void setCajero(Cashier cajero) {
         this.cajero = cajero;
-    }
+    }*/
 
   
 
-    public Client getCliente() {
+    /*public Client getCliente() {
         return cliente;
     }
 
@@ -71,7 +71,7 @@ public class RegistroModel {
 
     public Cashier getCajero() {
         return cajero;
-    }
+    }*/
     
     public List<Currency> getMonedas() {
         return monedas;

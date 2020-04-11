@@ -33,7 +33,7 @@ public class AccountDao {
     
     public void addAccount(Account a) throws Exception{
     
-        String sql = "insert into Account (number,balance,Client_client_id,Currency_currencyCode)"
+        String sql = "insert into Account (number,balance,Client_client_cod,Currency_currencyCode)"
                 + "values('%s','%s','%s','%s')";
         sql = String.format(sql,a.getNumber(),a.getBalance(),a.getClient().getCod(),a.getCurrency().getCurrencyCode());
         int count=db.executeUpdate(sql);
