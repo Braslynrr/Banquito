@@ -13,7 +13,12 @@
     <div class="derror">
         <h1>Ha ocurrido un error <br>
         <%= msg %></h1>
-        <input type="submit" value="Volver al inicio" onclick="Inicio(usuario)">
+        <% if(usuario!=null){%>
+        <input type="submit" value="Volver al inicio" onclick="Inicio(0)">
+        <% } %>
+         <% if(usuario==null){%>
+        <input type="submit" value="Volver al inicio" onclick="Inicio(1)">
+        <% } %>
     </div>  
 </body>
 </html>
@@ -22,7 +27,7 @@
     
     function Inicio(usuario){
        
-     if(usuario!==null){
+     if(usuario===0){
         window.location = "/Banquito/presentation/Menu/show";  
      }else{
         window.location = "/Banquito/presentation/Menu/index.jsp";  
