@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Banco.Presentation.Menu.Cajero.Registro;
+package Banco.Presentation.Menu.Cajero.RegsitroCuenta;
 
 import Banco.Logic.Account;
-import Banco.Logic.Client;
-import Banco.Logic.User;
+import Banco.Presentation.Menu.Cajero.Registro.RegistroController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,43 +24,45 @@ import javax.servlet.http.HttpSession;
  *
  * @author gaira
  */
-@WebServlet(name = "RegistroController", urlPatterns = {"/presentation/Menu/Cajero/Registro/show","/presentation/Menu/Cajero/Registro/registrar"})
-public class RegistroController extends HttpServlet {
+@WebServlet(name = "RegistroCuentaController", urlPatterns = {"/presentation/Menu/Cajero/RegistroCuenta/show","/presentation/Menu/Cajero/RegistroCuenta/registrar"})
+public class RegistroCuentaController extends HttpServlet {
 
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            request.setAttribute("model", new RegistroModel());
+      
+        request.setAttribute("model", new RegistroCuentaModel());
         String viewUrl ="";
         
         switch(request.getServletPath()){  
              
-        case "/presentation/Menu/Cajero/Registro/show":
+        case "/presentation/Menu/Cajero/RegistroCuenta/show":
                viewUrl=this.show(request);
             break;     
-        case "/presentation/Menu/Cajero/Registro/registrar":
+        case "/presentation/Menu/Cajero/RegistroCuenta/registrar":
                viewUrl=this.registrar(request);
             break;    
         }
         request.getRequestDispatcher(viewUrl).forward( request, response);
         
-
-        }
+        
+        
+        
+        
+        
+    }
     
     public String show(HttpServletRequest request){
         return this.showAction(request);
     }
-     public String registrar(HttpServletRequest request){
-         
+    public String registrar(HttpServletRequest request){
+        
         try{ 
-            Map<String,String> errores =  this.validar(request);
-            if(errores.isEmpty()){         
+            
+                    
                 return this.registrarAction(request);
-            }
-            else{
-                request.setAttribute("errores", errores);
-                return "/presentation/Menu/Cajero/Registro.jsp"; 
-            }      
+          
+       
             
         }
            catch(Exception e){
@@ -70,30 +70,23 @@ public class RegistroController extends HttpServlet {
         }   
     }
     
-     public  String registrarAction (HttpServletRequest request) {
+    public  String registrarAction (HttpServletRequest request) {
          
          Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
-         User real = new User();
-         Client cliente = new Client();
+        RegistroCuentaModel model= (RegistroCuentaModel) request.getAttribute("model");
          Account cuenta = new Account();
+         HttpSession session = request.getSession(true);
          
          try{
-             
-         real.setId(request.getParameter("userid"));
-         real.setPassword(request.getParameter("userpass"));
-         cliente.setCod(domainModel.clientCode());
-         cliente.setName(request.getParameter("username"));
-         cliente.setTelNumber(request.getParameter("tnumber"));
-         cliente.setUser(real);
+          model.setClient(Banco.Logic.Model.instance().ConsutClient((String)session.getAttribute("id")));
          cuenta.setBalance(0);
-         cuenta.setClient(cliente);
+         cuenta.setClient(model.getClient());
          cuenta.setNumber(domainModel.accountNumber());
          cuenta.setCurrency(domainModel.getCurrency(request.getParameter("currency")));
-         
-         domainModel.addUser(real);
-         domainModel.addClient(cliente);
+       
          domainModel.addAccount(cuenta);
-         return "/presentation/Menu/Cajero/Registro.jsp";
+ 
+         return "/presentation/Menu/Cajero/RegistroCuenta.jsp";
          }
          catch (Exception ex) {
             
@@ -103,19 +96,23 @@ public class RegistroController extends HttpServlet {
      }
     
     public String showAction(HttpServletRequest request){
-        RegistroModel model= (RegistroModel) request.getAttribute("model");
+        RegistroCuentaModel model= (RegistroCuentaModel) request.getAttribute("model");
         HttpSession session = request.getSession(true);
+        
+        
     
         try{
            this.updateModel(request);
            model.setMonedas(Banco.Logic.Model.instance().Consultarcurrency());
-           
-           session.setAttribute("password", Banco.Logic.Model.instance().getpassword());
+           model.setClient(Banco.Logic.Model.instance().ConsutClient((String)session.getAttribute("id")));
+           //session.setAttribute("password", Banco.Logic.Model.instance().getpassword());
            session.setAttribute("currencies", model.getMonedas());
-           session.setAttribute("userid", session.getAttribute("id"));
-           return "/presentation/Menu/Cajero/Registro.jsp";
+           session.setAttribute("id", model.getClient().getUser().getId());
+           session.setAttribute("username", model.getClient().getName());
+           session.setAttribute("userphone", model.getClient().getTelNumber());
+           return "/presentation/Menu/Cajero/RegistroCuenta.jsp";
         }catch(Exception ex){
-            return "/presentation/Menu/Cajero/Registro.jsp"; 
+            return "/presentation/Error.jsp"; 
         }
         
        
@@ -123,14 +120,13 @@ public class RegistroController extends HttpServlet {
     
     }
     void updateModel(HttpServletRequest request){
-       RegistroModel model= (RegistroModel) request.getAttribute("model");
+       RegistroCuentaModel model= (RegistroCuentaModel) request.getAttribute("model");
        HttpSession session = request.getSession(true);
-       
      
    }
 
     
-   Map<String,String> validar(HttpServletRequest request) {
+   /*Map<String,String> validar(HttpServletRequest request) {
         Map<String,String> errores = new HashMap<>();
         Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
         
@@ -139,7 +135,7 @@ public class RegistroController extends HttpServlet {
                 errores.put("userid","El cliente ya se encuentra registrado"); 
             }
         } catch (Exception ex) {
-            Logger.getLogger(RegistroController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RegistroCuentaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (request.getParameter("userid").isEmpty()){
             errores.put("userid","Cedula requerida");
@@ -157,9 +153,7 @@ public class RegistroController extends HttpServlet {
             errores.put("tnumber","Espacio requerido");
         }
         return errores;
-    }
-    
-
+    }*/
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

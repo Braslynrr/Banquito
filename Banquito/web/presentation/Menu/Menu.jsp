@@ -12,7 +12,7 @@
         <%@page import="Banco.Logic.Client"%>
         <%@page import="Banco.Logic.Cashier"%>
         <% Client cliente=(Client) session.getAttribute("client"); %>
-         <% Cashier cashier=(Cashier) session.getAttribute("cashier"); %>
+        <% Cashier cashier=(Cashier) session.getAttribute("cashier"); %>
         <div class="box">
             <h1>Cliente:<%=cliente.getCod()%></h1>
             <div id="cuen">

@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Banco.Presentation.Menu.Cajero.Registro;
+package Banco.Presentation.Menu.Cajero.RegsitroCuenta;
 
-
-//Puede ser que al final no todos los imports sean necesarios
-
+import Banco.Logic.Client;
 import Banco.Logic.Currency;
 import java.util.List;
 
@@ -15,20 +13,20 @@ import java.util.List;
  *
  * @author gaira
  */
-public class RegistroModel {
+public class RegistroCuentaModel {
     
-
-
-
     List<Currency> monedas;
 
+
     
     
-    public RegistroModel(){
+    public RegistroCuentaModel(){
     
         monedas = null;
+        client = null;
+        
     }
-   
+
     
     public List<Currency> getMonedas() {
         return monedas;
@@ -37,18 +35,15 @@ public class RegistroModel {
     public void setMonedas(List<Currency> monedas) {
         this.monedas = monedas;
     }
+    
+    public Client getClient() {
+        return client;
+    }
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    Client client;
     
     
 }

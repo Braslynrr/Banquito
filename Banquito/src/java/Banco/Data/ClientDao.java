@@ -54,6 +54,20 @@ public class ClientDao {
         
     }
     
+    public Client compClient(String id)throws Exception{
+        
+        String sql = "select * from client c inner join user u on c.User_id = u.id where c.User_id = '%s'";
+        sql = String.format(sql,id);
+        ResultSet rs = db.executeQuery(sql);
+        
+        if(rs.next()){
+            return this.toClient(rs);
+        }
+         else{
+            return null;
+        }
+        
+    }
     
     public Integer GeneratorNclient()throws Exception{
         String sql="select count(cod) from client";

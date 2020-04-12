@@ -21,13 +21,18 @@
        
         <% AbrirCuentaModel model= (AbrirCuentaModel) request.getAttribute("model"); %>
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
-     
+
         <div class="box">
-          <form  name="form" action = "/Banquito/presentation/Menu/Cajero/Registro/registrar" method="post">
+          <form  name="form" action = "/Banquito/presentation/Menu/Cajero/AbrirCuenta/registrar" method="post">
 
+                <h1>Digite el id del cliente </hl> 
                 
-
-         
+                <input type = "text" name = "clientid" placeholder="Id del cliente" class = "<%=erroneo("clientid", errores)%>" title="<%=title("clientid", errores)%>" />
+                
+      
+                
+                
+                
                   <input type = "submit" value = "Siguiente">
 
 

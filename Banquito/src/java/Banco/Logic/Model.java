@@ -107,6 +107,13 @@ public class Model {
        
    }
    
+   public Client compClient (String id) throws Exception {
+   
+       
+       return client.compClient(id);
+   
+   }
+   
    public void addUser(User obj) throws Exception{
        
        user.AddUser(obj);

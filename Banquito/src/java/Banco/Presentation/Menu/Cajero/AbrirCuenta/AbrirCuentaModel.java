@@ -15,27 +15,16 @@ import java.util.List;
 public class AbrirCuentaModel {
     
     
-    
-
-    List<Currency> monedas;
-
-    
+  
     
     public AbrirCuentaModel(){
     
-        monedas = null;
         
+       
     }
 
     
-    public List<Currency> getMonedas() {
-        return monedas;
-    }
 
-    public void setMonedas(List<Currency> monedas) {
-        this.monedas = monedas;
-    }
-    
     
     
 }

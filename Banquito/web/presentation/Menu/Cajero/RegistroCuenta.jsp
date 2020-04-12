@@ -1,11 +1,12 @@
+<%-- 
+    Document   : RegistroCuenta
+    Created on : Apr 11, 2020, 8:37:24 PM
+    Author     : gaira
+--%>
 
-<%@page import="Banco.Logic.Currency"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
-<%@page import="Banco.Logic.Cashier"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Banco.Presentation.Menu.Cajero.Registro.RegistroModel"%>
+<%@page import="java.util.Map"%>
+<%@page import="Banco.Logic.Currency"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,18 +23,24 @@
        
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
         <% List<Currency> lista=(List<Currency>) session.getAttribute("currencies");%>
-        <% String password = (String) session.getAttribute("password"); %>
         <% String id = (String) session.getAttribute("id"); %>
+        <% String username = (String) session.getAttribute("username"); %>
+        <% String userphone = (String) session.getAttribute("userphone"); %>
         
       <div class="box">
-          <form  name="form" action = "/Banquito/presentation/Menu/Cajero/Registro/registrar" method="post">
+          <form  name="form" action = "/Banquito/presentation/Menu/Cajero/RegistroCuenta/registrar" method="post">
 
-              <h1>Ingrese los datos del nuevo cliente</hl>    
-
-                  <input type = "text" name = "username" placeholder="Nombre" class = "<%=erroneo("username", errores)%>" title="<%=title("username", errores)%>" />
-                  <input type = "text" name = "tnumber" placeholder="Numero de telefono" class = "<%=erroneo("tnumber", errores)%>" title="<%=title("tnumber", errores)%>" />
+              <h1>Datos del cliente</hl>    
+                    
+                  <h3>ID</h3>  
                   <input type = "text" name = "userid" placeholder="id" value=<%= id %> class = "<%=erroneo("userid", errores)%>" title="<%=title("userid", errores)%>"/>
-                  <input type = "text" name = "userpass" placeholder="contrasena" value=<%= password %> class = "<%=erroneo("userpass", errores)%>" title="<%=title("userpass", errores)%>"/>
+                   <h3>Nombre</h3>  
+                  
+                  <input type = "text" name = "username" placeholder="Nombre" value=<%= username %> class = "<%=erroneo("username", errores)%>" title="<%=title("username", errores)%>" />
+                   <h3>Numero telefonico</h3>  
+                  <input type = "text" name = "tnumber" placeholder="Numero de telefono" value=<%= userphone %> class = "<%=erroneo("tnumber", errores)%>" title="<%=title("tnumber", errores)%>" />
+                  
+                 
                   
                   <h2>Seleccione el tipo de moneda para la nueva cuenta</h2>
                   <select id = "currencyType" name = "currency">

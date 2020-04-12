@@ -20,7 +20,7 @@
         <div class="box">
             <h1>Menu cajeros</hl>
             <div id="menu">   
-                <input type="submit" value="Registrar un cliente" onclick="Redirect1();" >
+          
                 <input type="submit" value="Abrir una cuenta" onclick="Redirect2();" >
             </div>
              <h2>Codigo de cajero: <%=cashier.getCod()%></h2>
@@ -28,9 +28,7 @@
     
       <script type = "text/javascript">
          <!--
-            function Redirect1() {
-               window.location = "/Banquito/presentation/Menu/Cajero/Registro/show";
-            }
+         
             function Redirect2() {
                window.location = "/Banquito/presentation/Menu/Cajero/AbrirCuenta/show";
             }
