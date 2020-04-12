@@ -63,11 +63,9 @@ public class AbrirCuentaController extends HttpServlet {
     }
 
     public String showAction(HttpServletRequest request) {
-        AbrirCuentaModel model = (AbrirCuentaModel) request.getAttribute("model");
-        HttpSession session = request.getSession(true);
-
+       
         try {
-            this.updateModel(request);
+          
 
             return "/presentation/Menu/Cajero/AbrirCuenta.jsp";
         } catch (Exception ex) {
@@ -120,17 +118,6 @@ public class AbrirCuentaController extends HttpServlet {
      
      Map<String,String> validar(HttpServletRequest request) {
         Map<String,String> errores = new HashMap<>();
-        Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
-        
-
-       /* try {
-            if (domainModel.compClient(request.getParameter("clientid")) == null){
-                errores.put("clientid","El cliente no se encuentra registrado"); 
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(AbrirCuentaController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-   
         if (request.getParameter("clientid").isEmpty()){
             errores.put("clientid","Cedula requerida");
             
@@ -139,11 +126,7 @@ public class AbrirCuentaController extends HttpServlet {
        
         return errores;
     }
-    void updateModel(HttpServletRequest request) {
-        AbrirCuentaModel model = (AbrirCuentaModel) request.getAttribute("model");
-        HttpSession session = request.getSession(true);
 
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
