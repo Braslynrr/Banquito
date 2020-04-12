@@ -6,6 +6,7 @@
 package Banco.Presentation.Menu.Cuenta.Favoritos;
 
 import Banco.Logic.Account;
+import Banco.Logic.Client;
 import Banco.Presentation.Menu.Cuenta.Transaccion.TransaccionModel;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,7 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brazza
  */
-@WebServlet(name = "FavoritosController", urlPatterns = {"/presentation/Menu/Cuenta/Favorito/show","/presentation/Menu/Cuenta/Favorito/transfer"})
+@WebServlet(name = "FavoritosController", urlPatterns = {"/presentation/Menu/Cuenta/Favorito/show","/presentation/Menu/Cuenta/Favorito/transfer","/presentation/Menu/Cuenta/Favorito/Eliminar?number"
++""})
 public class FavoritosController extends HttpServlet {
 
     
@@ -36,6 +38,18 @@ public class FavoritosController extends HttpServlet {
             break;     
         case "/presentation/Menu/Cuenta/Favorito/transfer":
                 viewUrl=this.transfer(request);
+            break;
+        case "/presentation/Menu/Cuenta/Favorito/Eliminar":
+                viewUrl=this.elimina(request);
+            break;
+        case "/Banquito/presentation/Menu/Cuenta/Favorito/Añade":
+                viewUrl=this.añade(request);
+            break;
+        case "/Banquito/presentation/Menu/Cuenta/Favorito/Eok":
+            viewUrl=this.eok(request);
+            break;
+        case "/Banquito/presentation/Menu/Cuenta/Favorito/Aok":
+            viewUrl=this.aok(request);
             break;
         }
         request.getRequestDispatcher(viewUrl).forward( request, response);
@@ -156,6 +170,73 @@ public class FavoritosController extends HttpServlet {
           session.setAttribute("msg", ex.getMessage());
           return "/presentation/Error.jsp";
       }
+    }
+    
+    
+    public boolean comprobacionrapida(HttpServletRequest request){
+        HttpSession session = request.getSession(true);
+        FavoritosModel model= new FavoritosModel();
+        try{
+            model.setNumber(Integer.parseInt((String) request.getParameter("number")));
+            session.setAttribute("model", model);
+        }catch(Exception ex){
+           session.setAttribute("msg", ex.getMessage());
+           return false;
+        }
+        return true;
+    }
+
+    private String elimina(HttpServletRequest request) {
+       HttpSession session = request.getSession(true);
+       FavoritosModel model= (FavoritosModel) session.getAttribute("model");
+       List<Account> lista= (List<Account>) session.getAttribute("favoritos");
+       for(Account a:lista){
+           if(a.getNumber()==model.getNumber()){
+               model.setAccount(a);
+               break;
+           }
+       }
+       session.setAttribute("model", model);
+       return "/presentacion/Menu/Cuenta/Favoritos/Eliminar.jsp";
+    }
+
+    private String eok(HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        FavoritosModel model= (FavoritosModel) session.getAttribute("model");
+        Client cl= (Client) session.getAttribute("client");
+        try{
+            Banco.Logic.Model.instance().EliminarFavorito(cl, model.getAccount());
+        }catch(Exception ex){
+             session.setAttribute("msg", ex.getMessage());
+          return "/presentation/Error.jsp";
+        }
+        return "/presentation/Menu/Cuenta/show";
+    }
+
+    private String añade(HttpServletRequest request) {
+       HttpSession session = request.getSession(true);
+       FavoritosModel model= (FavoritosModel) session.getAttribute("model");
+       try{
+           model.setAccount(Banco.Logic.Model.instance().getCuenta(model.getNumber()+""));
+           session.setAttribute("model", model);
+       }catch(Exception ex){
+          session.setAttribute("msg", ex.getMessage());
+          return "/presentation/Error.jsp";
+       }
+       return "/presentacion/Menu/Cuenta/Favoritos/añadir.jsp";
+    }
+
+    private String aok(HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        FavoritosModel model= (FavoritosModel) session.getAttribute("model");
+        Client cl= (Client) session.getAttribute("client");
+        try{
+            Banco.Logic.Model.instance().AñadirFavorito(cl, model.getAccount());
+        }catch(Exception ex){
+          session.setAttribute("msg", ex.getMessage());
+          return "/presentation/Error.jsp";
+        }
+        return "/presentation/Menu/Cuenta/show";
     }
     
 
