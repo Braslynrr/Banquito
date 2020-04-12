@@ -13,6 +13,7 @@ import Banco.Data.FavoritesDao;
 import Banco.Data.TransactionDao;
 import Banco.Data.UserDao;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -159,4 +160,20 @@ public class Model {
    public String getpassword(){
        return account.GenertadorKey();
    }
+   
+   public float ConversorMonedas(String cod1 ,String cod2,float cant) throws Exception{
+       return currency.ConversorMonedas(cod1, cod2, cant);
+   }
+   
+  public Currency getCurrencyCode(String cod)throws Exception{
+      return currency.getCurrencyCode(cod);
+  }
+  
+  public void newTransfer(Account acc,Account trans,Float cant) throws Exception{
+      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Envio",cant,acc,new Date(),trans.getCurrency().getCurrencyCode()));
+      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Recibo",cant,trans,new Date(),trans.getCurrency().getCurrencyCode()));
+      account.Update(acc);
+      account.Update(trans);
+  }
+  
 }

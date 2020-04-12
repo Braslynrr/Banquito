@@ -22,7 +22,7 @@
         </div>
     <from class="panel">  
         <div class="tabla">
-            <h1>Listado de Cuentas del Cliente <%=cliente.getName()%></h1>   
+            <h1>Listado de Cuentas del Cliente <%=cliente.getName()%></h1> 
             <table>
             <thead>
                 <tr> <td>Numero</td> <td>Saldo</td> <td> Moneda </td></tr>
@@ -46,7 +46,7 @@
             <tbody>
                 <% if(!favs.isEmpty()){%>
                         <% for(Account a:favs){%>
-                        <tr> <td><a href="/Banquito/presentation/Menu/Cuenta/Transacciones/show?numeroFld=<%=a.getNumber() %>"><%=a.getNumber() %> </td>  
+                        <tr> <td><a href="/Banquito/presentation/Menu/Cuenta/Favorito/show?numeroFld=<%=a.getNumber() %>"><%=a.getNumber() %> </td>  
                             <td><%=a.getClient().getName() %></td><td><%= a.getCurrency().getDescription() %></td></tr>          
                         <%}%>
                     <%}%>

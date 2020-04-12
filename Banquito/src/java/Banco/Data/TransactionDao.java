@@ -35,9 +35,11 @@ public class TransactionDao {
     
     public void addTransaction(Transaction t)throws Exception{
         
-        String sql = "insert into Transaction (number,type,amount,date,Account_number,currencyCode)"
-                + "values('%s','%s','%s','%s','%s','%s')";
-        sql = String.format(sql,t.getNumber(),t.getType(),t.getAmount(),t.getDate());
+        String sql = "insert into Transaction "
+                + "values(%s,'%s',%s,'%s',%s,'%s')";
+        SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd");
+        String fecha= form.format(t.getDate());
+        sql = String.format(sql,t.getNumber(),t.getType(),t.getAmount(),fecha,t.getAccount().getNumber(),t.getCurrencyCode());
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("La transaccion ya existe");
@@ -114,11 +116,11 @@ public class TransactionDao {
     public List<Transaction> getlista(Integer num,String cod)throws Exception{
         int max=30;
         List<Transaction> lista = new ArrayList<Transaction>();
-        String sql="select * from transaction t inner join account a inner join currency inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and c.User_id=u.id where t.Account_number= '%s'";
-        String sql2="and a.Client_client_cod= '%s'";
-        sql = String.format(sql,num);
-        sql2 = String.format(sql2,cod);
-        ResultSet rs = db.executeQuery(sql+sql2);
+        String sql="select * from transaction t inner join account a inner join currency cu "
+                + "inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and"
+                + " t.currencyCode= cu.currencyCode and c.User_id=u.id where t.Account_number= '%s' and a.Client_client_cod= '%s'";
+        sql = String.format(sql,num,cod);
+        ResultSet rs = db.executeQuery(sql);
         while(rs.next()&& max>0){
             lista.add(toTransaction(rs));
             max=max-1;
@@ -126,6 +128,15 @@ public class TransactionDao {
         return lista;
     }
     
-    
+        
+    public Integer GeneratorNTransaction()throws Exception{
+        String sql="select count(number) from transaction";
+        ResultSet rs = db.executeQuery(sql);
+         if (rs.next()) {
+            return Integer.parseInt(rs.getString("count(number)"))+1;
+         }else{
+            return 1;
+         }
+    } 
     
 }

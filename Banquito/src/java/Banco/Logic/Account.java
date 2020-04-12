@@ -44,7 +44,7 @@ public class Account implements Serializable {
     @Column(name = "number")
     private Integer number;
     @Column(name = "balance")
-    private Integer balance;
+    private Float balance;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
     private Favorites favorites;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "favoriteAccount")
@@ -77,11 +77,11 @@ public class Account implements Serializable {
         this.number = number;
     }
 
-    public Integer getBalance() {
+    public Float getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(Float balance) {
         this.balance = balance;
     }
 

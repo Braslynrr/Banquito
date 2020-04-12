@@ -48,6 +48,20 @@ public class CurrencyDao {
         
     }    
     
+    public Currency getCurrencyCode(String code)  throws Exception{
+    
+        String sql  = "select * from Currency where currencyCode = '%s'";
+        sql = String.format(sql, code);
+           ResultSet rs = db.executeQuery(sql);
+        if(rs.next()){
+            return this.toCurrency(rs);
+        }
+        else{
+            throw new Exception ("El tipo de moneda no existe");
+        }
+        
+    }  
+    
     public List<Currency> Listacurrency()throws Exception{
         String sql="Select * from Currency";
         List<Currency> lista= new ArrayList<Currency>();
@@ -59,6 +73,13 @@ public class CurrencyDao {
             }
         }
         return lista;
+    }
+    
+    public float ConversorMonedas(String cod1,String cod2 , float cantidad) throws Exception{
+        Currency propia = Banco.Logic.Model.instance().getCurrencyCode(cod1);
+        Currency transferir= Banco.Logic.Model.instance().getCurrencyCode(cod2);
+        float temp = propia.getExchangeRate() * cantidad;
+        return temp* transferir.getExchangeRate();
     }
     
     public static Currency toCurrency(ResultSet rs)throws SQLException{

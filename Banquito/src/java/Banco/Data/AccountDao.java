@@ -36,15 +36,19 @@ public class AccountDao {
         String sql = "insert into Account (number,balance,Client_client_cod,Currency_currencyCode)"
                 + "values('%s','%s','%s','%s')";
         sql = String.format(sql,a.getNumber(),a.getBalance(),a.getClient().getCod(),a.getCurrency().getCurrencyCode());
-         int count=db.executeUpdate(sql);
+        int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("La cuenta ya existe");
         }
+    }
     
-    
-    
-    
-    
+    public void Update(Account a)throws Exception{
+        String sql= "Update account set balance= %s , Client_client_cod= '%s', Currency_currencyCode= '%s' where number= %s";
+        sql = String.format(sql,a.getBalance(),a.getClient().getCod(),a.getCurrency().getCurrencyCode(),a.getNumber());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("No se pudo actualizar");
+        }
     }
     public Account getAccount(String num) throws Exception {
     
@@ -79,7 +83,7 @@ public class AccountDao {
         
             Account a = new Account();
             a.setNumber(Integer.parseInt(rs.getString("number")));
-            a.setBalance(Integer.parseInt(rs.getString("balance")));
+            a.setBalance(Float.parseFloat(rs.getString("balance")));
             a.setClient(toClient(rs));
             a.setCurrency(toCurrency(rs));
             return a;    
