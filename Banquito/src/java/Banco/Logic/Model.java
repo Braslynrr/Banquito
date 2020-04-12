@@ -176,4 +176,23 @@ public class Model {
       account.Update(trans);
   }
   
+  
+  public void EliminarFavorito(Client cl,Account acc) throws Exception{
+      if(favorites.VerificarFavorito(cl, acc)){
+          favorites.EliminarFavorito(cl, acc);
+      }else{
+           throw new Exception("Favorito no existe");
+      }
+  
+  }
+  
+  public void AñadirFavorito(Client cl,Account acc) throws Exception{
+       if(!favorites.VerificarFavorito(cl, acc)){
+           favorites.AñadirFavorito(cl, acc);
+      }else{
+           throw new Exception("Favorito ya existe");
+      }
+      
+  }
+  
 }

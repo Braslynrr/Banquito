@@ -5,12 +5,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Banquito</title>
+        <title>Transferencia</title>
         <%@ include file="/presentation/Head.jsp" %>
         <link href="/Banquito/css/transferF.css" rel="stylesheet" type="text/css" />
         <% List<Account> accounts=(List<Account>) session.getAttribute("cuentas"); %>
         <% FavoritosModel model = (FavoritosModel) session.getAttribute("model"); %>
-        <
+        
     </head>
     <body>
         <%@ include file="/presentation/header.jsp" %>

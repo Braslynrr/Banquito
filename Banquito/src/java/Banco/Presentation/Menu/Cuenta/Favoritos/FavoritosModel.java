@@ -14,6 +14,17 @@ public class FavoritosModel {
     Transaction transaction;
     float propio;
     float nuevo;
+    int number;
+
+    
+    
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
     public float getPropio() {
         return propio;
@@ -33,6 +44,7 @@ public class FavoritosModel {
 
     
     public FavoritosModel() {
+        account=null;
     }
 
     public Account getAccount() {

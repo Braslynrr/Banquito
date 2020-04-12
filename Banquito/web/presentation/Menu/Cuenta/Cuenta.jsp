@@ -55,7 +55,7 @@
         </div>
     </from>
         <div class="añade">
-            <input type="submit" value="Añadir Cuenta a favoritos">
+            <div class="texto">Numero de cuenta:</div><div class="texto2"><input id="number" type="text" placeholder="# cuenta"><input type="submit" value="Añadir Cuenta a favoritos"  onclick="añadir()"> <input type="button" value="Eliminar Cuenta de favoritos" onclick="eliminar()"></div>
         </div>
     </body>
      <%@ include file="/presentation/footer.jsp" %>
@@ -64,5 +64,11 @@
     
     function buscar(){
         window.location = "/Banquito/presentation/Menu/Cuenta/Transacciones/show?FechaI="+document.getElementById("F1").value+"&FechaF="+document.getElementById("F2").value+"&dmin="+document.getElementById("dinero").value;
+    }
+    function eliminar(){
+        window.location= "/Banquito/presentation/Menu/Cuenta/Favorito/Eliminar?number="+document.getElementById("number").value;
+    }
+    function añadir(){
+        window.location= "/Banquito/presentation/Menu/Cuenta/Favorito/Añade?number="+document.getElementById("number").value;
     }
 </script>

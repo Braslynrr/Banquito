@@ -7,6 +7,7 @@ package Banco.Data;
 
 import static Banco.Data.AccountDao.toAccount;
 import Banco.Logic.Account;
+import Banco.Logic.Client;
 import Banco.Logic.Favorites;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -21,6 +22,36 @@ public class FavoritesDao {
     
     public FavoritesDao(){
         db= new RelDatabase();
+    }
+    
+    
+   
+    public void EliminarFavorito(Client cl,Account other) throws Exception{
+        String sql = "delete from favorites f where f.Client_cod='%s' and f.favorite_account= %s";
+       sql = String.format(sql,cl.getCod(),other.getNumber());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Favorito no existe");
+        }
+    }
+    
+    public void AñadirFavorito(Client cl,Account other) throws Exception{
+        String sql = "insert into favorites values(0,'%s',%s)";
+        sql = String.format(sql,other.getNumber(),cl.getCod());
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Favorito ya existe");
+        }
+    }
+    
+    public boolean VerificarFavorito(Client cl,Account other)throws Exception{
+        String sql="select * from favorites f where f.Client_cod='%s' and f.favorite_account= %s";
+        sql = String.format(sql,cl.getCod(),other.getNumber());
+        ResultSet rs = db.executeQuery(sql);
+        if (rs.next()) {
+            return true;
+         }
+        return false;
     }
     
     public List<Account> ListaFavoritos(String cod)throws Exception{

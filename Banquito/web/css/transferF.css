@@ -49,3 +49,18 @@
 .box input[type="button"]:hover{
     background: #2ecc71;
 }
+
+.box .tabla{
+    margin-left: 25%;
+}
+
+.box .tabla table{
+    font-size: 1em;
+    margin-top: 70px;
+    width: 30%;
+    position: inherit;
+}
+
+.box .tabla td,th{
+   border-bottom: 1px solid black;
+}

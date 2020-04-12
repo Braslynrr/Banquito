@@ -151,5 +151,9 @@ public class Account implements Serializable {
     public String toString() {
         return "Banco.Logic.Account[ number=" + number + " ]";
     }
+
+    public void setBalance(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

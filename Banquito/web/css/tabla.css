@@ -79,9 +79,19 @@
     background: #2ecc71; 
 }
 
+.añade .texto{
+    color: white;
+    font-size: 2em;
+    margin-left: 25%;
+    margin-top: 31%;
+}
+
+.añade .texto2{
+    margin-left: 40%;
+    margin-top: -1.8%;
+}
+
 .añade [type="submit"]{
-  margin-left: 45%;
-  margin-top: 32%;
   border:0;
   background: none;
   padding: 7px 30px;
@@ -96,4 +106,30 @@
 
 .añade [type="submit"]:hover{
     background: #2ecc71; 
+}
+
+.añade [type="button"]{
+    border:0;
+    color: white;
+    background: none;
+    border: 2px solid #2ecc71;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    padding: 7px 30px;
+}    
+
+.añade [type="button"]:hover{
+    background: #2ecc71; 
+}
+
+.añade [type="text"]{
+    border:0;
+    color: white;
+    background: none;
+    border: 2px solid #2ecc71;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    padding: 7px 30px;
 }
