@@ -22,8 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brazza
  */
-@WebServlet(name = "FavoritosController", urlPatterns = {"/presentation/Menu/Cuenta/Favorito/show","/presentation/Menu/Cuenta/Favorito/transfer","/presentation/Menu/Cuenta/Favorito/Eliminar?number"
-+""})
+@WebServlet(name = "FavoritosController", urlPatterns = {"/presentation/Menu/Cuenta/Favorito/show","/presentation/Menu/Cuenta/Favorito/transfer","/presentation/Menu/Cuenta/Favorito/Eliminar"
+,"/presentation/Menu/Cuenta/Favorito/Añade","/presentation/Menu/Cuenta/Favorito/Eok","/presentation/Menu/Cuenta/Favorito/Aok"})
 public class FavoritosController extends HttpServlet {
 
     
@@ -42,13 +42,13 @@ public class FavoritosController extends HttpServlet {
         case "/presentation/Menu/Cuenta/Favorito/Eliminar":
                 viewUrl=this.elimina(request);
             break;
-        case "/Banquito/presentation/Menu/Cuenta/Favorito/Añade":
+        case "/presentation/Menu/Cuenta/Favorito/Añade":
                 viewUrl=this.añade(request);
             break;
-        case "/Banquito/presentation/Menu/Cuenta/Favorito/Eok":
+        case "/presentation/Menu/Cuenta/Favorito/Eok":
             viewUrl=this.eok(request);
             break;
-        case "/Banquito/presentation/Menu/Cuenta/Favorito/Aok":
+        case "/presentation/Menu/Cuenta/Favorito/Aok":
             viewUrl=this.aok(request);
             break;
         }
