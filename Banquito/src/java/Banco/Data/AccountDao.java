@@ -12,7 +12,9 @@ import Banco.Logic.Currency;
 import Banco.Logic.Account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -120,5 +122,59 @@ public class AccountDao {
             key=key+generator;
         }
         return key;
+    }
+    
+    
+    public Date getFechaProxima() throws Exception{
+        String sql="select * from server";
+        ResultSet rs = db.executeQuery(sql);
+        if(rs.next()){
+            return new Date(rs.getString("Fecha"));
+        }
+        return null;
+    }
+    
+    
+    public boolean isfecha() throws Exception{
+        String sql= "select * from server";
+        ResultSet rs = db.executeQuery(sql);
+        if(rs.next()){
+            return true;
+        }
+        return false;
+    }
+    
+    public void setServerDate(Date date) throws Exception {
+        SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd"); 
+        String fecha= form.format(date);
+        String sql="update server set cod=1 , fecha="+fecha+" where cod=1";
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Fecha fallo");
+        }
+    }
+    
+    public void includeDate(Date date) throws Exception{
+        SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd"); 
+        String fecha= form.format(date);
+        String sql="insert into server value(1 ,"+fecha+")";
+        int count=db.executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Fecha fallo");
+        }
+    }
+
+    public List<Account> getAll() throws Exception {
+        List<Account> lista= new ArrayList<Account>();
+        String sql = "select * from account a inner join client c inner join user u inner join currency cu on a.Client_client_cod = c.cod and "
+                + " c.User_id = u.id and a.Currency_currencyCode=cu.currencyCode";
+        ResultSet rs = db.executeQuery(sql);
+        while(rs.next()){
+            lista.add(toAccount(rs));
+        }    
+        if(lista.isEmpty()){
+            throw new Exception ("No existen cuentas");
+        }
+        return lista;
     }
 }

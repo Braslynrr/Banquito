@@ -195,4 +195,26 @@ public class Model {
       
   }
   
+  public Date FechaInteres()throws Exception{
+      return account.getFechaProxima();
+  }
+
+    public void setServerDate(Date date) throws Exception {
+        if(account.isfecha()){
+            account.setServerDate(date);
+        }else{
+            account.includeDate(date);
+        }
+    }
+
+    public void InteresMasivo() throws Exception {
+        List<Account> cuentas= account.getAll();
+        for(Account a:cuentas){
+            float cant=(a.getBalance()*1+a.getCurrency().getTax());
+            a.setBalance(a.getBalance()+cant);
+            account.Update(a);
+            transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Intereses",cant,a,new Date(),a.getCurrency().getCurrencyCode()));
+        }
+    }
+  
 }

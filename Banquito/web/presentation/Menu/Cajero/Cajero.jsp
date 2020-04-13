@@ -22,6 +22,7 @@
             <div id="menu">   
           
                 <input type="submit" value="Abrir una cuenta" onclick="Redirect2();" >
+                <input type="submit" value="Aplicar Intereses" onclick="Redirect1();" >
             </div>
              <h2>Codigo de cajero: <%=cashier.getCod()%></h2>
         </div>
@@ -32,7 +33,9 @@
             function Redirect2() {
                window.location = "/Banquito/presentation/Menu/Cajero/AbrirCuenta/show";
             }
-            
+             function Redirect1() {
+               window.location = "/Banquito/presentation/Menu/Cajero/Intereses";
+            }
         
       </script>   
         

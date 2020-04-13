@@ -1,6 +1,8 @@
-insert into currency values ("001",1,"Colones",5);
-insert into currency values ("002",573,"Dolares",1);
-insert into currency values ("003",615,"Euros",0.8);
+CREATE USER 'root1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root1';
+
+insert into currency values ("001",1,"Colones",0.13);
+insert into currency values ("002",573,"Dolares",0.06);
+insert into currency values ("003",615,"Euros",0.05);
 insert into user values("402410745","pinto99");
 insert into user values("402420750","brazza");
 insert into client values("CL100","Heiner","60216753","402410745");
@@ -60,3 +62,5 @@ Update account set balance= 1500 , Client_client_cod= 'CL001', Currency_currency
 
 
 select * from transaction t inner join account a inner join currency cu inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and t.currencyCode= cu.currencyCode and c.User_id=u.id where t.Account_number= 4 and a.Client_client_cod= "CL001";
+
+select * from account a inner join client c inner join user u inner join currency cu on a.Client_client_cod = c.cod and c.User_id = u.id and a.Currency_currencyCode=cu.currencyCode;

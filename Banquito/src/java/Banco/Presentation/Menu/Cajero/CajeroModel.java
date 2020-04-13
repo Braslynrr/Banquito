@@ -14,16 +14,26 @@ package Banco.Presentation.Menu.Cajero;
 import Banco.Logic.Account;
 import Banco.Logic.Cashier;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CajeroModel {
 List<Account> cuentas;
 Cashier cashier;
+Date interes;
     public CajeroModel() {
         cuentas=null;
         cashier=null;
     }
 
+    public Date getInteres() {
+        return interes;
+    }
+
+    public void setInteres(Date interes) {
+        this.interes = interes;
+    }
+    
     public Cashier getCashier() {
         return cashier;
     }

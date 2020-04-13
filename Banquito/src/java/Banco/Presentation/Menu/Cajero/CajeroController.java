@@ -12,6 +12,7 @@ import Banco.Logic.User;
 import Banco.Presentation.Menu.Model;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Brazza
  */
-@WebServlet(name = "CajeroController", urlPatterns = {"/presentation/Menu/Cajero/show"})
+@WebServlet(name = "CajeroController", urlPatterns = {"/presentation/Menu/Cajero/show","/presentation/Menu/Cajero/Intereses","/presentation/Menu/Cajero/Aplicar"})
 public class CajeroController extends HttpServlet {
     
     
@@ -36,6 +37,12 @@ public class CajeroController extends HttpServlet {
         case "/presentation/Menu/Cajero/show":
                viewUrl=this.show(request);
             break;            
+        case "/presentation/Menu/Cajero/Intereses":
+                viewUrl=this.intereses(request);
+            break;
+        case "/presentation/Menu/Cajero/Aplicar":
+                viewUrl=this.Aplicar(request);
+            break;
         }
         request.getRequestDispatcher(viewUrl).forward( request, response);
     }
@@ -112,5 +119,32 @@ public class CajeroController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String intereses(HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        try{
+            CajeroModel model= new CajeroModel();
+            model.setInteres(Banco.Logic.Model.instance().FechaInteres());
+            session.setAttribute("model",model);
+            session.setAttribute("hoy",new Date());
+            return "/presentation/Menu/Cajero/Intereses.jsp";
+        }catch(Exception ex){
+            session.setAttribute("msg", ex.getMessage());
+            return "/presentation/Error.jsp";
+        }
+    }
+
+    private String Aplicar(HttpServletRequest request) {
+         HttpSession session = request.getSession(true);
+         CajeroModel model =(CajeroModel) session.getAttribute("model");
+         try{
+             Banco.Logic.Model.instance().InteresMasivo();
+             Banco.Logic.Model.instance().setServerDate(new Date(model.getInteres().getTime()+31*100*60*60*24));
+             return "/presentation/Menu/Cajero/show";
+         }catch(Exception ex){
+             session.setAttribute("msg", ex.getMessage());
+             return "/presentation/Error.jsp";
+         }
+    }
 
 }
