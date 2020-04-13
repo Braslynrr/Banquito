@@ -186,10 +186,11 @@ public class FavoritosController extends HttpServlet {
         return true;
     }
 
-    private String elimina(HttpServletRequest request) {
+    
+     private String eliminaAction(HttpServletRequest request){
        HttpSession session = request.getSession(true);
        FavoritosModel model= (FavoritosModel) session.getAttribute("model");
-       List<Account> lista= (List<Account>) session.getAttribute("favoritos");
+       List<Account> lista= (List<Account>) session.getAttribute("favorites");
        for(Account a:lista){
            if(a.getNumber()==model.getNumber()){
                model.setAccount(a);
@@ -197,7 +198,14 @@ public class FavoritosController extends HttpServlet {
            }
        }
        session.setAttribute("model", model);
-       return "/presentacion/Menu/Cuenta/Favoritos/Eliminar.jsp";
+       return "/presentation/Menu/Cuenta/Favoritos/Eliminar.jsp";
+     }
+    
+    private String elimina(HttpServletRequest request) {
+        if(this.comprobacionrapida(request)){
+            return this.eliminaAction(request);
+        }
+        return "/presentation/Error.jsp";
     }
 
     private String eok(HttpServletRequest request) {
@@ -213,17 +221,30 @@ public class FavoritosController extends HttpServlet {
         return "/presentation/Menu/Cuenta/show";
     }
 
-    private String añade(HttpServletRequest request) {
+     private String añadeAction(HttpServletRequest request) {
        HttpSession session = request.getSession(true);
        FavoritosModel model= (FavoritosModel) session.getAttribute("model");
+       List<Account> lista= (List<Account>) session.getAttribute("cuentas");
        try{
+        for(Account a:lista){
+           if(a.getNumber()==model.getNumber()){
+               throw new Exception("La cuenta ya es perteneciente al usuario");
+           }
+        }
            model.setAccount(Banco.Logic.Model.instance().getCuenta(model.getNumber()+""));
            session.setAttribute("model", model);
        }catch(Exception ex){
           session.setAttribute("msg", ex.getMessage());
           return "/presentation/Error.jsp";
        }
-       return "/presentacion/Menu/Cuenta/Favoritos/añadir.jsp";
+       return "/presentation/Menu/Cuenta/Favoritos/añadir.jsp";
+     }
+    
+    private String añade(HttpServletRequest request) {
+        if(this.comprobacionrapida(request)){
+            return this.añadeAction(request);
+        }
+        return "/presentation/Error.jsp";
     }
 
     private String aok(HttpServletRequest request) {

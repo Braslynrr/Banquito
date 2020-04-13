@@ -36,7 +36,7 @@ public class FavoritesDao {
     }
     
     public void AñadirFavorito(Client cl,Account other) throws Exception{
-        String sql = "insert into favorites values(0,'%s',%s)";
+        String sql = "insert into favorites values(0,%s,'%s')";
         sql = String.format(sql,other.getNumber(),cl.getCod());
         int count=db.executeUpdate(sql);
         if (count==0){
