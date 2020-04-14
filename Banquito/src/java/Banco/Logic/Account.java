@@ -37,6 +37,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
 public class Account implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "limit")
+    private double limit;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -154,6 +159,14 @@ public class Account implements Serializable {
 
     public void setBalance(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public double getLimit() {
+        return limit;
+    }
+
+    public void setLimit(double limit) {
+        this.limit = limit;
     }
     
 }

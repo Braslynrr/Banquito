@@ -6,7 +6,9 @@
 package Banco.Logic;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,10 +17,12 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,6 +38,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Client.findByTelNumber", query = "SELECT c FROM Client c WHERE c.telNumber = :telNumber")
     , @NamedQuery(name = "Client.findByLimit", query = "SELECT c FROM Client c WHERE c.limit = :limit")})
 public class Client implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private Collection<Account> accountCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -137,6 +144,15 @@ public class Client implements Serializable {
     @Override
     public String toString() {
         return "Banco.Logic.Client[ cod=" + cod + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Account> getAccountCollection() {
+        return accountCollection;
+    }
+
+    public void setAccountCollection(Collection<Account> accountCollection) {
+        this.accountCollection = accountCollection;
     }
     
 }
