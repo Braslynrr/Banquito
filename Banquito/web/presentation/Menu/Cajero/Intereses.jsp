@@ -20,13 +20,13 @@
             <% if(model.getInteres()!=null){ %>
                     <% SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd"); %>
                     <% String fecha= form.format(model.getInteres()); %>
-                    <% if(hoy.after(model.getInteres()) || hoy.equals(model.getInteres())){ %>
+                    <% if(hoy.after(model.getInteres())){ %>
                         <h1> Aplicar intereses </h1>
                         <input type="button" value="Aplicar" onclick="enviar()" >
                         <input type="button" value="Volver" onclick="cancelar()" >
                     <% } %>
                     <%if(hoy.before(model.getInteres())){%>
-                        <h1>Intereses aplicables hasta <%= fecha%> </h1>
+                        <h2>Intereses aplicables hasta <%= fecha%> </h2>
                         <input type="button" value="Volver" onclick="cancelar()" >
                     <%}%>
                     

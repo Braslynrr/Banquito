@@ -12,6 +12,7 @@ import Banco.Logic.User;
 import Banco.Presentation.Menu.Model;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -139,7 +140,12 @@ public class CajeroController extends HttpServlet {
          CajeroModel model =(CajeroModel) session.getAttribute("model");
          try{
              Banco.Logic.Model.instance().InteresMasivo();
-             Banco.Logic.Model.instance().setServerDate(new Date(model.getInteres().getTime()+31*100*60*60*24));
+             if(model.getInteres()==null)
+                model.setInteres(new Date());
+             Calendar c = Calendar.getInstance();
+             c.setTime(new Date()); 
+             c.add(Calendar.DATE, 30);
+             Banco.Logic.Model.instance().setServerDate(c.getTime());
              return "/presentation/Menu/Cajero/show";
          }catch(Exception ex){
              session.setAttribute("msg", ex.getMessage());

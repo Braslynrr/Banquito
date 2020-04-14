@@ -12,10 +12,12 @@ import Banco.Logic.Currency;
 import Banco.Logic.Account;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -126,10 +128,13 @@ public class AccountDao {
     
     
     public Date getFechaProxima() throws Exception{
-        String sql="select * from server";
+        String sql="SELECT * FROM server where cod=1";
         ResultSet rs = db.executeQuery(sql);
         if(rs.next()){
-            return new Date(rs.getString("Fecha"));
+            String fecha=rs.getString("Fecha");
+            String[] parts = fecha.split("-");
+            Date date =new Date(Integer.parseInt(parts[0])-1900,Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+            return date;
         }
         return null;
     }
@@ -147,7 +152,8 @@ public class AccountDao {
     public void setServerDate(Date date) throws Exception {
         SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd"); 
         String fecha= form.format(date);
-        String sql="update server set cod=1 , fecha="+fecha+" where cod=1";
+        String sql="update server set cod=1 , fecha='%s' where cod=1";
+        sql = String.format(sql,fecha);
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("Fecha fallo");
@@ -157,7 +163,8 @@ public class AccountDao {
     public void includeDate(Date date) throws Exception{
         SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd"); 
         String fecha= form.format(date);
-        String sql="insert into server value(1 ,"+fecha+")";
+        String sql="insert into server value(1 ,'%s')";
+        sql = String.format(sql,fecha);
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("Fecha fallo");
