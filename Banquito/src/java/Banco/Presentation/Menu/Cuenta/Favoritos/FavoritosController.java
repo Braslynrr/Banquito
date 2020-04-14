@@ -162,7 +162,7 @@ public class FavoritosController extends HttpServlet {
           model.setNuevo(Banco.Logic.Model.instance().ConversorMonedas(model.getOwnaccount().getCurrency().getCurrencyCode(), model.getAccount().getCurrency().getCurrencyCode(), model.getPropio()));
           model.getOwnaccount().setBalance(model.getOwnaccount().getBalance()- model.getPropio());
           model.getAccount().setBalance(model.getAccount().getBalance()+ model.getNuevo());
-          Banco.Logic.Model.instance().newTransfer(model.getOwnaccount(), model.getAccount() , model.getNuevo());
+          Banco.Logic.Model.instance().newTransfer(model.getOwnaccount(), model.getAccount(),model.getPropio(), model.getNuevo());
           return "/presentation/Menu/Cuenta/show";
       }catch(Exception ex){
           model.getOwnaccount().setBalance(model.getOwnaccount().getBalance()+ model.getPropio());

@@ -64,3 +64,5 @@ Update account set balance= 1500 , Client_client_cod= 'CL001', Currency_currency
 select * from transaction t inner join account a inner join currency cu inner join client c inner join user u on t.Account_number= a.number and c.cod=a.Client_client_cod and t.currencyCode= cu.currencyCode and c.User_id=u.id where t.Account_number= 4 and a.Client_client_cod= "CL001";
 
 select * from account a inner join client c inner join user u inner join currency cu on a.Client_client_cod = c.cod and c.User_id = u.id and a.Currency_currencyCode=cu.currencyCode;
+
+select sum(amount) from transaction t where t.date="2020-04-13" and t.Account_number=2 and t.type="Transferencia-Envio";

@@ -16,7 +16,6 @@
     <%@ include file="/presentation/header.jsp" %>
          
         <from class="box">
-        <h3>Añadir Cuenta</h3>
             <% if(model.getInteres()!=null){ %>
                     <% SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd"); %>
                     <% String fecha= form.format(model.getInteres()); %>
@@ -26,6 +25,7 @@
                         <input type="button" value="Volver" onclick="cancelar()" >
                     <% } %>
                     <%if(hoy.before(model.getInteres())){%>
+                        <h1> Intereses no aplicables </h1>
                         <h2>Intereses aplicables hasta <%= fecha%> </h2>
                         <input type="button" value="Volver" onclick="cancelar()" >
                     <%}%>

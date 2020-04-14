@@ -169,8 +169,8 @@ public class Model {
       return currency.getCurrencyCode(cod);
   }
   
-  public void newTransfer(Account acc,Account trans,Float cant) throws Exception{
-      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Envio",cant,acc,new Date(),trans.getCurrency().getCurrencyCode()));
+  public void newTransfer(Account acc,Account trans,Float cantLocal,Float cant) throws Exception{
+      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Envio",cantLocal,acc,new Date(),acc.getCurrency().getCurrencyCode()));
       transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Recibo",cant,trans,new Date(),trans.getCurrency().getCurrencyCode()));
       account.Update(acc);
       account.Update(trans);
@@ -215,6 +215,10 @@ public class Model {
             account.Update(a);
             transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Intereses",cant,a,new Date(),a.getCurrency().getCurrencyCode()));
         }
+    }
+    
+    public float Dinerotransferencias(Account ac) throws Exception{
+        return transaction.CantActual(ac, new Date());
     }
   
 }
