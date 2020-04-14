@@ -142,13 +142,16 @@ public class TransactionDao {
     public float CantActual(Account ac,Date da) throws Exception{
         SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd");
         String fecha= form.format(da);
-        String sql= "select sum(amount) from transaction t where t.date='%s' and t.Account_number'%s' and t.type='Transferencia-Envio'";
-        sql = String.format(sql,ac.getNumber(),fecha);
+        String sql= "select sum(amount) from transaction t where t.date='%s' and t.Account_number=%s and t.type='Transferencia-Envio'";
+        sql = String.format(sql,fecha,ac.getNumber());
         ResultSet rs = db.executeQuery(sql);
          if (rs.next()) {
-            return Float.parseFloat(rs.getString("sum(amount)"));        
+             String num=rs.getString("sum(amount)");
+             if(num==null)
+                return 0;
+             return Float.parseFloat(num);        
         }
-        return 0;
+        return 0; 
     }
     
 }

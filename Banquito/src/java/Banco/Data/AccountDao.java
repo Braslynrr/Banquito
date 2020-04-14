@@ -37,7 +37,7 @@ public class AccountDao {
     
     public void addAccount(Account a) throws Exception{
     
-        String sql = "insert into Account (number,balance,Client_client_cod,Currency_currencyCode,`limit`)"
+        String sql = "insert into Account (number,balance,Client_client_cod,Currency_currencyCode,limit)"
                 + "values('%s','%s','%s','%s','%s')";
         sql = String.format(sql,a.getNumber(),a.getBalance(),a.getClient().getCod(),a.getCurrency().getCurrencyCode(),a.getLimit());
         int count=db.executeUpdate(sql);
@@ -47,8 +47,8 @@ public class AccountDao {
     }
     
     public void Update(Account a)throws Exception{
-        String sql= "Update account set balance= %s , Client_client_cod= '%s', Currency_currencyCode= '%s' where number= %s";
-        sql = String.format(sql,a.getBalance(),a.getClient().getCod(),a.getCurrency().getCurrencyCode(),a.getNumber());
+        String sql= "Update account set balance= %s where number= %s";
+        sql = String.format(sql,a.getBalance(),a.getNumber());
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("No se pudo actualizar");
@@ -90,7 +90,7 @@ public class AccountDao {
             a.setBalance(Float.parseFloat(rs.getString("balance")));
             a.setClient(toClient(rs));
             a.setCurrency(toCurrency(rs));
-            a.setLimit(0);
+            a.setLimit(Double.parseDouble(rs.getString("limit")));
             return a;    
         }
          catch (SQLException ex) {

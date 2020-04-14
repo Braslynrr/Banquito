@@ -37,10 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
 public class Account implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "limit")
-    private double limit;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,6 +46,9 @@ public class Account implements Serializable {
     private Integer number;
     @Column(name = "balance")
     private Float balance;
+    @Column(name = "limit")
+    private double limit;
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
     private Favorites favorites;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "favoriteAccount")

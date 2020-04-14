@@ -7,18 +7,10 @@ insert into user values("402410745","pinto99");
 insert into user values("402420750","brazza");
 insert into client values("CL100","Heiner","60216753","402410745");
 insert into client values("CL001","Braslyn","60032274","402420750");
-insert into account values(1,100,"CL001","002");
-insert into account values(2,10000,"CL100","001");
-insert into account values(3,1500,"CL001","001");
-insert into account values(4,15000,"CL001","003");
-insert into account values(5,1500,"CL001","002");
-insert into account values(6,150,"CL001","003");
+insert into account values(1,10000,"CL001","002",1000);
+insert into account values(2,10000,"CL100","001",1000);
 insert into cashier values("Braslyn","CS001","402420750");
 insert into favorites values(0,2,"CL001");
-insert into favorites values(0,3,"CL100");
-insert into favorites values(0,4,"CL100");
-insert into favorites values(0,5,"CL100");
-insert into favorites values(0,6,"CL100");
 
 select count(number) from transaction;
 

@@ -137,6 +137,7 @@ public class FavoritosController extends HttpServlet {
             if(cant>model.getOwnaccount().getBalance()){
                 throw  new Exception("Saldo insuficiente");
             }
+            session.setAttribute("model", model);
         }catch(Exception e){
             session.setAttribute("msg", e.getMessage());
             return false;
@@ -159,11 +160,16 @@ public class FavoritosController extends HttpServlet {
       HttpSession session = request.getSession(true);
       FavoritosModel model = (FavoritosModel) session.getAttribute("model");
       try{
+          float base = Banco.Logic.Model.instance().Dinerotransferencias(model.getOwnaccount());
+          if(model.getOwnaccount().getLimit() >= base+model.getNuevo()){
           model.setNuevo(Banco.Logic.Model.instance().ConversorMonedas(model.getOwnaccount().getCurrency().getCurrencyCode(), model.getAccount().getCurrency().getCurrencyCode(), model.getPropio()));
           model.getOwnaccount().setBalance(model.getOwnaccount().getBalance()- model.getPropio());
           model.getAccount().setBalance(model.getAccount().getBalance()+ model.getNuevo());
           Banco.Logic.Model.instance().newTransfer(model.getOwnaccount(), model.getAccount(),model.getPropio(), model.getNuevo());
           return "/presentation/Menu/Cuenta/show";
+          }else{
+              throw new Exception("Su cuenta #"+model.getOwnaccount().getNumber()+" excede la cantidad maxima de tranferencia por dia -> "+model.getOwnaccount().getLimit());
+          }
       }catch(Exception ex){
           model.getOwnaccount().setBalance(model.getOwnaccount().getBalance()+ model.getPropio());
           model.getAccount().setBalance(model.getAccount().getBalance()- model.getNuevo());
