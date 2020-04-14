@@ -133,7 +133,8 @@ public class AccountDao {
         if(rs.next()){
             String fecha=rs.getString("Fecha");
             String[] parts = fecha.split("-");
-            Date date =new Date(Integer.parseInt(parts[0])-1900,Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+            Date date =new Date(Integer.parseInt(parts[0])-1900,Integer.parseInt(parts[1])-1,Integer.parseInt(parts[2]));
+            Date x= new Date(2020-1900,0,1);
             return date;
         }
         return null;
