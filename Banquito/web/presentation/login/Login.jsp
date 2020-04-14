@@ -24,11 +24,11 @@
         <% Map<String,String[]> form = (errores==null)?this.getForm(model):request.getParameterMap();%>
         
          <form class="box" name="form" action="/Banquito/presentation/login/login" method="post">
-            <h1>Log in</h1>
+            <h1>Iniciar sesión</h1>
           
           
-            <div id="usuario" class="campo"><input class="<%=erroneo("userid",errores)%>" placeholder="usuario" type="text" name="userid" value="<%=form.get("userid")[0]%>" title="<%=title("userid",errores)%>"></div>
-            <div id="pass" class="campo"><input class="<%=erroneo("userpass",errores)%>" placeholder="clave" type="password" name="userpass" value="<%=form.get("userpass")[0]%>" title="<%=title("userpass",errores)%>"></div>
+            <div id="usuario" class="campo"><input class="<%=erroneo("userid",errores)%>" placeholder="USUARIO" type="text" name="userid" value="<%=form.get("userid")[0]%>" title="<%=title("userid",errores)%>"></div>
+            <div id="pass" class="campo"><input class="<%=erroneo("userpass",errores)%>" placeholder="CLAVE" type="password" name="userpass" value="<%=form.get("userpass")[0]%>" title="<%=title("userpass",errores)%>"></div>
             <input type="submit" value="Entrar">
         </form>
     </body>
