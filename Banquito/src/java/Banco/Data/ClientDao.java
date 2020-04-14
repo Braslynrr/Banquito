@@ -26,10 +26,10 @@ public class ClientDao {
     
     public void AddClient(Client c) throws Exception{
         
-        String sql = "insert into client (cod,name,tel_number,User_id)"
-                + "values ('%s','%s','%s','%s')";
+        String sql = "insert into client (cod,name,tel_number,User_id,`limit`)"
+                + "values ('%s','%s','%s','%s','%s')";
         
-        sql = String.format(sql, c.getCod(),c.getName(),c.getTelNumber(),c.getUser().getId());
+        sql = String.format(sql, c.getCod(),c.getName(),c.getTelNumber(),c.getUser().getId(),c.getLimit());
         int count = db.executeUpdate(sql);
         if(count == 0){
             throw new Exception("El usuario ya existe");
@@ -89,6 +89,7 @@ public class ClientDao {
             c.setName(rs.getString("name"));
             c.setTelNumber(rs.getString("tel_number"));
             c.setUser(toUser(rs));
+            c.setLimit(0.0);
             //c.setUser(c.getUserid());
             return c;
             

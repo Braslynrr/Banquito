@@ -6,9 +6,7 @@
 package Banco.Logic;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,12 +15,10 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
     , @NamedQuery(name = "Client.findByCod", query = "SELECT c FROM Client c WHERE c.cod = :cod")
     , @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name")
-    , @NamedQuery(name = "Client.findByTelNumber", query = "SELECT c FROM Client c WHERE c.telNumber = :telNumber")})
+    , @NamedQuery(name = "Client.findByTelNumber", query = "SELECT c FROM Client c WHERE c.telNumber = :telNumber")
+    , @NamedQuery(name = "Client.findByLimit", query = "SELECT c FROM Client c WHERE c.limit = :limit")})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,13 +52,14 @@ public class Client implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "tel_number")
     private String telNumber;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "limit")
+    private Double limit;
     @JoinColumns({
         @JoinColumn(name = "User_id", referencedColumnName = "id")
         , @JoinColumn(name = "User_id", referencedColumnName = "id")})
     @ManyToOne(optional = false)
     private User user;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private Collection<Account> accountCollection;
 
     public Client() {
     }
@@ -100,21 +98,20 @@ public class Client implements Serializable {
         this.telNumber = telNumber;
     }
 
+    public Double getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Double limit) {
+        this.limit = limit;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    @XmlTransient
-    public Collection<Account> getAccountCollection() {
-        return accountCollection;
-    }
-
-    public void setAccountCollection(Collection<Account> accountCollection) {
-        this.accountCollection = accountCollection;
     }
 
     @Override

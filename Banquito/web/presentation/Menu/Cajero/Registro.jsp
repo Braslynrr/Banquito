@@ -34,7 +34,7 @@
                   <input type = "text" name = "tnumber" placeholder="Numero de telefono" class = "<%=erroneo("tnumber", errores)%>" title="<%=title("tnumber", errores)%>" />
                   <input type = "text" name = "userid" placeholder="id" value=<%= id %> class = "<%=erroneo("userid", errores)%>" title="<%=title("userid", errores)%>"/>
                   <input type = "text" name = "userpass" placeholder="contrasena" value=<%= password %> class = "<%=erroneo("userpass", errores)%>" title="<%=title("userpass", errores)%>"/>
-                  
+                  <input type = "text" name = "limit" placeholder="Limite" class = "<%=erroneo("limit", errores)%>" title="<%=title("limit", errores)%>"/>
                   <h2>Seleccione el tipo de moneda para la nueva cuenta</h2>
                   <select id = "currencyType" name = "currency">
 
