@@ -28,10 +28,10 @@ public class CashierDao {
     
     public void AddCashier(Cashier c) throws Exception{
         
-        String sql = "insert into client (id,name,User_id)"
-                + "values ('%s','%s','%s','%s')";
+        String sql = "insert into cashier (name,cod,User_id)"
+                + "values ('%s','%s','%s')";
         
-        sql = String.format(sql, c.getCod(),c.getName(),c.getUser().getId());
+        sql = String.format(sql,c.getName(), c.getCod(),c.getUser().getId());
         int count = db.executeUpdate(sql);
         if(count == 0){
             throw new Exception("El cajero ya existe");

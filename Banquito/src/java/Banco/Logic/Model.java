@@ -61,6 +61,15 @@ public class Model {
        return code;
    }
    
+     public String cashierCode () throws Exception{
+   
+       
+       String code = "Cs"+Integer.toString(cashier.GeneratorNCashier());
+       
+   
+       return code;
+   }
+   
      public Integer accountNumber () throws Exception{
    
        
@@ -76,6 +85,12 @@ public class Model {
            throw new Exception ("Usuario no existe");
        }
        return result;
+   
+   }
+   
+      public User getUser(String id) throws Exception{
+       
+      return  user.getUser(id);
    
    }
     
@@ -121,6 +136,7 @@ public class Model {
        
    }
    
+   
    public List<Transaction> consultarTransacionesRange(String Cod, String FechaI,String FechaF,String dmin)throws Exception{
         List<Transaction> lista = transaction.getlistaRang(Cod, FechaI, FechaF, dmin);
         return lista;
@@ -131,6 +147,12 @@ public class Model {
        client.AddClient(obj);
        
    }
+      public void addCashier(Cashier obj) throws Exception{
+       
+       cashier.AddCashier(obj);
+       
+   }
+    
     
    public void addAccount(Account obj) throws Exception{
        
