@@ -9,6 +9,7 @@ insert into client values("CL100","Heiner","60216753","402410745");
 insert into client values("CL001","Braslyn","60032274","402420750");
 insert into account values(1,10000,"CL001","002",1000);
 insert into account values(2,10000,"CL100","001",1000);
+insert into account values(2,1000,"CL100","003",100);
 insert into cashier values("Braslyn","CS001","402420750");
 insert into favorites values(0,2,"CL001");
 
@@ -58,3 +59,5 @@ select * from transaction t inner join account a inner join currency cu inner jo
 select * from account a inner join client c inner join user u inner join currency cu on a.Client_client_cod = c.cod and c.User_id = u.id and a.Currency_currencyCode=cu.currencyCode;
 
 select sum(amount) from transaction t where t.date="2020-04-13" and t.Account_number=2 and t.type="Transferencia-Envio";
+
+select sum(amount) from transaction t where t.date='2020-04-14' and t.Account_number=1 and t.type='Transferencia-Envio'

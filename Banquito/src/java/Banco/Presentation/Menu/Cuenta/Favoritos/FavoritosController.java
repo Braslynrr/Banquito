@@ -161,7 +161,7 @@ public class FavoritosController extends HttpServlet {
       FavoritosModel model = (FavoritosModel) session.getAttribute("model");
       try{
           float base = Banco.Logic.Model.instance().Dinerotransferencias(model.getOwnaccount());
-          if(model.getOwnaccount().getLimit() >= base+model.getNuevo()){
+          if(model.getOwnaccount().getLimit() >= base+model.getPropio()){
           model.setNuevo(Banco.Logic.Model.instance().ConversorMonedas(model.getOwnaccount().getCurrency().getCurrencyCode(), model.getAccount().getCurrency().getCurrencyCode(), model.getPropio()));
           model.getOwnaccount().setBalance(model.getOwnaccount().getBalance()- model.getPropio());
           model.getAccount().setBalance(model.getAccount().getBalance()+ model.getNuevo());

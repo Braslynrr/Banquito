@@ -78,8 +78,22 @@ public class CurrencyDao {
     public float ConversorMonedas(String cod1,String cod2 , float cantidad) throws Exception{
         Currency propia = Banco.Logic.Model.instance().getCurrencyCode(cod1);
         Currency transferir= Banco.Logic.Model.instance().getCurrencyCode(cod2);
-        float temp = propia.getExchangeRate() * cantidad;
-        return temp* transferir.getExchangeRate();
+        if(propia.getDescription().equals(transferir.getDescription())){
+            return cantidad;
+        }else{
+            if(transferir.getDescription().equals("Colones")){
+                float temp = cantidad*propia.getExchangeRate() ;
+                return temp;
+            }else{
+                if(propia.getDescription().equals("Colones")){
+                float temp = cantidad/transferir.getExchangeRate() ;
+                return temp;
+                }
+            }
+        }
+        float temp = cantidad*propia.getExchangeRate() ;
+        temp = temp/transferir.getExchangeRate() ;
+        return temp;
     }
     
     public static Currency toCurrency(ResultSet rs)throws SQLException{
