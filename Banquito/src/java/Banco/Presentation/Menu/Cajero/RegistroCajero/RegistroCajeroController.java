@@ -6,6 +6,7 @@
 package Banco.Presentation.Menu.Cajero.RegistroCajero;
 
 import Banco.Logic.Cashier;
+import Banco.Logic.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class RegistroCajeroController extends HttpServlet {
         
         
         
-          request.setAttribute("model", new RegistroCajeroModel());
+        request.setAttribute("model", new RegistroCajeroModel());
         String viewUrl ="";
         
         switch(request.getServletPath()){  
@@ -101,9 +102,11 @@ public class RegistroCajeroController extends HttpServlet {
                  return "/presentation/Menu/Cajero/RegistroCajeroCliente.jsp";
              }
              else {
-                 
-                 session.setAttribute("id", request.getParameter("clientid"));
-                 return  "/presentation/Menu/Cajero/Registro/show";
+                 User user = new User();
+                 user.setId(request.getParameter("cashierid"));
+                 user.setPassword(domainModel.getpassword());
+                 session.setAttribute("user", user);
+                 return  "/presentation/Menu/Cajero/RegistroCajeroNuevo.jsp";
                  
              }
          
@@ -126,15 +129,29 @@ public class RegistroCajeroController extends HttpServlet {
      public  String registrarAction (HttpServletRequest request) {
          
         Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
-       
+       HttpSession session = request.getSession(true);
         Cashier cajero = new Cashier();
          
          try{
-             
-           cajero.setCod(domainModel.cashierCode());
-           cajero.setName(request.getParameter("username"));
-           cajero.setUser(domainModel.getUser(request.getParameter("userid")));
            
+             if (session.getAttribute("user") == null) {
+                 cajero.setCod(domainModel.cashierCode());
+                 cajero.setName(request.getParameter("username"));
+                 cajero.setUser(domainModel.getUser(request.getParameter("userid")));
+             }
+             
+             else{
+                 
+                 
+                 User user = (User)session.getAttribute("user");
+                 cajero.setCod(domainModel.cashierCode());
+                 cajero.setName(request.getParameter("username"));
+                 cajero.setUser(user);
+                 domainModel.addUser(user);
+                 
+                 
+             }
+          
           
           domainModel.addCashier(cajero);
  

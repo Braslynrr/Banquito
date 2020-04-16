@@ -21,7 +21,7 @@ public class RegistroCajeroModel {
     
     public RegistroCajeroModel(){
         
-        usuario = null;
+        usuario = new User();
         cliente = null;
     
     
