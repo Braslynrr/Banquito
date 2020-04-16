@@ -72,22 +72,22 @@ public class RegistroCuentaController extends HttpServlet {
     
     public  String registrarAction (HttpServletRequest request) {
          
-         Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
-        RegistroCuentaModel model= (RegistroCuentaModel) request.getAttribute("model");
-         Account cuenta = new Account();
-         HttpSession session = request.getSession(true);
-         
-         try{
-          model.setClient(Banco.Logic.Model.instance().ConsutClient((String)session.getAttribute("id")));
-         cuenta.setBalance(0);
-         cuenta.setClient(model.getClient());
-         cuenta.setNumber(domainModel.accountNumber());
-         cuenta.setCurrency(domainModel.getCurrency(request.getParameter("currency")));
-       
-         domainModel.addAccount(cuenta);
- 
-         return "/presentation/Menu/Cajero/RegistroCuenta.jsp";
-         }
+        Banco.Logic.Model domainModel = Banco.Logic.Model.instance();
+        RegistroCuentaModel model = (RegistroCuentaModel) request.getAttribute("model");
+        Account cuenta = new Account();
+        HttpSession session = request.getSession(true);
+
+        try {
+            model.setClient(Banco.Logic.Model.instance().ConsutClient((String) session.getAttribute("id")));
+            cuenta.setBalance(new Float(0));
+            cuenta.setClient(model.getClient());
+            cuenta.setNumber(domainModel.accountNumber());
+            cuenta.setCurrency(domainModel.getCurrency(request.getParameter("currency")));
+            cuenta.setLimit(Double.valueOf(request.getParameter("limit")));
+            domainModel.addAccount(cuenta);
+
+            return "/presentation/Menu/Cajero/RegistroCuenta.jsp";
+        }
          catch (Exception ex) {
             
  
