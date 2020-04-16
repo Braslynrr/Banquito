@@ -148,6 +148,7 @@ public class RegistroCajeroController extends HttpServlet {
                  cajero.setName(request.getParameter("username"));
                  cajero.setUser(user);
                  domainModel.addUser(user);
+                 session.setAttribute("user", null);
                  
                  
              }
