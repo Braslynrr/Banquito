@@ -27,7 +27,7 @@
 
                 <h1>Digite el id del nuevo cajero </hl> 
                 
-                <input type = "text" name = "cashierid" placeholder="Id del cliente" class = "<%=erroneo("cashierid", errores)%>" title="<%=title("cashierid", errores)%>" />
+                <input type = "text" name = "cashierid" placeholder="Id" class = "<%=erroneo("cashierid", errores)%>" title="<%=title("cashierid", errores)%>" />
                 
       
                 
