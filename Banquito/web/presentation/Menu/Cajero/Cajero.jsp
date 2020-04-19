@@ -22,7 +22,8 @@
             <div id="menu">   
           
                 <input type="submit" value="Abrir una cuenta" onclick="Redirect2();" >
-                <input type="submit" value="Registrar un cajero" onclick="Redirect3();" >
+                <input type="submit" value="Registrar un cajero" onclick="Redirect3();">
+                <input type="submit" value="Realizar un deposito o retiro" onclick="Redirect4();" >
                 <input type="submit" value="Aplicar Intereses" onclick="Redirect1();" >
             </div>
              <h2>Codigo de cajero: <%=cashier.getCod()%></h2>
@@ -39,6 +40,10 @@
             }
                function Redirect3() {
                window.location = "/Banquito/presentation/Menu/Cajero/RegistroCajero/show";
+             }
+             
+            function Redirect4() {
+               window.location = "/Banquito/presentation/Menu/Cajero/Transacciones/BuscarCliente/show";
              }
       </script>   
         
