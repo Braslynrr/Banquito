@@ -93,7 +93,11 @@ public class Model {
       return  user.getUser(id);
    
    }
-    
+     public Client getByCod(String cod) throws Exception{
+       
+      return  client.clientCod(cod);
+   
+   } 
    
    public List<Account> ConsultarCuentas(String cod)throws Exception{
        List<Account> lista= account.getList(cod);

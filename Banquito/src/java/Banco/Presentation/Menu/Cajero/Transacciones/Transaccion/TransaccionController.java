@@ -8,6 +8,8 @@ package Banco.Presentation.Menu.Cajero.Transacciones.Transaccion;
 import Banco.Logic.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * @author gaira
  */
 @WebServlet(name = "TransaccionController", urlPatterns = {"/presentation/Menu/Cajero/Transacciones/BuscarCliente/show",
-"/presentation/Menu/Cajero/Transacciones/BuscarCliente/ObtenerCuenta"})
+"/presentation/Menu/Cajero/Transacciones/BuscarCliente/ObtenerCuenta","/presentation/Menu/Cajero/Transacciones/BuscarCliente/siguiente"})
 public class TransaccionController extends HttpServlet {
 
     /**
@@ -35,7 +37,7 @@ public class TransaccionController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
-        request.setAttribute("model", new TransaccionModel());
+        //request.setAttribute("model", new TransaccionModel());
         String viewUrl ="";
         
         switch(request.getServletPath()){  
@@ -45,6 +47,9 @@ public class TransaccionController extends HttpServlet {
             break;
         case "/presentation/Menu/Cajero/Transacciones/BuscarCliente/ObtenerCuenta":
                viewUrl=this.getAccount(request);
+            break;   
+       case "/presentation/Menu/Cajero/Transacciones/BuscarCliente/siguiente":
+               viewUrl=this.goTransaction(request);
             break;   
        
         }
@@ -58,10 +63,12 @@ public class TransaccionController extends HttpServlet {
      public String getAccount(HttpServletRequest request){
         return this.getAccountAction(request);
     }
+    public String goTransaction(HttpServletRequest request){
+        return this.goTransactionAction(request);
+    } 
     public String showAction(HttpServletRequest request){
         
-       TransaccionModel model= (TransaccionModel) request.getAttribute("model");
-        HttpSession session = request.getSession(true);
+       
       
           try{
            //this.updateModel(request);
@@ -73,8 +80,9 @@ public class TransaccionController extends HttpServlet {
     }
      public String getAccountAction(HttpServletRequest request){
         
-       TransaccionModel model= (TransaccionModel) request.getAttribute("model");
+       
        HttpSession session = request.getSession(true);
+       TransaccionModel model= new TransaccionModel();
        Banco.Logic.Model domainModel = Banco.Logic.Model.instance();
        Client cliente = new Client();
        
@@ -82,13 +90,52 @@ public class TransaccionController extends HttpServlet {
           try{
            cliente = domainModel.compClient((String)request.getParameter("clientid"));
            model.setCuentas(domainModel.ConsultarCuentas(cliente.getCod()));
+           model.setCliente(cliente);
            session.setAttribute("accounts", model.getCuentas());
            session.setAttribute("id", request.getParameter("clientid"));
+           session.setAttribute("model", model);
+
            return "/presentation/Menu/Cajero/Transacciones/BuscarCliente.jsp";
         }catch(Exception ex){
             return "/presentation/Error.jsp"; 
         }
     
+    }
+     
+       public String goTransactionAction(HttpServletRequest request){
+        
+       
+       HttpSession session = request.getSession(true);
+       TransaccionModel model= new TransaccionModel();
+       Banco.Logic.Model domainModel = Banco.Logic.Model.instance();
+       
+       
+       if(model.getCliente()!= null){
+          
+           try {
+
+                   model.setCuenta(domainModel.getCuenta(request.getParameter("accounts")));
+               } catch (Exception ex) {
+                   Logger.getLogger(TransaccionController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               session.setAttribute("model", model);
+               return "/presentation/Menu/Cajero/Transacciones/Transaccion.jsp";
+           }
+       else{
+       
+           try {
+               model.setCuenta(domainModel.getCuenta((String)request.getParameter("accountnumber")));
+               model.setCliente(domainModel.getByCod(model.getCuenta().getClient().getCod()));
+               session.setAttribute("model", model);
+               return "/presentation/Menu/Cajero/Transacciones/Transaccion.jsp";
+           } catch (Exception ex) {
+               Logger.getLogger(TransaccionController.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
+           
+       
+       }
+       return "/presentation/Error.jsp";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

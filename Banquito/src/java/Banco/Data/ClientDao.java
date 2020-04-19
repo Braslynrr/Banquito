@@ -69,6 +69,21 @@ public class ClientDao {
         
     }
     
+     public Client clientCod(String id)throws Exception{
+        
+        String sql = "select * from client where cod = '%s'";
+        sql = String.format(sql,id);
+        ResultSet rs = db.executeQuery(sql);
+        
+        if(rs.next()){
+            return this.toClient(rs);
+        }
+         else{
+            return null;
+        }
+        
+    }
+    
     public Integer GeneratorNclient()throws Exception{
         String sql="select count(cod) from client";
         ResultSet rs = db.executeQuery(sql);

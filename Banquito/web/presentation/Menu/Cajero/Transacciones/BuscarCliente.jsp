@@ -1,3 +1,4 @@
+<%@page import="Banco.Presentation.Menu.Cajero.Transacciones.Transaccion.TransaccionModel"%>
 <%@page import="Banco.Logic.Account"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -19,6 +20,7 @@
        
         <% List<Account> lista=(List<Account>) session.getAttribute("accounts");%>
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
+        <% TransaccionModel model= (TransaccionModel) session.getAttribute("model"); %>
         <% String id = (String)session.getAttribute("id");%>
         <div class="box">
               <div>
@@ -29,38 +31,37 @@
                           <% }%>
 
                           <input type = "text" name = "clientid" placeholder="Id del cliente"  value="<%= id%>" class = "<%=erroneo("clientid", errores)%>" title="<%=title("clientid", errores)%>" /> 
-                          <select id = "clientaccounts" name = "accounts">
-
-                              <% if (lista == null) { %>
-                              <option> Numero de cuenta </option>
-                              <% }%>
-                              <% if (lista != null) { %>
-                              <% for (Account a : lista) {%>
-                              <option><%= a.getNumber()%></option>
-                              <% }%>
-
-                              <% }%>
-
-
-
-
-
-                  </select>
+                
                       <input type = "submit" value = "Buscar">
                   </form>
                 </div>  
-            
+              
+
           <form  name="form1" action = "/Banquito/presentation/Menu/Cajero/Transacciones/BuscarCliente/siguiente" method="post">
 
-           
+             <select id = "clientaccounts" name = "accounts">
+
+                    <% if (lista == null) { %>
+                    <option> Numero de cuenta </option>
+                    <% }%>
+                    <% if (lista != null) { %>
+                    <% for (Account a : lista) {%>
+                    <option><%= a.getNumber()%></option>
+                    <% }%>
+
+                    <% }%>
+
+
+
+
+
+                </select>
                
-                 <div
-                  <form name ="form3">
+          
                       <h1>Digitar directamente el numero de cuenta </hl> 
                       
                       <input type = "text" name = "accountnumber" placeholder="Numero de cuenta" class = "<%=erroneo("accountnumber", errores)%>" title="<%=title("accountnumber", errores)%>" /> 
-                  </form>
-                </div> 
+            
       
                 
                 
