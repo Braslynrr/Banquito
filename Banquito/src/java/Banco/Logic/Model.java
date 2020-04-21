@@ -78,6 +78,16 @@ public class Model {
    
        return code;
    }
+     
+    public Integer TransactionNumber () throws Exception{
+   
+       
+       Integer code = transaction.GeneratorNTransaction();
+       
+   
+       return code;
+   }  
+     
    public User consultUser(String id,String pass) throws Exception{
        
        User result = user.Login(id,pass);
@@ -157,6 +167,11 @@ public class Model {
        
    }
     
+         public void addTransaction(Transaction obj) throws Exception{
+       
+       transaction.addTransaction(obj);
+       
+   }
     
    public void addAccount(Account obj) throws Exception{
        
@@ -202,6 +217,11 @@ public class Model {
       account.Update(trans);
   }
   
+  public void updateAccount (Account a) throws Exception{
+      
+      account.Update(a);
+      
+  }
   
   public void EliminarFavorito(Client cl,Account acc) throws Exception{
       if(favorites.VerificarFavorito(cl, acc)){

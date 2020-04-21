@@ -1,4 +1,5 @@
 
+<%@page import="Banco.Presentation.Menu.Cajero.Transacciones.Transaccion.TransaccionModel"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
@@ -17,26 +18,28 @@
     <body>
         <%@ include file="/presentation/header.jsp" %>
        
-        
+        <% TransaccionModel model= (TransaccionModel) session.getAttribute("model"); %>
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
 
         <div class="box">
-          <form  name="form" action = "/Banquito/presentation/Menu/Cajero/AbrirCuenta/registrar" method="post">
+          <form  name="form" action = "/Banquito/presentation/Menu/Cajero/Transacciones/Transaccion/transaccion" method="post">
 
-              <div
-                  <form name ="subform" method="post">
-                      <h1>Digite el id del cliente y seleccione la cuenta </hl> 
-                     <input type = "text" name = "clientid" placeholder="Id del cliente" class = "<%=erroneo("clientid", errores)%>" title="<%=title("clientid", errores)%>" /> 
-                  </form>
-                </div> 
+               <h1>Detalles de la cuenta </hl>
+                
+               <h1>Propietario: <%= model.getCliente().getName() %> </hl>
                
-                
-      
-                
-                
-                
-                  <input type = "submit" value = "Siguiente">
+                <h1>Numero de cuenta:  <%= model.getCuenta().getNumber() %> </hl>
+                 <h1>Slado actual:  <%= model.getCuenta().getBalance() %> </hl>
+                 <h1>Seleccione el tipo de transaccion que desea realizar: </hl><br><br>
+                 <input type="radio" id ="retiro" name="radiobt1" value="retiro"> 
+                 <label for="retiro">Retiro</label><br>
 
+                 <input type="radio" id ="deposito" name="radiobt1" value="deposito"> 
+                 <label for="deposito">Deposito</label><br>
+                 
+                 <input type = "text" name = "detail" placeholder="Motivo" class = "<%=erroneo("detail", errores)%>" title="<%=title("detail", errores)%>" />
+                 <input type = "text" name = "monto" placeholder="Monto de la transaccion" class = "<%=erroneo("monto", errores)%>" title="<%=title("monto", errores)%>" />
+                 <input type = "submit" value = "Realizar transaccion">
 
                   </form>
                   </div>

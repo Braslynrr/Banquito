@@ -19,6 +19,15 @@ public class TransaccionModel {
     Client cliente;
     Account cuenta;
 
+    public String getTipomoneda() {
+        return tipomoneda;
+    }
+
+    public void setTipomoneda(String tipomoneda) {
+        this.tipomoneda = tipomoneda;
+    }
+    String tipomoneda;
+
     public Account getCuenta() {
         return cuenta;
     }

@@ -40,6 +40,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Transaction.findByCurrencyCode", query = "SELECT t FROM Transaction t WHERE t.currencyCode = :currencyCode")})
 public class Transaction implements Serializable {
 
+    @Size(max = 45)
+    @Column(name = "detail")
+    private String detail;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -157,6 +161,14 @@ public class Transaction implements Serializable {
     public String toString() {
         SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd");
         return form.format(date);
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
     
 }

@@ -59,10 +59,16 @@ public class RegistroCuentaController extends HttpServlet {
         
         try{ 
             
-                    
+            Map<String, String> errores = this.validar(request);
+            if (errores.isEmpty()) {
                 return this.registrarAction(request);
-          
-       
+            }
+            else{
+                request.setAttribute("errores", errores);
+                return "/presentation/Menu/Cajero/RegistroCuenta.jsp"; 
+            } 
+
+
             
         }
            catch(Exception e){
@@ -126,34 +132,16 @@ public class RegistroCuentaController extends HttpServlet {
    }
 
     
-   /*Map<String,String> validar(HttpServletRequest request) {
+   Map<String,String> validar(HttpServletRequest request) {
         Map<String,String> errores = new HashMap<>();
         Banco.Logic.Model  domainModel = Banco.Logic.Model.instance();
         
-        try {
-            if (domainModel.clientExist(request.getParameter("userid"))){
-                errores.put("userid","El cliente ya se encuentra registrado"); 
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(RegistroCuentaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (request.getParameter("userid").isEmpty()){
-            errores.put("userid","Cedula requerida");
-            
-        }
-
-        if (request.getParameter("userpass").isEmpty()){
-            errores.put("userpass","Clave requerida");
-        }
-        if (request.getParameter("username").isEmpty()){
-            errores.put("username","Espacio requerido");
-        }
-
-        if (request.getParameter("tnumber").isEmpty()){
-            errores.put("tnumber","Espacio requerido");
+   
+        if (request.getParameter("limit").isEmpty()){
+            errores.put("limit","Espacio requerido");
         }
         return errores;
-    }*/
+    }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

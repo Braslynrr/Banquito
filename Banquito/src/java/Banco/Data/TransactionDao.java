@@ -36,10 +36,10 @@ public class TransactionDao {
     public void addTransaction(Transaction t)throws Exception{
         
         String sql = "insert into Transaction "
-                + "values(%s,'%s',%s,'%s',%s,'%s')";
+                + "values(%s,'%s',%s,'%s',%s,'%s','%s')";
         SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd");
         String fecha= form.format(t.getDate());
-        sql = String.format(sql,t.getNumber(),t.getType(),t.getAmount(),fecha,t.getAccount().getNumber(),t.getCurrencyCode());
+        sql = String.format(sql,t.getNumber(),t.getType(),t.getAmount(),fecha,t.getAccount().getNumber(),t.getCurrencyCode(), t.getDetail());
         int count=db.executeUpdate(sql);
         if (count==0){
             throw new Exception("La transaccion ya existe");
@@ -77,6 +77,7 @@ public class TransactionDao {
             t.setAccount(toAccount(rs));
             t.getAccount().setNumber(Integer.parseInt(rs.getString("number")));
             t.setCurrencyCode(t.getAccount().getCurrency().getCurrencyCode());
+            t.setDetail(rs.getString("detail"));
             return t;
            
         

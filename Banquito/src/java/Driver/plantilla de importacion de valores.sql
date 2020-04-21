@@ -1,6 +1,6 @@
 CREATE USER 'root1'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root1';
 
-insert into currency values ("001",1,"Colones",0.13);
+insert insert into currency values ("001",1,"Colones",0.13);
 insert into currency values ("002",573,"Dolares",0.06);
 insert into currency values ("003",615,"Euros",0.05);
 insert into user values("402410745","pinto99");
@@ -8,7 +8,7 @@ insert into user values("402420750","brazza");
 insert into client values("CL100","Heiner","60216753","402410745");
 insert into client values("CL001","Braslyn","60032274","402420750");
 insert into account values(1,10000,"CL001","002",1000);
-insert into account values(2,10000,"CL100","001",1000);
+
 insert into account values(2,1000,"CL100","003",100);
 insert into cashier values("Braslyn","CS001","402420750");
 insert into favorites values(0,2,"CL001");
@@ -22,8 +22,8 @@ select * from account a inner join client c inner join user u inner join currenc
 
 select * from client where cod = "CL100";
 
-insert into transaction values(1,"traspasoamount",1000,date("2020-04-22"),1,"001");
-insert into transaction values(12,"traspasoamount",5100,date("2020-04-22"),3,"001");
+insert into transaction values(1,"traspasoamount",1000,date("2020-04-22"),1,"001","prueba");
+insert into transaction values(12,"traspasoamount",5100,date("2020-04-22"),3,"001","prueba");
 
 select * from account a inner join client c inner join user u on u.id=c.User_id on a.Client_client_cod = c.cod inner join Currency d on a.Currency_currencyCode = d.currencyCode where a.number = 1 and a.Client_client_cod="CL001";
 
