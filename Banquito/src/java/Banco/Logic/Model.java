@@ -210,9 +210,9 @@ public class Model {
       return currency.getCurrencyCode(cod);
   }
   
-  public void newTransfer(Account acc,Account trans,Float cantLocal,Float cant) throws Exception{
-      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Envio",cantLocal,acc,new Date(),acc.getCurrency().getCurrencyCode()));
-      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Recibo",cant,trans,new Date(),trans.getCurrency().getCurrencyCode()));
+  public void newTransfer(Account acc,Account trans,Float cantLocal,Float cant,String detail) throws Exception{
+      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Envio",cantLocal,acc,new Date(),acc.getCurrency().getCurrencyCode(),detail));
+      transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Transferencia-Recibo",cant,trans,new Date(),trans.getCurrency().getCurrencyCode(),detail));
       account.Update(acc);
       account.Update(trans);
   }
@@ -259,7 +259,7 @@ public class Model {
             float cant=(a.getBalance()*a.getCurrency().getTax());
             a.setBalance(a.getBalance()+cant);
             account.Update(a);
-            transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Intereses",cant,a,new Date(),a.getCurrency().getCurrencyCode()));
+            transaction.addTransaction(new Transaction(transaction.GeneratorNTransaction(),"Intereses",cant,a,new Date(),a.getCurrency().getCurrencyCode(),"Interes Pasivo de su cuenta bancaria"));
         }
     }
     

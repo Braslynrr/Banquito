@@ -21,11 +21,12 @@
         <select id = "selectaccount" name = "Saccounts">
 
             <% for (Account a : accounts){ %>
-            <option id="<%= a.getNumber()%>"  title="<%=a.getBalance()+" "+a.getCurrency().getDescription() %>"> <%= a.getNumber() %>  </option>
+            <option value="<%= a.getNumber()%>"> Cuenta: <%=a.getNumber() %> Saldo: <%=a.getBalance()+" "+a.getCurrency().getDescription() %> </option>
             <% } %>
         </select>
             Cantidad:<input id="cant" type="number" min="1"><br>
         tranferir a numero de <%= model.toString()%>
+        Detalle:<input id="detalle" type="text">
         <br>
         <input type="button" value="Cancelar" onclick="cancelar()" >
         <input type="button" value="Confirmar" onclick="enviar()">
@@ -43,7 +44,8 @@
     function enviar(){
         var numero=document.getElementById("selectaccount").value;
         var cuenta=document.getElementById("cant").value;
-        window.location ="/Banquito/presentation/Menu/Cuenta/Favorito/transfer?Naccount="+numero+"&cantidad="+cuenta;
+        var detail=document.getElementById("detalle").value;
+        window.location ="/Banquito/presentation/Menu/Cuenta/Favorito/transfer?Naccount="+numero+"&cantidad="+cuenta+"&detalle="+detail;
     }
     
  </script>

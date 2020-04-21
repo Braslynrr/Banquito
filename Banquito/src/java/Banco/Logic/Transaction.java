@@ -80,13 +80,14 @@ public class Transaction implements Serializable {
         this.number = number;
     }
 
-    public Transaction(Integer number, String type, float amount,Account account,Date date ,String currencyCode) {
+    public Transaction(Integer number, String type, float amount,Account account,Date date ,String currencyCode,String detail) {
         this.number = number;
         this.type = type;
         this.amount = amount;
         this.account=account;
         this.date=date;
         this.currencyCode = currencyCode;
+        this.detail=detail;
     }
 
     public Integer getNumber() {

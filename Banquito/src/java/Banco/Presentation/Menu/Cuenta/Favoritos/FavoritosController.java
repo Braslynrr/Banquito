@@ -123,6 +123,7 @@ public class FavoritosController extends HttpServlet {
         HttpSession session = request.getSession(true);
         FavoritosModel model= (FavoritosModel) session.getAttribute("model");
         String Nacc=request.getParameter("Naccount");
+        model.setDetalle(request.getParameter("detalle"));
         List<Account> accounts= (List<Account>) session.getAttribute("cuentas");
         for(Account a:accounts){
              if((a.getNumber()+"").equals(Nacc)){
@@ -131,6 +132,9 @@ public class FavoritosController extends HttpServlet {
              }
         }
         String cantidad = request.getParameter("cantidad");
+        if((model.getDetalle().equals(""))){
+            model.setDetalle("Tranferencia a "+model.getAccount().getClient().getName());
+        }
         try{
             Float cant= Float.parseFloat(cantidad);
             model.setPropio(cant);
@@ -165,7 +169,7 @@ public class FavoritosController extends HttpServlet {
           model.setNuevo(Banco.Logic.Model.instance().ConversorMonedas(model.getOwnaccount().getCurrency().getCurrencyCode(), model.getAccount().getCurrency().getCurrencyCode(), model.getPropio()));
           model.getOwnaccount().setBalance(model.getOwnaccount().getBalance()- model.getPropio());
           model.getAccount().setBalance(model.getAccount().getBalance()+ model.getNuevo());
-          Banco.Logic.Model.instance().newTransfer(model.getOwnaccount(), model.getAccount(),model.getPropio(), model.getNuevo());
+          Banco.Logic.Model.instance().newTransfer(model.getOwnaccount(), model.getAccount(),model.getPropio(), model.getNuevo(),model.getDetalle());
           return "/presentation/Menu/Cuenta/show";
           }else{
               throw new Exception("Su cuenta #"+model.getOwnaccount().getNumber()+" excede la cantidad maxima de tranferencia por dia -> "+model.getOwnaccount().getLimit());

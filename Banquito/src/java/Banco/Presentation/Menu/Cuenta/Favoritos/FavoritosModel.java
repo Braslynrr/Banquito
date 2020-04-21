@@ -15,7 +15,7 @@ public class FavoritosModel {
     float propio;
     float nuevo;
     int number;
-
+    String detalle;
     
     
     public int getNumber() {
@@ -69,6 +69,14 @@ public class FavoritosModel {
 
     public void setOwnaccount(Account Ownaccount) {
         this.Ownaccount = Ownaccount;
+    }
+
+    public String getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(String detalle) {
+        this.detalle = detalle;
     }
     
     @Override
