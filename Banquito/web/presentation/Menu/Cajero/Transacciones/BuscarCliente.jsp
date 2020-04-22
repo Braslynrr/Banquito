@@ -22,6 +22,7 @@
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
         <% TransaccionModel model= (TransaccionModel) session.getAttribute("model"); %>
         <% String id = (String)session.getAttribute("id");%>
+        <% String action = (String)session.getAttribute("action");%>
         <div class="box">
               <div>
                   <form name ="form2" action = "/Banquito/presentation/Menu/Cajero/Transacciones/BuscarCliente/ObtenerCuenta" method="post">
@@ -37,7 +38,7 @@
                 </div>  
               
 
-          <form  name="form1" action = "/Banquito/presentation/Menu/Cajero/Transacciones/BuscarCliente/siguiente" method="post">
+          <form  name="form1" action = "<%="/Banquito/presentation/Menu/Cajero/Transacciones/BuscarCliente/"+action%>" method="post">
 
              <select id = "clientaccounts" name = "accounts">
 

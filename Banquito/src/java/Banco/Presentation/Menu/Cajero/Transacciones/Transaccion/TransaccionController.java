@@ -26,8 +26,8 @@ import javax.servlet.http.HttpSession;
  * @author gaira
  */
 @WebServlet(name = "TransaccionController", urlPatterns = {"/presentation/Menu/Cajero/Transacciones/BuscarCliente/show",
-    "/presentation/Menu/Cajero/Transacciones/BuscarCliente/ObtenerCuenta", "/presentation/Menu/Cajero/Transacciones/BuscarCliente/siguiente",
-"/presentation/Menu/Cajero/Transacciones/Transaccion/transaccion"})
+"/presentation/Menu/Cajero/Transacciones/BuscarCliente/makeTransfer","/presentation/Menu/Cajero/Transacciones/BuscarCliente/ObtenerCuenta", "/presentation/Menu/Cajero/Transacciones/BuscarCliente/siguiente",
+"/presentation/Menu/Cajero/Transacciones/Transaccion/transaccion", "/presentation/Menu/Cajero/Transacciones/BuscarCliente/transfer"})
 public class TransaccionController extends HttpServlet {
 
     /**
@@ -58,6 +58,14 @@ public class TransaccionController extends HttpServlet {
              case "/presentation/Menu/Cajero/Transacciones/Transaccion/transaccion":
                 viewUrl = this.makeTransaction(request);
                 break;
+             case "/presentation/Menu/Cajero/Transacciones/BuscarCliente/makeTransfer":
+                viewUrl = this.makeTransfer(request);
+                break;
+            case "/presentation/Menu/Cajero/Transacciones/BuscarCliente/transfer":
+                viewUrl = this.goTransfer(request);
+                break;
+   
+             
 
         }
         request.getRequestDispatcher(viewUrl).forward(request, response);
@@ -65,9 +73,18 @@ public class TransaccionController extends HttpServlet {
     }
 
     public String show(HttpServletRequest request) {
+        
+        HttpSession session = request.getSession(true);
+        session.setAttribute("action", "siguiente");
         return this.showAction(request);
     }
-
+    
+    public String makeTransfer(HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        session.setAttribute("action", "transfer");
+        return this.showAction(request);
+    }
+    
     public String getAccount(HttpServletRequest request) {
         Map<String, String> errores = this.validarId(request);
         if (errores.isEmpty()) {
@@ -89,6 +106,24 @@ public class TransaccionController extends HttpServlet {
         Map<String, String> errores = this.validarCuenta(request);
         if (errores.isEmpty()) {
             return this.goTransactionAction(request);
+        } else {
+            request.setAttribute("errores", errores);
+            return "/presentation/Menu/Cajero/Transacciones/BuscarCliente.jsp";
+        }
+
+    }
+    
+      public String goTransfer(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(true);
+        TransaccionModel model = (TransaccionModel) session.getAttribute("model");
+        if (model != null) {
+            return this.goTransferAction(request);
+        }
+
+        Map<String, String> errores = this.validarCuenta(request);
+        if (errores.isEmpty()) {
+            return this.goTransferAction(request);
         } else {
             request.setAttribute("errores", errores);
             return "/presentation/Menu/Cajero/Transacciones/BuscarCliente.jsp";
@@ -228,6 +263,40 @@ public class TransaccionController extends HttpServlet {
         }
         return "/presentation/Error.jsp";
     }
+    
+        public String goTransferAction(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(true);
+        TransaccionModel model = (TransaccionModel) session.getAttribute("model");
+        Banco.Logic.Model domainModel = Banco.Logic.Model.instance();
+
+        if (model != null) {
+
+            try {
+
+                model.setCuenta(domainModel.getCuenta(request.getParameter("accounts")));
+            } catch (Exception ex) {
+                Logger.getLogger(TransaccionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            session.setAttribute("model", model);
+            return "/presentation/Menu/Cajero/Transacciones/Transferencia.jsp";
+        } else {
+
+            try {
+
+                model = new TransaccionModel();
+                model.setCuenta(domainModel.getCuenta((String) request.getParameter("accountnumber")));
+                model.setCliente(domainModel.getByCod(model.getCuenta().getClient().getCod()));
+                session.setAttribute("model", model);
+                return "/presentation/Menu/Cajero/Transacciones/Transferencia.jsp";
+            } catch (Exception ex) {
+                Logger.getLogger(TransaccionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        return "/presentation/Error.jsp";
+    }
+    
 
     Map<String, String> validarId(HttpServletRequest request) {
         Map<String, String> errores = new HashMap<>();
