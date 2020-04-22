@@ -20,7 +20,7 @@
        
         <% List<Account> lista=(List<Account>) session.getAttribute("accounts");%>
         <% Map<String,String> errores = (Map<String,String>) request.getAttribute("errores"); %>
-        <% TransaccionModel model= (TransaccionModel) session.getAttribute("model"); %>
+        
         <% String id = (String)session.getAttribute("id");%>
         <% String action = (String)session.getAttribute("action");%>
         <div class="box">

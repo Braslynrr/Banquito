@@ -5,6 +5,7 @@
  */
 package Banco.Presentation.Menu.Cajero.Transacciones.Transaccion;
 
+import Banco.Logic.Account;
 import Banco.Logic.Client;
 import Banco.Logic.Transaction;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "TransaccionController", urlPatterns = {"/presentation/Menu/Cajero/Transacciones/BuscarCliente/show",
 "/presentation/Menu/Cajero/Transacciones/BuscarCliente/makeTransfer","/presentation/Menu/Cajero/Transacciones/BuscarCliente/ObtenerCuenta", "/presentation/Menu/Cajero/Transacciones/BuscarCliente/siguiente",
-"/presentation/Menu/Cajero/Transacciones/Transaccion/transaccion", "/presentation/Menu/Cajero/Transacciones/BuscarCliente/transfer"})
+"/presentation/Menu/Cajero/Transacciones/Transaccion/transaccion", "/presentation/Menu/Cajero/Transacciones/BuscarCliente/transfer","/presentation/Menu/Cajero/Transacciones/Transferencia/transferencia"})
 public class TransaccionController extends HttpServlet {
 
     /**
@@ -63,6 +64,9 @@ public class TransaccionController extends HttpServlet {
                 break;
             case "/presentation/Menu/Cajero/Transacciones/BuscarCliente/transfer":
                 viewUrl = this.goTransfer(request);
+                break;
+            case "/presentation/Menu/Cajero/Transacciones/Transferencia/transferencia":
+                viewUrl = this.toTransfer(request);
                 break;
    
              
@@ -144,12 +148,26 @@ public class TransaccionController extends HttpServlet {
         }
 
     }
+     
+     public String toTransfer(HttpServletRequest request) {
+
+      
+        Map<String, String> errores = this.validar(request);
+        if (errores.isEmpty()) {
+            return this.toTransferAction(request);
+        } else {
+            request.setAttribute("errores", errores);
+            return "/presentation/Menu/Cajero/Transacciones/Transferencia.jsp";
+        }
+
+    }
     public String showAction(HttpServletRequest request) {
 
         try {
             HttpSession session = request.getSession(true);
             session.removeAttribute("id");
             session.removeAttribute("accounts");
+            session.removeAttribute("model");
             //session.invalidate();
             return "/presentation/Menu/Cajero/Transacciones/BuscarCliente.jsp";
         } catch (Exception ex) {
@@ -228,7 +246,39 @@ public class TransaccionController extends HttpServlet {
 
     }
     
-    
+    public String toTransferAction(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(true);
+        TransaccionModel model = (TransaccionModel) session.getAttribute("model");
+        Banco.Logic.Model domainModel = Banco.Logic.Model.instance();
+        Account cuentaDestino;
+        Account cuentaOrigen;
+        float montoOrigen = 0;
+        float montoDestino = montoOrigen;
+        String detail;
+        
+        
+        
+        
+        try{
+            cuentaDestino = domainModel.getCuenta(request.getParameter("numcuenta"));
+            cuentaOrigen = model.getCuenta();
+            montoOrigen = Float.parseFloat(request.getParameter("monto"));
+            detail = request.getParameter("detail");
+            if(cuentaDestino.getCurrency() != cuentaOrigen.getCurrency()){
+                montoDestino = domainModel.ConversorMonedas(cuentaOrigen.getCurrency().getCurrencyCode(), cuentaDestino.getCurrency().getCurrencyCode(), montoOrigen);
+                
+            }
+            cuentaOrigen.setBalance(cuentaOrigen.getBalance()-montoOrigen);
+            cuentaDestino.setBalance(cuentaDestino.getBalance()+montoDestino);
+            domainModel.newTransfer(cuentaOrigen, cuentaDestino, montoOrigen, montoDestino, detail);
+            
+            return "/presentation/Menu/Cajero/Cajero.jsp";
+        } catch (Exception ex) {
+            return "/presentation/Error.jsp";
+        }
+
+    }
     
 
     public String goTransactionAction(HttpServletRequest request) {

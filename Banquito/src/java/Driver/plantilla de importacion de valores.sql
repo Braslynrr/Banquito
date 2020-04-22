@@ -23,7 +23,7 @@ select * from account a inner join client c inner join user u inner join currenc
 select * from client where cod = "CL100";
 
 insert into transaction values(1,"traspasoamount",1000,date("2020-04-22"),1,"001","prueba");
-insert into transaction values(12,"traspasoamount",5100,date("2020-04-22"),3,"001","prueba");
+insert into transaction values(2,"traspasoamount",5100,date("2020-04-22"),3,"001","prueba");
 
 select * from account a inner join client c inner join user u on u.id=c.User_id on a.Client_client_cod = c.cod inner join Currency d on a.Currency_currencyCode = d.currencyCode where a.number = 1 and a.Client_client_cod="CL001";
 
