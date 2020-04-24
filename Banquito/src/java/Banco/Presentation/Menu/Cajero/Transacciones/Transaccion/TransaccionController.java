@@ -372,6 +372,8 @@ public class TransaccionController extends HttpServlet {
     
      Map<String, String> validar(HttpServletRequest request) {
         Map<String, String> errores = new HashMap<>();
+        HttpSession session = request.getSession(true);
+        TransaccionModel model= (TransaccionModel) session.getAttribute("model");
 
         if (request.getParameter("detail").isEmpty()) {
             errores.put("detail", "Espacio requerido");
@@ -379,6 +381,13 @@ public class TransaccionController extends HttpServlet {
         if (request.getParameter("monto").isEmpty()) {
             errores.put("monto", "Espacio requerido");
         }
+        if (Float.parseFloat(request.getParameter("monto"))>model.getCuenta().getBalance())
+        {
+            errores.put("monto", "Fondos insuficientes");
+        
+        }
+                
+                
        
         return errores;
     }
