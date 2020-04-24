@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Banquito</title>
         <%@ include file="/presentation/Head.jsp" %>
-         <link href="/Banquito/css/registrouser.css" rel="stylesheet" type="text/css" />
+         <link href="/Banquito/css/transactions.css" rel="stylesheet" type="text/css" />
         
     </head>
     <body>
@@ -28,7 +28,7 @@
                <h1>Propietario: <%= model.getCliente().getName() %> </hl>
                
                 <h1>Numero de cuenta:  <%= model.getCuenta().getNumber() %> </hl>
-                 <h1>Slado actual:  <%= model.getCuenta().getBalance() %> </hl>
+                 <h1>Slado actual:  <%= model.getCuenta().getBalance() %>  <%= model.getTipomoneda()%> </hl>
                  <h1>Digite el numero de la cuenta destino: </hl><br><br>
                  
                  

@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Banquito</title>
         <%@ include file="/presentation/Head.jsp" %>
-         <link href="/Banquito/css/registrouser.css" rel="stylesheet" type="text/css" />
+         <link href="/Banquito/css/transactions.css" rel="stylesheet" type="text/css" />
         
     </head>
     <body>

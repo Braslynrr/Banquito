@@ -292,6 +292,7 @@ public class TransaccionController extends HttpServlet {
             try {
 
                 model.setCuenta(domainModel.getCuenta(request.getParameter("accounts")));
+                model.setTipomoneda(model.getCuenta().getCurrency().getDescription());
             } catch (Exception ex) {
                 Logger.getLogger(TransaccionController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -304,6 +305,7 @@ public class TransaccionController extends HttpServlet {
                 model = new TransaccionModel();
                 model.setCuenta(domainModel.getCuenta((String) request.getParameter("accountnumber")));
                 model.setCliente(domainModel.getByCod(model.getCuenta().getClient().getCod()));
+                model.setTipomoneda(model.getCuenta().getCurrency().getDescription());
                 session.setAttribute("model", model);
                 return "/presentation/Menu/Cajero/Transacciones/Transaccion.jsp";
             } catch (Exception ex) {
@@ -325,6 +327,7 @@ public class TransaccionController extends HttpServlet {
             try {
 
                 model.setCuenta(domainModel.getCuenta(request.getParameter("accounts")));
+                model.setTipomoneda(model.getCuenta().getCurrency().getDescription());
             } catch (Exception ex) {
                 Logger.getLogger(TransaccionController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -337,6 +340,7 @@ public class TransaccionController extends HttpServlet {
                 model = new TransaccionModel();
                 model.setCuenta(domainModel.getCuenta((String) request.getParameter("accountnumber")));
                 model.setCliente(domainModel.getByCod(model.getCuenta().getClient().getCod()));
+                model.setTipomoneda(model.getCuenta().getCurrency().getDescription());
                 session.setAttribute("model", model);
                 return "/presentation/Menu/Cajero/Transacciones/Transferencia.jsp";
             } catch (Exception ex) {

@@ -10,26 +10,13 @@
   opacity: 1;
   text-align: center;
   border-radius: 10px 10px 10px 10px;
-  background-color: #eae4a9;
-}
-
-.box1{
-  font-size: 1em;
-  width: 300px;
-  height: 620px;
-  padding: 40px;
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  opacity: 1;
-  text-align: center;
-  border-radius: 10px 10px 10px 10px;
   background-color: white;
 }
 
+
+
 .box>h1{
-   color: #9f6934;
+   color: black;
    text-align: center;
    top: 50%;
    
@@ -41,12 +28,11 @@
   display: block;
   margin: 20px auto;
   text-align: center;
-  border: 2px solid #9f6934;
+  border: 2px solid black;
   padding: 14px 10px;
   width: 200px;
   height: 10px;
   outline: none;
-  color: 9f6934;
   border-radius: 24px;
   transition: 0.25s;
 }
@@ -69,7 +55,7 @@ input[type=text].is-invalid,input[type=password].is-invalid{
         border: 2px solid #2ecc71;
         padding: 14px 40px;
         outline: none;
-        color: #9f6934;
+        color: black;
         border-radius: 24px;
         transition: 0.25s;
         cursor: pointer;
@@ -80,19 +66,19 @@ input[type=text].is-invalid,input[type=password].is-invalid{
     }
     
    h1{
-   color: #9f6934;
+   color: black;
    text-align: center;
    font-size: 1.5em;
  
     }
     h2{
-   color: #9f6934;
+   color: black;
    text-align: center;
    font-size: 1.1em;
  
     }
         h3{
-   color: #9f6934;
+   color: black;
    text-align: center;
    font-size: 1em;
  
