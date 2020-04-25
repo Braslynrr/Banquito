@@ -92,7 +92,7 @@ public class RegistroCuentaController extends HttpServlet {
             cuenta.setLimit(Double.valueOf(request.getParameter("limit")));
             domainModel.addAccount(cuenta);
 
-            return "/presentation/Menu/Cajero/RegistroCuenta.jsp";
+            return "/presentation/Menu/Cajero/Cajero.jsp";
         }
          catch (Exception ex) {
             

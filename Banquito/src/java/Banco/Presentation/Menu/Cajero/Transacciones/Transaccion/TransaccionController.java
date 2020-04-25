@@ -380,12 +380,20 @@ public class TransaccionController extends HttpServlet {
         }
         if (request.getParameter("monto").isEmpty()) {
             errores.put("monto", "Espacio requerido");
-        }
-        if (Float.parseFloat(request.getParameter("monto"))>model.getCuenta().getBalance())
-        {
-            errores.put("monto", "Fondos insuficientes");
-        
-        }
+         }
+         if (session.getAttribute("action").equals("siguiente")) {
+             if (request.getParameter("radiobt1").equals("retiro") && Float.parseFloat(request.getParameter("monto")) > model.getCuenta().getBalance()) {
+                 errores.put("monto", "Fondos insuficientes");
+             }
+         } else {
+
+             if (Float.parseFloat(request.getParameter("monto")) > model.getCuenta().getBalance()) {
+                 errores.put("monto", "Fondos insuficientes");
+
+             }
+
+         }
+
                 
                 
        

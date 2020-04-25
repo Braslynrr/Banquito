@@ -156,7 +156,7 @@ public class RegistroCajeroController extends HttpServlet {
           
           domainModel.addCashier(cajero);
  
-         return "/presentation/Menu/Cajero/RegistroCajero/show";
+         return "/presentation/Menu/Cajero/Cajero.jsp";
          }
          catch (Exception ex) {
             

@@ -95,7 +95,7 @@ public class RegistroController extends HttpServlet {
          domainModel.addUser(real);
          domainModel.addClient(cliente);
          domainModel.addAccount(cuenta);
-         return "/presentation/Menu/Cajero/Registro.jsp";
+         return "/presentation/Menu/Cajero/Cajero.jsp";
          }
          catch (Exception ex) {
             
