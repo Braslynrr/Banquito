@@ -77,11 +77,16 @@ public class RegistroController extends HttpServlet {
          Client cliente = new Client();
          Account cuenta = new Account();
          
-         try{
-         
-         //Agregar un if que verifique el usuario
-         real.setId(request.getParameter("userid"));
-         real.setPassword(request.getParameter("userpass"));
+         try {
+
+             if (domainModel.compUser(request.getParameter("userid")) != null) {
+                 real = domainModel.getUser(request.getParameter("userid"));
+             } else {
+                 real.setId(request.getParameter("userid"));
+                 real.setPassword(request.getParameter("userpass"));
+                 domainModel.addUser(real);
+             }
+
          cliente.setCod(domainModel.clientCode());
          cliente.setName(request.getParameter("username"));
          cliente.setTelNumber(request.getParameter("tnumber"));
@@ -93,7 +98,7 @@ public class RegistroController extends HttpServlet {
          cuenta.setCurrency(domainModel.getCurrency(request.getParameter("currency")));
          cuenta.setLimit(Double.valueOf(request.getParameter("limit")));
          
-         domainModel.addUser(real);
+         
          domainModel.addClient(cliente);
          domainModel.addAccount(cuenta);
          return "/presentation/Menu/Cajero/Cajero.jsp";

@@ -144,6 +144,15 @@ public class Model {
    
    }
    
+      public User compUser (String id) throws Exception {
+   
+       
+       return user.compUser(id);
+   
+   }
+   
+   
+   
    public void addUser(User obj) throws Exception{
        
        user.AddUser(obj);

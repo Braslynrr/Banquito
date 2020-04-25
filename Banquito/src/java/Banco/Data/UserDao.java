@@ -57,7 +57,20 @@ public class UserDao {
         
     }
     
-    
+       public User compUser(String id)throws Exception{
+        
+        String sql = "select * from user where id = '%s'";
+        sql = String.format(sql,id);
+        ResultSet rs = db.executeQuery(sql);
+        
+        if(rs.next()){
+            return this.toUser(rs);
+        }
+         else{
+            return null;
+        }
+        
+    }
     
     public User Login(String id ,String pass)throws Exception{
         String sql = "select * from user where id = '%s'";
