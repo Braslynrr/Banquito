@@ -78,7 +78,8 @@ public class RegistroController extends HttpServlet {
          Account cuenta = new Account();
          
          try{
-             
+         
+         //Agregar un if que verifique el usuario
          real.setId(request.getParameter("userid"));
          real.setPassword(request.getParameter("userpass"));
          cliente.setCod(domainModel.clientCode());
