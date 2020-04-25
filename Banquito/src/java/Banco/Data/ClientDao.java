@@ -49,7 +49,7 @@ public class ClientDao {
             return this.toClient(rs);
         }
          else{
-            throw new Exception ("El cliente no existe");
+            return null;
         }
         
     }
