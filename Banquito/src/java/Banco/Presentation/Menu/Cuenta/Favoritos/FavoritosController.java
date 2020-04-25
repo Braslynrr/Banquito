@@ -138,6 +138,9 @@ public class FavoritosController extends HttpServlet {
         try{
             Float cant= Float.parseFloat(cantidad);
             model.setPropio(cant);
+            if(cant<=0){
+                throw new Exception("cantidad minima es 1");
+            }
             if(cant>model.getOwnaccount().getBalance()){
                 throw  new Exception("Saldo insuficiente");
             }
