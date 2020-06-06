@@ -26,10 +26,10 @@ public class ClientDao {
     
     public void AddClient(Client c) throws Exception{
         
-        String sql = "insert into client (id,name,tel_number,User_id)"
+        String sql = "insert into client (cod,name,tel_number,User_id)"
                 + "values ('%s','%s','%s','%s')";
         
-        sql = String.format(sql, c.getId(),c.getName(),c.getTelNumber(),c.getUserid());
+        sql = String.format(sql, c.getCod(),c.getName(),c.getTelNumber(),c.getUser().getId());
         int count = db.executeUpdate(sql);
         if(count == 0){
             throw new Exception("El usuario ya existe");
@@ -38,9 +38,10 @@ public class ClientDao {
         
     }
     
+    
     public Client getClient(String id)throws Exception{
         
-        String sql = "select * from cliente c inner join user u on c.User=u id where c.id like '%%%s%%'";
+        String sql = "select * from client c inner join user u on c.User_id = u.id where c.User_id = '%s'";
         sql = String.format(sql,id);
         ResultSet rs = db.executeQuery(sql);
         
@@ -48,20 +49,62 @@ public class ClientDao {
             return this.toClient(rs);
         }
          else{
-            throw new Exception ("El cliente no existe");
+            return null;
         }
         
     }
+    
+    public Client compClient(String id)throws Exception{
+        
+        String sql = "select * from client c inner join user u on c.User_id = u.id where c.User_id = '%s'";
+        sql = String.format(sql,id);
+        ResultSet rs = db.executeQuery(sql);
+        
+        if(rs.next()){
+            return this.toClient(rs);
+        }
+         else{
+            return null;
+        }
+        
+    }
+    
+     public Client clientCod(String id)throws Exception{
+        
+        String sql = "select * from client where cod = '%s'";
+        sql = String.format(sql,id);
+        ResultSet rs = db.executeQuery(sql);
+        
+        if(rs.next()){
+            return this.toClient(rs);
+        }
+         else{
+            return null;
+        }
+        
+    }
+    
+    public Integer GeneratorNclient()throws Exception{
+        String sql="select count(cod) from client";
+        ResultSet rs = db.executeQuery(sql);
+         if (rs.next()) {
+            return Integer.parseInt(rs.getString("count(cod)"))+1;
+         }else{
+            return 1;
+         }
+    } 
+    
     
     public static Client toClient(ResultSet rs) throws SQLException{
     
         try{
             
             Client c = new Client();
-            c.setId(rs.getString("id"));
+            c.setCod(rs.getString("cod"));
             c.setName(rs.getString("name"));
             c.setTelNumber(rs.getString("tel_number"));
-            c.setUserid(toUser(rs));
+            c.setUser(toUser(rs));
+            //c.setUser(c.getUserid());
             return c;
             
         

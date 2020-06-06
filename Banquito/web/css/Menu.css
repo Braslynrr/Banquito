@@ -1,0 +1,38 @@
+.menu{
+    padding: 75px;
+    background: #eae4a9;
+    position: inherit;
+    height: 0;
+    text-align: left;
+}
+
+.menu>ul {
+    padding:40px 40px 50px 20px;
+    list-style: none;
+    
+}
+.menu>ul>li{
+    font-size: 15px;
+    display: inline-block;
+    vertical-align:top;
+    
+}
+
+.menu>ul>li>a{
+    width: 100%;
+    font-family: Open Sans, sans-serif;	
+    color: #9f6934;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    margin-right:20px;
+}
+
+.menu>ul>li>a:hover{
+    color:brown;
+}
+
+.slogan{
+    font-family: Open Sans, sans-serif;	
+    padding-left: 5.6%;
+}

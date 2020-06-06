@@ -36,7 +36,7 @@ public class CurrencyDao {
     
     public Currency getCurrency(String code)  throws Exception{
     
-        String sql  = "select * from Currency where currencyCode = '%s'";
+        String sql  = "select * from Currency where description = '%s'";
         sql = String.format(sql, code);
            ResultSet rs = db.executeQuery(sql);
         if(rs.next()){
@@ -48,17 +48,63 @@ public class CurrencyDao {
         
     }    
     
+    public Currency getCurrencyCode(String code)  throws Exception{
+    
+        String sql  = "select * from Currency where currencyCode = '%s'";
+        sql = String.format(sql, code);
+           ResultSet rs = db.executeQuery(sql);
+        if(rs.next()){
+            return this.toCurrency(rs);
+        }
+        else{
+            throw new Exception ("El tipo de moneda no existe");
+        }
+        
+    }  
+    
+    public List<Currency> Listacurrency()throws Exception{
+        String sql="Select * from Currency";
+        List<Currency> lista= new ArrayList<Currency>();
+        ResultSet rs = db.executeQuery(sql);
+        while(rs.next()){
+            Currency curren= this.toCurrency(rs);
+            if(curren.getDescription()!="colones"){
+                lista.add(curren);
+            }
+        }
+        return lista;
+    }
+    
+    public float ConversorMonedas(String cod1,String cod2 , float cantidad) throws Exception{
+        Currency propia = Banco.Logic.Model.instance().getCurrencyCode(cod1);
+        Currency transferir= Banco.Logic.Model.instance().getCurrencyCode(cod2);
+        if(propia.getDescription().equals(transferir.getDescription())){
+            return cantidad;
+        }else{
+            if(transferir.getDescription().equals("Colones")){
+                float temp = cantidad*propia.getExchangeRate() ;
+                return temp;
+            }else{
+                if(propia.getDescription().equals("Colones")){
+                float temp = cantidad/transferir.getExchangeRate() ;
+                return temp;
+                }
+            }
+        }
+        float temp = cantidad*propia.getExchangeRate() ;
+        temp = temp/transferir.getExchangeRate() ;
+        return temp;
+    }
+    
     public static Currency toCurrency(ResultSet rs)throws SQLException{
     
         try{
-            
             Currency c = new Currency();
             c.setCurrencyCode(rs.getString("currencyCode"));
-            c.setExchangeRate(Float.parseFloat(rs.getString("exdchange_rate")));
+            c.setExchangeRate(Float.parseFloat(rs.getString("exchange_rate")));
             c.setDescription(rs.getString("description"));
-            
+            c.setTax(Float.parseFloat(rs.getString("tax")));
             return c;
-        
         }
           catch(SQLException ex){
         return null;

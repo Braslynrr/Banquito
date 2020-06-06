@@ -7,10 +7,6 @@ package Banco.Presentation.Login;
 
 import Banco.Logic.User;
 
-/**
- *
- * @author gaira
- */
 public class Model {
     
     User current;
@@ -30,10 +26,5 @@ public class Model {
     public void setCurrent(User current) {
         this.current = current;
     }
-   
-    
-    
-    
-    
     
 }

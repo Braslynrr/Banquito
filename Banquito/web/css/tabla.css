@@ -1,0 +1,135 @@
+.panel{
+  padding-left: 99%;
+  background-color: None;
+  font-size: 1em;
+  width: 100%;
+  height: 60%;
+  top: 60%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  opacity: 1;
+  text-align: center;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.panel .tabla{
+    width: 100%;
+    height: 45%;
+    margin-top: 10px;
+    color: white;
+    border-collapse: collapse;
+    overflow: auto;
+}
+
+.panel .tabla h1{
+    padding-left: 15%; 
+    position: fixed;
+}
+
+.panel .tabla table{
+    font-size: 2em;
+    margin-top: 70px;
+    width: 30%;
+    height: 30%;
+    color: white;
+    left: 62%;
+    position: fixed;
+    display:  block;
+    overflow: auto;
+}
+
+.panel .tabla th, td {
+    width: 5%;
+   border-bottom: 1px solid white;
+}
+
+.panel .tabla a{
+    color: #9f6934;
+}
+
+.panel .tabla a:hover{
+    color:brown;
+}
+
+
+.busqueda{
+    font-size: 1em;
+    color: white;
+    text-align: center;
+}
+
+.busqueda h1{
+    font-size: 2em;
+}
+
+.busqueda [type="submit"]{
+  border:0;
+  background: none;
+  padding: 7px 30px;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.busqueda [type="submit"]:hover{
+    background: #2ecc71; 
+}
+
+.añade .texto{
+    color: white;
+    font-size: 2em;
+    margin-left: 25%;
+    margin-top: 31%;
+}
+
+.añade .texto2{
+    margin-left: 40%;
+    margin-top: -1.8%;
+}
+
+.añade [type="submit"]{
+  border:0;
+  background: none;
+  padding: 7px 30px;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.añade [type="submit"]:hover{
+    background: #2ecc71; 
+}
+
+.añade [type="button"]{
+    border:0;
+    color: white;
+    background: none;
+    border: 2px solid #2ecc71;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    padding: 7px 30px;
+}    
+
+.añade [type="button"]:hover{
+    background: #2ecc71; 
+}
+
+.añade [type="text"]{
+    border:0;
+    color: white;
+    background: none;
+    border: 2px solid #2ecc71;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+    padding: 7px 30px;
+}

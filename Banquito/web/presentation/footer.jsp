@@ -1,4 +1,4 @@
 
 <footer>
-    <h5>Total Soft Inc. ©2019 Tsf, Inc.</h5>
+    <h5>Banquito Soft Inc. ©2020 Tsf, Inc.</h5>
 </footer>

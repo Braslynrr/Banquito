@@ -1,18 +1,16 @@
-<%-- 
-    Document   : Index
-    Created on : Mar 17, 2020, 10:46:49 PM
-    Author     : gaira
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Banquito</title>
+        <%@ include file="/presentation/Head.jsp" %>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%@ include file="/presentation/header.jsp" %>
+        <div class="box">
+            <img src="/Banquito/imagenes/wilaT.png">
+        </div>
     </body>
     <%@ include file="/presentation/footer.jsp" %>
 </html>

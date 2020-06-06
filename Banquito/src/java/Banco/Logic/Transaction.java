@@ -6,6 +6,7 @@
 package Banco.Logic;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -38,6 +39,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Transaction.findByDate", query = "SELECT t FROM Transaction t WHERE t.date = :date")
     , @NamedQuery(name = "Transaction.findByCurrencyCode", query = "SELECT t FROM Transaction t WHERE t.currencyCode = :currencyCode")})
 public class Transaction implements Serializable {
+
+    @Size(max = 45)
+    @Column(name = "detail")
+    private String detail;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,11 +80,14 @@ public class Transaction implements Serializable {
         this.number = number;
     }
 
-    public Transaction(Integer number, String type, float amount, String currencyCode) {
+    public Transaction(Integer number, String type, float amount,Account account,Date date ,String currencyCode,String detail) {
         this.number = number;
         this.type = type;
         this.amount = amount;
+        this.account=account;
+        this.date=date;
         this.currencyCode = currencyCode;
+        this.detail=detail;
     }
 
     public Integer getNumber() {
@@ -152,7 +160,16 @@ public class Transaction implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Transaction[ number=" + number + " ]";
+        SimpleDateFormat form= new SimpleDateFormat("YYYY-MM-dd");
+        return form.format(date);
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
     
 }

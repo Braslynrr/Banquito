@@ -6,7 +6,7 @@
 package Banco.Logic;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Brazza
+ * @author gaira
  */
 @Entity
 @Table(name = "user")
@@ -44,10 +44,10 @@ public class User implements Serializable {
     @Size(max = 20)
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
-    private List<Cashier> cashierList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
-    private List<Client> clientList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<Cashier> cashierCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<Client> clientCollection;
 
     public User() {
     }
@@ -73,21 +73,21 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public List<Cashier> getCashierList() {
-        return cashierList;
+    public Collection<Cashier> getCashierCollection() {
+        return cashierCollection;
     }
 
-    public void setCashierList(List<Cashier> cashierList) {
-        this.cashierList = cashierList;
+    public void setCashierCollection(Collection<Cashier> cashierCollection) {
+        this.cashierCollection = cashierCollection;
     }
 
     @XmlTransient
-    public List<Client> getClientList() {
-        return clientList;
+    public Collection<Client> getClientCollection() {
+        return clientCollection;
     }
 
-    public void setClientList(List<Client> clientList) {
-        this.clientList = clientList;
+    public void setClientCollection(Collection<Client> clientCollection) {
+        this.clientCollection = clientCollection;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.User[ id=" + id + " ]";
+        return id;
     }
     
 }

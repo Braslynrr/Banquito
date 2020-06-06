@@ -28,10 +28,10 @@ public class CashierDao {
     
     public void AddCashier(Cashier c) throws Exception{
         
-        String sql = "insert into client (id,name,User_id)"
-                + "values ('%s','%s','%s','%s')";
+        String sql = "insert into cashier (name,cod,User_id)"
+                + "values ('%s','%s','%s')";
         
-        sql = String.format(sql, c.getId(),c.getName(),c.getUserid());
+        sql = String.format(sql,c.getName(), c.getCod(),c.getUser().getId());
         int count = db.executeUpdate(sql);
         if(count == 0){
             throw new Exception("El cajero ya existe");
@@ -42,7 +42,7 @@ public class CashierDao {
     
     public Cashier getCashier(String id)throws Exception{
         
-        String sql = "select * from cliente c inner join user u on c.User=u id where c.id like '%%%s%%'";
+        String sql = "select * from cashier c inner join user u on c.User_id = u.id where c.User_id = '%s'";
         sql = String.format(sql,id);
         ResultSet rs = db.executeQuery(sql);
         
@@ -50,29 +50,35 @@ public class CashierDao {
             return this.toCashier(rs);
         }
          else{
-            throw new Exception ("El cliente no existe");
+            return null;
         }
         
     }
     
+    
+    public Integer GeneratorNCashier()throws Exception{
+        String sql="select count(cod) from cashier";
+        ResultSet rs = db.executeQuery(sql);
+         if (rs.next()) {
+            return Integer.parseInt(rs.getString("count(cod)"))+1;
+         }else{
+            return 1;
+         }
+    } 
+    
     public static Cashier toCashier(ResultSet rs) throws SQLException{
     
-        try{
-            
+        try{      
             Cashier c = new Cashier();
-            c.setId(rs.getString("id"));
+            c.setCod(rs.getString("cod"));
             c.setName(rs.getString("name"));
-            c.setUserid(toUser(rs));
+            c.setUser(toUser(rs));
             return c;
-            
-        
         }
         catch(SQLException ex){
             return null;
         }
     }
-    
-    
     
     
     

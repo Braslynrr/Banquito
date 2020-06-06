@@ -6,7 +6,7 @@
 package Banco.Logic;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,31 +26,29 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Brazza
+ * @author gaira
  */
 @Entity
 @Table(name = "client")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
-    , @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id")
+    , @NamedQuery(name = "Client.findByCod", query = "SELECT c FROM Client c WHERE c.cod = :cod")
     , @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name")
-    , @NamedQuery(name = "Client.findByTelNumber", query = "SELECT c FROM Client c WHERE c.telNumber = :telNumber")})
+    , @NamedQuery(name = "Client.findByTelNumber", query = "SELECT c FROM Client c WHERE c.telNumber = :telNumber")
+    , @NamedQuery(name = "Client.findByLimit", query = "SELECT c FROM Client c WHERE c.limit = :limit")})
 public class Client implements Serializable {
 
-    @JoinColumns({
-        @JoinColumn(name = "User_id", referencedColumnName = "id")
-        , @JoinColumn(name = "User_id", referencedColumnName = "id")})
-    @ManyToOne(optional = false)
-    private User user;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private Collection<Account> accountCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "cod")
+    private String cod;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -61,31 +59,34 @@ public class Client implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "tel_number")
     private String telNumber;
-    @JoinColumn(name = "User_id", referencedColumnName = "id")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "limit")
+    private Double limit;
+    @JoinColumns({
+        @JoinColumn(name = "User_id", referencedColumnName = "id")
+        , @JoinColumn(name = "User_id", referencedColumnName = "id")})
     @ManyToOne(optional = false)
-    private User userid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientclientid")
-    private List<Account> accountList;
+    private User user;
 
     public Client() {
     }
 
-    public Client(String id) {
-        this.id = id;
+    public Client(String cod) {
+        this.cod = cod;
     }
 
-    public Client(String id, String name, String telNumber) {
-        this.id = id;
+    public Client(String cod, String name, String telNumber) {
+        this.cod = cod;
         this.name = name;
         this.telNumber = telNumber;
     }
 
-    public String getId() {
-        return id;
+    public String getCod() {
+        return cod;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCod(String cod) {
+        this.cod = cod;
     }
 
     public String getName() {
@@ -104,27 +105,26 @@ public class Client implements Serializable {
         this.telNumber = telNumber;
     }
 
-    public User getUserid() {
-        return userid;
+    public Double getLimit() {
+        return limit;
     }
 
-    public void setUserid(User userid) {
-        this.userid = userid;
+    public void setLimit(Double limit) {
+        this.limit = limit;
     }
 
-    @XmlTransient
-    public List<Account> getAccountList() {
-        return accountList;
+    public User getUser() {
+        return user;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (cod != null ? cod.hashCode() : 0);
         return hash;
     }
 
@@ -135,7 +135,7 @@ public class Client implements Serializable {
             return false;
         }
         Client other = (Client) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.cod == null && other.cod != null) || (this.cod != null && !this.cod.equals(other.cod))) {
             return false;
         }
         return true;
@@ -143,15 +143,16 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Logic.Client[ id=" + id + " ]";
+        return "Banco.Logic.Client[ cod=" + cod + " ]";
     }
 
-    public User getUser() {
-        return user;
+    @XmlTransient
+    public Collection<Account> getAccountCollection() {
+        return accountCollection;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAccountCollection(Collection<Account> accountCollection) {
+        this.accountCollection = accountCollection;
     }
     
 }

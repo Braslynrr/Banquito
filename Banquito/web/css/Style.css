@@ -1,0 +1,67 @@
+.logo{
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  top: 0;
+  background: white;
+  font-size: 1em;
+  left:0;
+}
+
+.logo>span{
+    font-family: Open Sans, sans-serif;
+    font-size: 4em;
+    color: brown;
+}
+
+body{
+    background: url(../imagenes/madera.jpg);
+    background-position: center;
+    background-size: inherit;
+}
+
+
+footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 5%;
+  background-color: #E0E0E0;
+  color: rgb(139,96,32);
+  text-align: center;
+}
+
+
+button{
+    border: none;
+    color: white;
+    background-color: brown;
+    cursor: pointer;
+    width: 100%;
+    font-size: 15px;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+button:hover{
+    opacity: 0.8;
+}
+
+.box{
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  opacity: 1;
+  text-align: center;
+}
+
+
+.box img{
+    position: absolute;
+    top: 123%;
+    left: -30%;
+}
